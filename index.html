@@ -122,8 +122,7 @@
         .photo-wrapper img { width: 100%; height: 240px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(255, 255, 255, 0.9); cursor: zoom-in; transition: 0.2s; }
         .photo-wrapper img:hover { opacity: 0.85; }
         .photo-caption { font-size: 17px; color: #d35400; text-align: center; font-weight: bold; background: rgba(255, 243, 205, 0.8); padding: 8px 10px; }
-
-        /* YouTube 影片嵌入卡片專屬樣式 */
+        
         .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 10px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.9); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
@@ -187,9 +186,44 @@
         th { background: rgba(44, 62, 80, 0.95); color: #fff; }
         tr:hover { background: rgba(255, 255, 255, 0.6); }
 
-        .footer-container { margin-top: 40px; }
-        .nameplate { height: 120px; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25)); transition: 0.3s; cursor: pointer; }
-        .nameplate:hover { transform: scale(1.05); }
+        /* ================= 10. 原生報名表單專屬樣式 ================= */
+        .cute-form {
+            background: rgba(255, 255, 255, 0.95); padding: 25px 30px; border-radius: 16px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); text-align: left;
+            border: 2px dashed #3498db; margin-top: 15px;
+        }
+        .form-title { color: #2980b9; font-size: 26px; text-align: center; margin: 0 0 5px; }
+        .form-subtitle { color: #7f8c8d; text-align: center; font-size: 16px; margin-bottom: 25px; }
+        .form-section-title { font-size: 18px; font-weight: bold; color: #d35400; margin: 15px 0 10px; border-bottom: 2px solid rgba(211, 84, 0, 0.2); padding-bottom: 5px; }
+        
+        .form-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .form-grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+        
+        .cute-form label { display: flex; flex-direction: column; font-size: 15px; color: #2c3e50; font-weight: bold; gap: 5px; }
+        
+        /* 表單輸入框與下拉選單的美化 */
+        .cute-form input[type="text"], 
+        .cute-form input[type="number"], 
+        .cute-form select, 
+        .cute-form textarea {
+            padding: 10px; border: 1px solid #bdc3c7; border-radius: 8px; 
+            font-family: inherit; font-size: 16px; transition: 0.3s; 
+            width: 100%; box-sizing: border-box; background: #fff;
+        }
+        .cute-form select { cursor: pointer; appearance: auto; } /* 讓下拉選單保有箭頭並能點擊 */
+        
+        .cute-form input:focus, .cute-form select:focus, .cute-form textarea:focus { 
+            border-color: #3498db; outline: none; box-shadow: 0 0 8px rgba(52, 152, 219, 0.3); 
+        }
+        .cute-form textarea { resize: vertical; }
+
+        .form-submit-btn {
+            display: block; width: 100%; padding: 15px; margin-top: 25px;
+            background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; border-radius: 12px;
+            font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: inherit;
+        }
+        .form-submit-btn:hover { background: linear-gradient(135deg, #2980b9, #1f6391); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
+        .form-submit-btn:disabled { background: #95a5a6; cursor: not-allowed; transform: none; box-shadow: none; }
 
         /* ================= 8. 雪花飄落特效 ================= */
         #snow-container {
@@ -240,6 +274,7 @@
             .lightbox-nav { width: 40px; height: 40px; font-size: 24px; }
             #lightbox-prev { left: 10px; } #lightbox-next { right: 10px; }
             .intro-custom-wave .wave-title { font-size: 22px; }
+            .cute-form { padding: 15px; }
         }
     </style>
 </head>
@@ -322,11 +357,10 @@
                 </div>
             </div>
 
-            <!-- 頁籤：公會活動紀錄 (依時間由新到舊排序) -->
+            <!-- 頁籤：公會活動紀錄 -->
             <div id="historyTab" class="tab-content">
                 <div class="history-grid">
 
-                    <!-- 1. 2026.09.07 肝帝爭霸戰 -->
                     <div class="history-card">
                         <span class="history-date">2026.09.07</span>
                         <h4 class="history-title">【Cloudy 肝帝爭霸戰：沒有最卷，只有更卷！】</h4>
@@ -337,18 +371,16 @@
                         </div>
                     </div>
 
-                    <!-- 2. 2026.05.31 闇黑龍王首通紀念 -->
                     <div class="history-card">
                         <span class="history-date">2026.05.31</span>
                         <h4 class="history-title">【Cloudy 闇黑龍王首通紀念】</h4>
-                        <div class="photo-count">🎬 首次通關歷史性的一刻！</div>
+                        <div class="photo-count">🎬 首次通關歷史性一刻！</div>
                         <div class="video-wrapper">
                             <iframe src="https://www.youtube.com/embed/WMNZnBcaSZ0" title="楓之谷Artale 2026.05.31_Cloudy闇黑龍王首通場" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                         </div>
-                        <div class="photo-caption" style="margin-top: 5px;">Cloudy的夥伴們成功首通闇黑龍王！</div>
+                        <div class="photo-caption" style="margin-top: 5px;">恭喜 Cloudy 成功首通闇黑龍王！</div>
                     </div>
 
-                    <!-- 3. 2026.03.09 台中線下副本 -->
                     <div class="history-card">
                         <span class="history-date">2026.03.09</span>
                         <h4 class="history-title">【台中線下副本】</h4>
@@ -360,7 +392,6 @@
                         </div>
                     </div>
 
-                    <!-- 4. 2026.02.16 新春財源廣進活動 -->
                     <div class="history-card">
                         <span class="history-date">2026.02.16</span>
                         <h4 class="history-title">【Cloudy 新春財源廣進活動】</h4>
@@ -373,7 +404,6 @@
                         </div>
                     </div>
 
-                    <!-- 5. 2025.12.27 第一次線下聚會 -->
                     <div class="history-card">
                         <span class="history-date">2025.12.27</span>
                         <h4 class="history-title">【第一次線下聚會「銀櫃KTV大亂鬥」跟「消滅和牛燒肉」】</h4>
@@ -387,7 +417,6 @@
                         </div>
                     </div>
 
-                    <!-- 6. 2025.11.17 第一張合照 -->
                     <div class="history-card">
                         <span class="history-date">2025.11.17</span>
                         <h4 class="history-title">【Cloudy公會第一張合照】</h4>
@@ -403,13 +432,167 @@
                 </div>
             </div>
 
-            <!-- 頁籤：突襲王團報名 -->
+            <!-- 頁籤：突襲王團報名 (已進化為下拉選單版) -->
             <div id="signupTab" class="tab-content">
                 <div class="glass-panel" style="padding: 10px; text-align: center;">
-                    <div id="countdownDisplay">⏳ 距離本週報名截止還剩下： <span id="timerText">計算中...</span></div>
+                    <div id="countdownDisplay">⏳ 距離本週報名截止還剩： <span id="timerText">計算中...</span></div>
+                    
                     <div id="formContainer">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSef8Gupvet4Tz2fsTVYbQ-LzYV1h88sRATUabVAeHoGfTymbA/viewform?embedded=true" class="embed-container" title="王團報名表單" loading="lazy"></iframe>
+                        <form id="customRaidForm" class="cute-form">
+                            <h3 class="form-title">⚔️ 突襲王團專屬報名表</h3>
+                            <p class="form-subtitle">資料將由系統加密直達公會後台，填寫不卡頓！</p>
+
+                            <div class="form-section-title">👤 基本資料</div>
+                            <div class="form-grid-3">
+                                <label>角色名稱 <input type="text" name="entry.926742329" required placeholder="例: 小丹家"></label>
+                                
+                                <label>職業
+                                    <select name="entry.1786929801" required>
+                                        <option value="" disabled selected>請選擇職業</option>
+                                        <!-- 劍士 -->
+                                        <option value="英雄">英雄</option>
+                                        <option value="聖騎士">聖騎士</option>
+                                        <option value="黑騎士">黑騎士</option>
+                                        <!-- 法師 -->
+                                        <option value="火毒大魔導士">火毒大魔導士</option>
+                                        <option value="冰雷大魔導士">冰雷大魔導士</option>
+                                        <option value="主教">主教</option>
+                                        <!-- 弓箭手 -->
+                                        <option value="箭神">箭神</option>
+                                        <option value="神射手">神射手</option>
+                                        <!-- 盜賊 -->
+                                        <option value="夜使者">夜使者</option>
+                                        <option value="暗影神偷">暗影神偷</option>
+                                        <!-- 海盜 -->
+                                        <option value="拳霸">拳霸</option>
+                                        <option value="槍神">槍神</option>
+                                    </select>
+                                </label>
+                                
+                                <label>等級 <input type="number" name="entry.1536869258" required placeholder="例: 187"></label>
+                            </div>
+
+                            <div class="form-section-title">🎯 王團志願 (請選擇)</div>
+                            <div class="form-grid-3">
+                                <label>樹王團 
+                                    <select name="entry.1446110915">
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="第一志願">第一志願</option><option value="第二志願">第二志願</option><option value="第三志願">第三志願</option>
+                                        <option value="第四志願">第四志願</option><option value="第五志願">第五志願</option><option value="第六志願">第六志願</option><option value="無">無</option>
+                                    </select>
+                                </label>
+                                <label>龍王團 
+                                    <select name="entry.1649766981">
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="第一志願">第一志願</option><option value="第二志願">第二志願</option><option value="第三志願">第三志願</option>
+                                        <option value="第四志願">第四志願</option><option value="第五志願">第五志願</option><option value="第六志願">第六志願</option><option value="無">無</option>
+                                    </select>
+                                </label>
+                                <label>困拉團 
+                                    <select name="entry.2110660154">
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="第一志願">第一志願</option><option value="第二志願">第二志願</option><option value="第三志願">第三志願</option>
+                                        <option value="第四志願">第四志願</option><option value="第五志願">第五志願</option><option value="第六志願">第六志願</option><option value="無">無</option>
+                                    </select>
+                                </label>
+                                <label>蝴蝶團 
+                                    <select name="entry.1867960071">
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="第一志願">第一志願</option><option value="第二志願">第二志願</option><option value="第三志願">第三志願</option>
+                                        <option value="第四志願">第四志願</option><option value="第五志願">第五志願</option><option value="第六志願">第六志願</option><option value="無">無</option>
+                                    </select>
+                                </label>
+                                <label>炎魔團 
+                                    <select name="entry.723571906">
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="第一志願">第一志願</option><option value="第二志願">第二志願</option><option value="第三志願">第三志願</option>
+                                        <option value="第四志願">第四志願</option><option value="第五志願">第五志願</option><option value="第六志願">第六志願</option><option value="無">無</option>
+                                    </select>
+                                </label>
+                                <label>其他王團 
+                                    <select name="entry.995234162">
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="第一志願">第一志願</option><option value="第二志願">第二志願</option><option value="第三志願">第三志願</option>
+                                        <option value="第四志願">第四志願</option><option value="第五志願">第五志願</option><option value="第六志願">第六志願</option><option value="無">無</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <div class="form-section-title">📅 可出團時間 (請選擇)</div>
+                            <div class="form-grid-4">
+                                <label>星期一 
+                                    <select name="entry.743300179">
+                                        <option value="" disabled selected>請選擇時段</option>
+                                        <option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option>
+                                        <option value="無法配合">無法配合</option>
+                                    </select>
+                                </label>
+                                <label>星期二 
+                                    <select name="entry.758275373">
+                                        <option value="" disabled selected>請選擇時段</option>
+                                        <option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option>
+                                        <option value="無法配合">無法配合</option>
+                                    </select>
+                                </label>
+                                <label>星期三 
+                                    <select name="entry.2038020441">
+                                        <option value="" disabled selected>請選擇時段</option>
+                                        <option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option>
+                                        <option value="無法配合">無法配合</option>
+                                    </select>
+                                </label>
+                                <label>星期四 
+                                    <select name="entry.626318710">
+                                        <option value="" disabled selected>請選擇時段</option>
+                                        <option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option>
+                                        <option value="無法配合">無法配合</option>
+                                    </select>
+                                </label>
+                                <label>星期五 
+                                    <select name="entry.57187148">
+                                        <option value="" disabled selected>請選擇時段</option>
+                                        <option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option>
+                                        <option value="無法配合">無法配合</option>
+                                    </select>
+                                </label>
+                                <label>星期六 
+                                    <select name="entry.509154940">
+                                        <option value="" disabled selected>請選擇時段</option>
+                                        <option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option>
+                                        <option value="無法配合">無法配合</option>
+                                    </select>
+                                </label>
+                                <label>星期日 
+                                    <select name="entry.289458533">
+                                        <option value="" disabled selected>請選擇時段</option>
+                                        <option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option>
+                                        <option value="無法配合">無法配合</option>
+                                    </select>
+                                </label>
+                                <label>配合場數 
+                                    <select name="entry.1582749214">
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="7場">7場</option>
+                                        <option value="14場">14場</option>
+                                        <option value="21場">21場</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <div class="form-section-title">📝 其他備註</div>
+                            <textarea name="entry.2040299953" rows="2" placeholder="有什麼想告訴會長的嗎？(可留白)"></textarea>
+
+                            <button type="submit" id="submitBtn" class="form-submit-btn">✨ 送出報名資料 ✨</button>
+                        </form>
                     </div>
+
                     <div id="closedMessage" style="display: none; padding: 120px 20px;">
                         <h3 style="color: #e67e22; font-size: 32px; font-weight: bold; margin-bottom: 20px;">下週王團登記於每週一至週二開放~敬請期待</h3>
                         <p style="font-size: 22px; color: #7f8c8d;">休息一下，我們下週見！</p>
@@ -679,9 +862,46 @@
             document.body.appendChild(snowContainer);
         }
 
+        // ================= 10. 原生表單提交 (Cloudflare 中繼) =================
+        function initCustomForm() {
+            const form = document.getElementById('customRaidForm');
+            if(!form) return;
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault(); // 防止網頁跳轉
+                
+                const btn = document.getElementById('submitBtn');
+                const originalText = btn.innerText;
+                btn.innerText = "資料傳送中... 🚀";
+                btn.disabled = true;
+
+                // 收集表單裡填寫的所有資料
+                const formData = new FormData(this);
+
+                try {
+                    // 發送資料給你在 Cloudflare 架設的中繼站
+                    const res = await fetch("https://cloudy-form.danielyuphoto.workers.dev/", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    if (res.ok) {
+                        alert("🎉 報名成功！資料已安全送達公會後台。");
+                        this.reset(); // 清空表單
+                    } else {
+                        alert("⚠️ 傳送失敗，請稍後再試或聯繫幹部。");
+                    }
+                } catch(err) {
+                    alert("⚠️ 網路連線錯誤，請確認網路狀態！");
+                } finally {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             window.updateAH = updateAH; 
-            initTabs(); calculate(); initTimers(); initLightbox(); initAudio(); initSnow(); 
+            initTabs(); calculate(); initTimers(); initLightbox(); initAudio(); initSnow(); initCustomForm();
         });
     </script>
 </body>
