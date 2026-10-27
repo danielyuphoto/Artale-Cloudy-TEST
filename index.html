@@ -660,7 +660,7 @@
             });
         }
 
-        // ================= 2. 時間與倒數管理器 (效能升級版) =================
+        // ================= 2. 時間與倒數管理器 (永遠開啟版) =================
         function initTimers() {
             const els = {
                 formContainer: document.getElementById("formContainer"),
@@ -680,34 +680,33 @@
             function update() {
                 const twDate = getTaiwanTime();
                 const today = twDate.getDay(); 
-                const hour = twDate.getHours();
 
-                if (today >= 1 && today <= 2) {
-                    els.formContainer.style.display = "block";
-                    els.formMsg.style.display = "none";
-                    els.countDisp.style.display = "block";
-                    
-                    const target = new Date(twDate);
-                    target.setDate(twDate.getDate() + (2 - today));
-                    target.setHours(23, 59, 59, 999);
-                    
-                    const diff = target - twDate;
-                    if (diff > 0) {
-                        const d = Math.floor(diff / 86400000);
-                        const h = String(Math.floor((diff / 3600000) % 24)).padStart(2, '0');
-                        const m = String(Math.floor((diff / 60000) % 60)).padStart(2, '0');
-                        const s = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-                        els.timerText.textContent = `${d} 天 ${h} 小時 ${m} 分 ${s} 秒`;
-                    }
+                // 1. 永遠顯示報名表單與隊伍名單，隱藏關閉提示訊息
+                els.formContainer.style.display = "block";
+                els.formMsg.style.display = "none";
+                els.countDisp.style.display = "block";
+                
+                els.rosterWrap.style.display = "block";
+                els.rosterMsg.style.display = "none";
+
+                // 2. 倒數計時器邏輯：永遠尋找「下一個星期二的 23:59:59」
+                const target = new Date(twDate);
+                // today: 0(日), 1(一), 2(二), 3(三), 4(四), 5(五), 6(六)
+                // 目標是星期二 (2)。如果今天是星期三(3)~星期日(0)，則往後加天數尋找下週二
+                let daysUntilTuesday = (2 - today + 7) % 7;
+                target.setDate(twDate.getDate() + daysUntilTuesday);
+                target.setHours(23, 59, 59, 999);
+
+                const diff = target - twDate;
+                if (diff > 0) {
+                    const d = Math.floor(diff / 86400000);
+                    const h = String(Math.floor((diff / 3600000) % 24)).padStart(2, '0');
+                    const m = String(Math.floor((diff / 60000) % 60)).padStart(2, '0');
+                    const s = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+                    els.timerText.textContent = `${d} 天 ${h} 小時 ${m} 分 ${s} 秒`;
                 } else {
-                    els.formContainer.style.display = "none";
-                    els.countDisp.style.display = "none";
-                    els.formMsg.style.display = "block";
+                    els.timerText.textContent = "結算中..."; 
                 }
-
-                const isClosed = (today === 2 && hour >= 8) || (today === 3 && hour < 18);
-                els.rosterWrap.style.display = isClosed ? "none" : "block";
-                els.rosterMsg.style.display = isClosed ? "block" : "none";
             }
             update(); setInterval(update, 1000);
         }
