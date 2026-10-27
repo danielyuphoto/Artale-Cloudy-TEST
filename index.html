@@ -90,7 +90,7 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             cursor: zoom-in; transform-origin: center; 
             animation: legendaryDropGlow 3.5s infinite ease-in-out; 
-            will-change: transform, box-shadow; /* 優化：主動提示瀏覽器 GPU 加速 */
+            will-change: transform, box-shadow; 
         }
         .recruit-image-container img:hover { 
             transform: translateY(-15px) scale(1.03); z-index: 999; position: relative; 
@@ -235,7 +235,7 @@
             position: absolute; top: -10vh; color: #fff; opacity: 0.8;
             text-shadow: 0 0 6px rgba(255,255,255,0.9);
             animation: fall linear infinite;
-            will-change: transform; /* 優化：主動提示瀏覽器 GPU 加速，大幅降低 CPU 消耗 */
+            will-change: transform; 
         }
         @keyframes fall {
             0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
@@ -435,7 +435,7 @@
                 </div>
             </div>
 
-            <!-- 頁籤：突襲王團報名 (優化排版版) -->
+            <!-- 頁籤：突襲王團報名 (百分之百絕對對齊版) -->
             <div id="signupTab" class="tab-content">
                 <div class="glass-panel" style="padding: 10px; text-align: center;">
                     <div id="countdownDisplay">⏳ 距離本週報名截止還剩： <span id="timerText">計算中...</span></div>
@@ -447,7 +447,7 @@
 
                             <div class="form-section-title">👤 基本資料</div>
                             <div class="form-grid-3">
-                                <label>角色名稱 (請填寫正確) <input type="text" name="entry.926742329" required placeholder="例: 小丹家"></label>
+                                <label>角色名稱 (請填寫正確) <input type="text" name="entry.926742329" required placeholder="例: 小丹家" inputmode="text" lang="zh-TW"></label>
                                 
                                 <label>職業
                                     <select name="entry.1786929801" required>
@@ -465,7 +465,6 @@
 
                             <div class="form-section-title">🎯 王團志願 (請選擇)</div>
                             <div class="form-grid-3">
-                                <!-- 第一到第三志願 -->
                                 <label>第一志願 
                                     <select name="entry.1649766981">
                                         <option value="" disabled selected>請選擇</option>
@@ -498,49 +497,49 @@
                             <div class="form-section-title">📅 可出團時間 (請選擇)</div>
                             <div class="form-grid-4">
                                 <label>星期一 
-                                    <select name="entry.743300179">
-                                        <option value="" disabled selected>請選擇時段</option>
-                                        <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
-                                        <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
-                                    </select>
-                                </label>
-                                <label>星期二 
                                     <select name="entry.152285602">
                                         <option value="" disabled selected>請選擇時段</option>
                                         <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
                                         <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
                                     </select>
                                 </label>
-                                <label>星期三 
+                                <label>星期二 
                                     <select name="entry.1600353529">
                                         <option value="" disabled selected>請選擇時段</option>
                                         <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
                                         <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
                                     </select>
                                 </label>
-                                <label>星期四 
+                                <label>星期三 
                                     <select name="entry.1547949797">
                                         <option value="" disabled selected>請選擇時段</option>
                                         <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
                                         <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
                                     </select>
                                 </label>
-                                <label>星期五 
+                                <label>星期四 
                                     <select name="entry.519235186">
                                         <option value="" disabled selected>請選擇時段</option>
                                         <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
                                         <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
                                     </select>
                                 </label>
-                                <label>星期六 
+                                <label>星期五 
                                     <select name="entry.1921200425">
                                         <option value="" disabled selected>請選擇時段</option>
                                         <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
                                         <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
                                     </select>
                                 </label>
-                                <label>星期日 
+                                <label>星期六 
                                     <select name="entry.33166810">
+                                        <option value="" disabled selected>請選擇時段</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
+                                        <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
+                                    </select>
+                                </label>
+                                <label>星期日 
+                                    <select name="entry.743300179">
                                         <option value="" disabled selected>請選擇時段</option>
                                         <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
                                         <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
@@ -559,7 +558,7 @@
                                 根據上題的可配合時間，請盡量明確說明<br>
                                 例如：「週二19:00後、週四20:00後」、「平日晚上20:30後皆可」、「週六13:00開打」等等。
                             </p>
-                            <textarea name="entry.2040299953" rows="3" placeholder="請在此輸入時間詳細說明..."></textarea>
+                            <textarea name="entry.2040299953" rows="3" placeholder="請在此輸入時間詳細說明..." inputmode="text" lang="zh-TW"></textarea>
 
                             <button type="submit" id="submitBtn" class="form-submit-btn">✨ 送出報名資料 ✨</button>
                         </form>
@@ -673,11 +672,10 @@
                 rosterMsg: document.getElementById("rosterClosedMessage")
             };
 
-            // 優化：取得台灣時間，減少字串解析耗損
             function getTaiwanTime() {
                 const now = new Date();
                 const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-                return new Date(utc + (3600000 * 8)); // 台灣 UTC+8
+                return new Date(utc + (3600000 * 8)); 
             }
 
             function update() {
@@ -805,7 +803,6 @@
                 if (shouldPlay) {
                     audio.play().catch(error => {
                         console.log("自動播放被阻擋，等待使用者互動。");
-                        // 優化：加入 once: true 避免無效監聽器堆疊耗用記憶體
                         const forcePlay = () => audio.play();
                         document.addEventListener("click", forcePlay, { once: true });
                         document.addEventListener("touchstart", forcePlay, { once: true });
@@ -844,10 +841,21 @@
             document.body.appendChild(snowContainer);
         }
 
-        // ================= 10. 原生表單提交 (Cloudflare 中繼) =================
+        // ================= 10. 原生表單提交 (Cloudflare 中繼) + 鍵盤修正 =================
         function initCustomForm() {
             const form = document.getElementById('customRaidForm');
             if(!form) return;
+
+            // 🎯 絕招：針對文字輸入框，防止 Safari 亂切英文鍵盤
+            const textInputs = form.querySelectorAll('input[type="text"], textarea');
+            textInputs.forEach(input => {
+                // 先把原本的 name 偷偷記下來存到 data-name
+                input.dataset.name = input.getAttribute('name');
+                input.removeAttribute('name'); 
+
+                // 等玩家點擊輸入的時候，因為沒有 name 屬性，Safari 就會乖乖保持中文鍵盤
+            });
+
             form.addEventListener('submit', async function(e) {
                 e.preventDefault(); 
                 
@@ -855,6 +863,11 @@
                 const originalText = btn.innerText;
                 btn.innerText = "資料傳送中... 🚀";
                 btn.disabled = true;
+
+                // 🎯 送出前一刻，把 name 屬性裝回去，讓 Google 表單認得是誰
+                textInputs.forEach(input => {
+                    input.setAttribute('name', input.dataset.name);
+                });
 
                 const formData = new FormData(this);
 
@@ -875,14 +888,11 @@
                 } finally {
                     btn.innerText = originalText;
                     btn.disabled = false;
+                    
+                    // 🎯 送出完畢後，再次把 name 拔掉，準備下一次填寫
+                    textInputs.forEach(input => {
+                        input.removeAttribute('name');
+                    });
                 }
             });
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            window.updateAH = updateAH; 
-            initTabs(); calculate(); initTimers(); initLightbox(); initAudio(); initSnow(); initCustomForm();
-        });
-    </script>
-</body>
-</html>
