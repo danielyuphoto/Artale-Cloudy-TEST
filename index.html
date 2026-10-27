@@ -322,7 +322,6 @@
                     <div class="current-song-marquee"><span id="currentSongName">載入中...</span></div>
                     <button id="nextSongBtn" class="song-ctrl-btn" title="下一首">⏭</button>
                 </div>
-                <!-- 移除 autoplay，改為純控制面板 -->
                 <audio id="bgMusic" controls controlsList="nodownload noplaybackrate"></audio>
             </div>
         </div>
@@ -435,7 +434,7 @@
                 </div>
             </div>
 
-            <!-- 頁籤：突襲王團報名 (百分之百絕對對齊版) -->
+            <!-- 頁籤：突襲王團報名 -->
             <div id="signupTab" class="tab-content">
                 <div class="glass-panel" style="padding: 10px; text-align: center;">
                     <div id="countdownDisplay">⏳ 距離本週報名截止還剩： <span id="timerText">計算中...</span></div>
@@ -852,8 +851,6 @@
                 // 先把原本的 name 偷偷記下來存到 data-name
                 input.dataset.name = input.getAttribute('name');
                 input.removeAttribute('name'); 
-
-                // 等玩家點擊輸入的時候，因為沒有 name 屬性，Safari 就會乖乖保持中文鍵盤
             });
 
             form.addEventListener('submit', async function(e) {
@@ -896,3 +893,12 @@
                 }
             });
         }
+
+        // 🟢 總電源開關：等網頁載入完畢後，啟動所有功能
+        document.addEventListener('DOMContentLoaded', () => {
+            window.updateAH = updateAH; 
+            initTabs(); calculate(); initTimers(); initLightbox(); initAudio(); initSnow(); initCustomForm();
+        });
+    </script>
+</body>
+</html>
