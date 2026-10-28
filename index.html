@@ -171,7 +171,9 @@
 
         /* ================= 7. 其他 UI 元件 ================= */
         .roster-card { width: 105%; margin-left: 0; padding: 10px; }
-        .embed-container { width: 100%; height: 651.75px; border: none; border-radius: 12px; background: #fff; }
+        
+        /* 🔥 這裡修改了 iframe 的高度，將原本的 651.75px 縮小為 460px */
+        .embed-container { width: 100%; height: 460px; border: none; border-radius: 12px; background: #fff; }
 
         .sub-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
         #countdownDisplay { background: rgba(255, 243, 205, 0.8); border: 2px dashed #f39c12; color: #d35400; font-size: 20px; text-align: center; padding: 12px; margin-bottom: 15px; font-family: Tahoma, sans-serif; }
@@ -268,7 +270,8 @@
             .controls-row { flex-direction: column; align-items: flex-start; gap: 10px; }
             
             .roster-card { width: 100%; margin-left: 0; }
-            .embed-container { height: 550px; }
+            /* 🔥 手機版的高度也同步調降，防止手機看也有多餘白邊 */
+            .embed-container { height: 460px; }
 
             .nameplate { height: 75px; }
             #countdownDisplay { font-size: 16px; padding: 10px; margin-bottom: 10px;} 
@@ -338,7 +341,7 @@
                     <div class="wave-title">☁️ ㄤㄤ尼豪！歡迎登入 Cloudy 專屬小窩！ ☁️</div>
                     
                     <p>各位 Cloudy 的小夥伴們，經過幹部們的爆肝努力，我們終於有自己的專屬地盤啦！🎉</p>
-                    <p>不管你是來找回憶、找隊友還是找工具，這裡通通為你準備好了：</p>
+                    <p>不管你是來找回憶、找隊友還是找工具，這裡通通為ंपूर्準備好了：</p>
                     
                     <p><span class="highlight-item">✨ 活動點滴紀錄</span>：回顧我們過去一起舉辦過的各種瘋狂活動與專屬大合照！</p>
                     <p><span class="highlight-item">🔥 每週突襲王報名＆分組公告</span>：打王絕對不迷路！每週的報名表單和專屬分組公告都在這，隨時掌握出團動態。</p>
