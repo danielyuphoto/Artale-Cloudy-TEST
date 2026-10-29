@@ -171,9 +171,7 @@
 
         /* ================= 7. 其他 UI 元件 ================= */
         .roster-card { width: 105%; margin-left: 0; padding: 10px; }
-        
-        /* 🔥 這裡修改了 iframe 的高度，將原本的 651.75px 縮小為 610px */
-        .embed-container { width: 100%; height: 610px; border: none; border-radius: 12px; background: #fff; }
+        .embed-container { width: 100%; height: 615px; border: none; border-radius: 12px; background: #fff; }
 
         .sub-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
         #countdownDisplay { background: rgba(255, 243, 205, 0.8); border: 2px dashed #f39c12; color: #d35400; font-size: 20px; text-align: center; padding: 12px; margin-bottom: 15px; font-family: Tahoma, sans-serif; }
@@ -270,8 +268,7 @@
             .controls-row { flex-direction: column; align-items: flex-start; gap: 10px; }
             
             .roster-card { width: 100%; margin-left: 0; }
-            /* 🔥 手機版的高度也同步調降，防止手機看也有多餘白邊 */
-            .embed-container { height: 460px; }
+            .embed-container { height: 550px; }
 
             .nameplate { height: 75px; }
             #countdownDisplay { font-size: 16px; padding: 10px; margin-bottom: 10px;} 
@@ -341,7 +338,7 @@
                     <div class="wave-title">☁️ ㄤㄤ尼豪！歡迎登入 Cloudy 專屬小窩！ ☁️</div>
                     
                     <p>各位 Cloudy 的小夥伴們，經過幹部們的爆肝努力，我們終於有自己的專屬地盤啦！🎉</p>
-                    <p>不管你是來找回憶、找隊友還是找工具，這裡通通為ंपूर्準備好了：</p>
+                    <p>不管你是來找回憶、找隊友還是找工具，這裡通通為你準備好了：</p>
                     
                     <p><span class="highlight-item">✨ 活動點滴紀錄</span>：回顧我們過去一起舉辦過的各種瘋狂活動與專屬大合照！</p>
                     <p><span class="highlight-item">🔥 每週突襲王報名＆分組公告</span>：打王絕對不迷路！每週的報名表單和專屬分組公告都在這，隨時掌握出團動態。</p>
@@ -437,15 +434,27 @@
                 </div>
             </div>
 
-            <!-- 頁籤：突襲王團報名 -->
+            <!-- 頁籤：突襲王團報名 (新增合成備註選項) -->
             <div id="signupTab" class="tab-content">
                 <div class="glass-panel" style="padding: 10px; text-align: center;">
                     <div id="countdownDisplay">⏳ 距離本週報名截止還剩： <span id="timerText">計算中...</span></div>
                     
                     <div id="formContainer">
                         <form id="customRaidForm" class="cute-form">
-                            <h3 class="form-title">⚔️ 突襲王團專屬報名表</h3>
+                            <h3 class="form-title">⚔️ 突襲王團 固定團/換團申請表</h3>
                             <p class="form-subtitle">資料將由系統加密直達公會後台，填寫不卡頓！</p>
+
+                            <!-- 🔥 新增：填表目的 (自動合成備註魔法) -->
+                            <div class="form-section-title">📌 填表目的 (必選)</div>
+                            <div class="form-grid-3">
+                                <label style="grid-column: 1 / -1;">您這次填寫表單的原因是？ 
+                                    <select id="formPurpose" required style="border: 2px solid #e74c3c; box-shadow: 0 0 5px rgba(231,76,60,0.3);">
+                                        <option value="" disabled selected>請選擇填表目的...</option>
+                                        <option value="新進求組">👋 [新進求組] 我是新來的 / 目前無固定團，請求分配</option>
+                                        <option value="申請換團">🔄 [申請換團] 我已有固定團，下週起想轉換突襲王目標</option>
+                                    </select>
+                                </label>
+                            </div>
 
                             <div class="form-section-title">👤 基本資料</div>
                             <div class="form-grid-3">
@@ -566,14 +575,15 @@
                         </form>
                     </div>
 
+                    <!-- 表單關閉時顯示的訊息 -->
                     <div id="closedMessage" style="display: none; padding: 120px 20px;">
-                        <h3 style="color: #e67e22; font-size: 32px; font-weight: bold; margin-bottom: 20px;">下週王團登記於每週一至週二開放~敬請期待</h3>
-                        <p style="font-size: 22px; color: #7f8c8d;">休息一下，我們下週見！</p>
+                        <h3 style="color: #e67e22; font-size: 32px; font-weight: bold; margin-bottom: 20px;">下週王團固定團/換團 申請於每週六至週日開放~</h3>
+                        <p style="font-size: 22px; color: #7f8c8d;">請於週末期間回來填寫喔！</p>
                     </div>
                 </div>
             </div>
 
-            <!-- 頁籤：每週突襲王團隊伍 -->
+            <!-- 頁籤：每週突襲王團隊伍 (固定團全天候開放) -->
             <div id="rosterTab" class="tab-content">
                 <div id="rosterContainerWrapper">
                     <div class="sub-tabs">
@@ -585,10 +595,6 @@
                     <div class="glass-panel roster-card">
                         <iframe id="rosterIframe" src="https://docs.google.com/spreadsheets/d/18ScfVsNY4OSDRs3fy71uTyHmD27eYFbvffn0XQ8YrYE/htmlembed?widget=false&chrome=false&gid=245864129" class="embed-container" title="每週突襲王團隊伍" loading="lazy"></iframe>
                     </div>
-                </div>
-                <div id="rosterClosedMessage" class="glass-panel" style="display: none; padding: 120px 20px; text-align: center; margin-top: 15px;">
-                    <h3 style="color: #e67e22; font-size: 32px; font-weight: bold; margin-bottom: 20px;">公會幹部們努力安排隊伍中，敬請期待>&lt;</h3>
-                    <p style="font-size: 22px; color: #7f8c8d;">每週三 18:00 將公佈最新排定名單！</p>
                 </div>
             </div>
 
@@ -663,15 +669,13 @@
             });
         }
 
-        // ================= 2. 時間與倒數管理器 (永遠開啟版) =================
+        // ================= 2. 時間與倒數管理器 (限定六日開放版) =================
         function initTimers() {
             const els = {
                 formContainer: document.getElementById("formContainer"),
                 formMsg: document.getElementById("closedMessage"),
                 countDisp: document.getElementById("countdownDisplay"),
-                timerText: document.getElementById("timerText"),
-                rosterWrap: document.getElementById("rosterContainerWrapper"),
-                rosterMsg: document.getElementById("rosterClosedMessage")
+                timerText: document.getElementById("timerText")
             };
 
             function getTaiwanTime() {
@@ -683,33 +687,34 @@
             function update() {
                 const twDate = getTaiwanTime();
                 const today = twDate.getDay(); 
-
-                // 1. 永遠顯示報名表單與隊伍名單，隱藏關閉提示訊息
-                els.formContainer.style.display = "block";
-                els.formMsg.style.display = "none";
-                els.countDisp.style.display = "block";
                 
-                els.rosterWrap.style.display = "block";
-                els.rosterMsg.style.display = "none";
-
-                // 2. 倒數計時器邏輯：永遠尋找「下一個星期二的 23:59:59」
-                const target = new Date(twDate);
-                // today: 0(日), 1(一), 2(二), 3(三), 4(四), 5(五), 6(六)
-                // 目標是星期二 (2)。如果今天是星期三(3)~星期日(0)，則往後加天數尋找下週二
-                let daysUntilTuesday = (2 - today + 7) % 7;
-                target.setDate(twDate.getDate() + daysUntilTuesday);
-                target.setHours(23, 59, 59, 999);
-
-                const diff = target - twDate;
-                if (diff > 0) {
-                    const d = Math.floor(diff / 86400000);
-                    const h = String(Math.floor((diff / 3600000) % 24)).padStart(2, '0');
-                    const m = String(Math.floor((diff / 60000) % 60)).padStart(2, '0');
-                    const s = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-                    els.timerText.textContent = `${d} 天 ${h} 小時 ${m} 分 ${s} 秒`;
+                // 0 是星期日，6 是星期六。只有這兩天開放表單。
+                if (today === 0 || today === 6) {
+                    els.formContainer.style.display = "block";
+                    els.formMsg.style.display = "none";
+                    els.countDisp.style.display = "block";
+                    
+                    const target = new Date(twDate);
+                    if (today === 6) {
+                        target.setDate(twDate.getDate() + 1); // 如果是週六，目標設為明天的週日
+                    }
+                    target.setHours(23, 59, 59, 999);
+                    
+                    const diff = target - twDate;
+                    if (diff > 0) {
+                        const d = Math.floor(diff / 86400000);
+                        const h = String(Math.floor((diff / 3600000) % 24)).padStart(2, '0');
+                        const m = String(Math.floor((diff / 60000) % 60)).padStart(2, '0');
+                        const s = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+                        els.timerText.textContent = `${d} 天 ${h} 小時 ${m} 分 ${s} 秒`;
+                    }
                 } else {
-                    els.timerText.textContent = "結算中..."; 
+                    els.formContainer.style.display = "none";
+                    els.countDisp.style.display = "none";
+                    els.formMsg.style.display = "block";
                 }
+                
+                // 排班表現在是固定團模式，24 小時全天候開放，不再需要隱藏了！
             }
             update(); setInterval(update, 1000);
         }
@@ -842,7 +847,7 @@
             document.body.appendChild(snowContainer);
         }
 
-        // ================= 10. 原生表單提交 (Cloudflare 中繼) + 鍵盤修正 =================
+        // ================= 10. 原生表單提交 (Cloudflare 中繼) + 備註自動合成魔術 =================
         function initCustomForm() {
             const form = document.getElementById('customRaidForm');
             if(!form) return;
@@ -850,7 +855,6 @@
             // 🎯 絕招：針對文字輸入框，防止 Safari 亂切英文鍵盤
             const textInputs = form.querySelectorAll('input[type="text"], textarea');
             textInputs.forEach(input => {
-                // 先把原本的 name 偷偷記下來存到 data-name
                 input.dataset.name = input.getAttribute('name');
                 input.removeAttribute('name'); 
             });
@@ -863,7 +867,15 @@
                 btn.innerText = "資料傳送中... 🚀";
                 btn.disabled = true;
 
-                // 🎯 送出前一刻，把 name 屬性裝回去，讓 Google 表單認得是誰
+                // 🎯 魔法啟動：取得「填表目的」與使用者的「原始備註」
+                const purposeSelect = document.getElementById('formPurpose');
+                const detailsTextarea = form.querySelector('[data-name="entry.2040299953"]'); // 這裡抓原本隱形掉的 textarea
+                const originalDetailsContent = detailsTextarea.value; 
+
+                // 🎯 組合文字：將目的標籤強迫黏在文字最前面
+                detailsTextarea.value = `[${purposeSelect.value}] ${originalDetailsContent}`;
+
+                // 送出前一刻，把 name 屬性裝回去
                 textInputs.forEach(input => {
                     input.setAttribute('name', input.dataset.name);
                 });
@@ -888,7 +900,10 @@
                     btn.innerText = originalText;
                     btn.disabled = false;
                     
-                    // 🎯 送出完畢後，再次把 name 拔掉，準備下一次填寫
+                    // 🎯 送出完畢後，把 textarea 恢復成玩家原本打的字 (避免看到被加工過的標籤)
+                    detailsTextarea.value = originalDetailsContent;
+
+                    // 再次把 name 拔掉，準備下一次填寫
                     textInputs.forEach(input => {
                         input.removeAttribute('name');
                     });
