@@ -669,7 +669,7 @@
             });
         }
 
-        // ================= 2. 時間與倒數管理器 (限定六日開放版) =================
+        // ================= 2. 時間與倒數管理器 (含首發日自動回歸版) =================
         function initTimers() {
             const els = {
                 formContainer: document.getElementById("formContainer"),
@@ -688,16 +688,22 @@
                 const twDate = getTaiwanTime();
                 const today = twDate.getDay(); 
                 
-                // 0 是星期日，6 是星期六。只有這兩天開放表單。
-               if (today === 0 || today === 6) {
+                // 💡 加入「期間限定」密碼：設定 2026 年 10 月 30 日（週五）為特別開放日
+                const dateNum = twDate.getFullYear() * 10000 + (twDate.getMonth() + 1) * 100 + twDate.getDate();
+                const isSpecialLaunchDay = (dateNum === 20261030);
+                
+                // 0 是星期日，6 是星期六。或是「特別開放日」皆可開啟
+                if (today === 0 || today === 6 || isSpecialLaunchDay) {
                     els.formContainer.style.display = "block";
                     els.formMsg.style.display = "none";
                     els.countDisp.style.display = "block";
                     
                     const target = new Date(twDate);
-                    if (today === 6) {
-                        target.setDate(twDate.getDate() + 1); // 如果是週六，目標設為明天的週日
-                    }
+                    
+                    // 自動計算距離「本週日深夜 23:59」還有幾天
+                    if (today === 6) target.setDate(twDate.getDate() + 1); // 週六
+                    if (today === 5) target.setDate(twDate.getDate() + 2); // 週五 (首發特例)
+                    
                     target.setHours(23, 59, 59, 999);
                     
                     const diff = target - twDate;
@@ -713,8 +719,6 @@
                     els.countDisp.style.display = "none";
                     els.formMsg.style.display = "block";
                 }
-                
-                // 排班表現在是固定團模式，24 小時全天候開放，不再需要隱藏了！
             }
             update(); setInterval(update, 1000);
         }
