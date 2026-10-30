@@ -689,7 +689,7 @@
                 const today = twDate.getDay(); 
                 
                 // 0 是星期日，6 是星期六。只有這兩天開放表單。
-                if (true) {
+               if (today === 0 || today === 6) {
                     els.formContainer.style.display = "block";
                     els.formMsg.style.display = "none";
                     els.countDisp.style.display = "block";
