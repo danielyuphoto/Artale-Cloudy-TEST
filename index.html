@@ -40,7 +40,7 @@
         
         @keyframes textShimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         .title-cursive, .title-zen {
-            background: linear-gradient(to right, #2c3e50 20%, #8e44ad 40%, #f1c40f 50%, #8e44ad 60%, #2c3e50 80%);
+            background: linear-gradient(to right, #2c3e50 20%, #e67e22 40%, #e74c3c 50%, #e67e22 60%, #2c3e50 80%); /* 萬聖節橘黑配色 */
             background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
             animation: textShimmer 4s linear infinite;
         }
@@ -57,8 +57,8 @@
             transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-family: inherit; white-space: nowrap; 
         }
         .sidebar button:hover, .sub-tabs button:hover { background: rgba(255, 255, 255, 0.95); transform: translateX(5px); }
-        .sidebar button.active, .sub-tabs button.active { background: #3498db; color: white; border-color: #2980b9; transform: translateX(5px); }
-        .sub-tabs button.active { background: #e67e22; border-color: #d35400; transform: none; }
+        .sidebar button.active, .sub-tabs button.active { background: #e67e22; color: white; border-color: #d35400; transform: translateX(5px); } /* 改為橘色主題 */
+        .sub-tabs button.active { background: #d35400; border-color: #a04000; transform: none; }
         .sub-tabs button:hover { transform: none; }
 
         .main-content { flex: 1; min-width: 0; }
@@ -74,15 +74,15 @@
             will-change: transform;
         }
         .hero-image-container img:hover { 
-            transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px 5px rgba(142, 68, 173, 0.4); border-color: #fff;
+            transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px 5px rgba(230, 126, 34, 0.4); border-color: #fff;
         }
 
         /* ====== 👑 招生區圖片神話級特效 ====== */
         .recruit-image-container { width: 100%; display: flex; justify-content: center; padding: 40px 10px; }
         @keyframes legendaryDropGlow {
-            0% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(255, 170, 0, 0.4), 0 0 35px 12px rgba(0, 130, 255, 0.3); transform: translateY(0px); }
-            50% { box-shadow: 0 15px 40px rgba(0,0,0,0.55), 0 0 45px 18px rgba(255, 170, 0, 0.85), 0 0 75px 28px rgba(0, 130, 255, 0.65); transform: translateY(-10px); }
-            100% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(255, 170, 0, 0.4), 0 0 35px 12px rgba(0, 130, 255, 0.3); transform: translateY(0px); }
+            0% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(255, 170, 0, 0.4), 0 0 35px 12px rgba(230, 126, 34, 0.3); transform: translateY(0px); }
+            50% { box-shadow: 0 15px 40px rgba(0,0,0,0.55), 0 0 45px 18px rgba(255, 170, 0, 0.85), 0 0 75px 28px rgba(230, 126, 34, 0.65); transform: translateY(-10px); }
+            100% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(255, 170, 0, 0.4), 0 0 35px 12px rgba(230, 126, 34, 0.3); transform: translateY(0px); }
         }
         .recruit-image-container img { 
             width: 100%; max-width: 1300px; height: auto; border-radius: 16px; 
@@ -95,7 +95,7 @@
         .recruit-image-container img:hover { 
             transform: translateY(-15px) scale(1.03); z-index: 999; position: relative; 
             animation: none; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 65px 22px rgba(255, 160, 0, 1), 0 0 85px 32px rgba(0, 120, 255, 0.85); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 65px 22px rgba(255, 160, 0, 1), 0 0 85px 32px rgba(230, 126, 34, 0.85); 
             border-color: #fff;
         }
         
@@ -103,7 +103,7 @@
         .intro-box { padding: 30px; line-height: 1.8; font-size: 20px; }
         .intro-custom-wave { font-family: '華康大波浪圓體', 'DFPWave-W12', 'Mochiy Pop P One', 'Zen Maru Gothic', sans-serif; color: #2c3e50; letter-spacing: 1px; }
         .intro-custom-wave p { margin-bottom: 12px; }
-        .intro-custom-wave .wave-title { text-align: center; font-size: 28px; color: #2980b9; margin-bottom: 25px; border-bottom: 2px dashed rgba(52, 152, 219, 0.4); padding-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .intro-custom-wave .wave-title { text-align: center; font-size: 28px; color: #d35400; margin-bottom: 25px; border-bottom: 2px dashed rgba(211, 84, 0, 0.4); padding-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
         .intro-custom-wave .highlight-item { color: #d35400; font-size: 22px; font-weight: normal; }
         .intro-custom-wave .footer-cheer { text-align: center; font-size: 26px; color: #c0392b; margin-top: 25px; padding-top: 15px; border-top: 2px dashed rgba(192, 57, 43, 0.3); }
 
@@ -118,7 +118,7 @@
         .gallery-container { display: flex; gap: 15px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 15px; }
         .gallery-container::-webkit-scrollbar { height: 8px; }
         .gallery-container::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); border-radius: 4px; }
-        .gallery-container::-webkit-scrollbar-thumb { background: rgba(52, 152, 219, 0.5); border-radius: 4px; }
+        .gallery-container::-webkit-scrollbar-thumb { background: rgba(230, 126, 34, 0.5); border-radius: 4px; }
         
         .photo-wrapper { flex: 0 0 100%; scroll-snap-align: center; display: flex; flex-direction: column; gap: 10px; }
         .photo-wrapper img { width: 100%; height: 240px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(255, 255, 255, 0.9); cursor: zoom-in; transition: 0.2s; }
@@ -141,12 +141,12 @@
 
         /* ================= 6. Q版立體手帳風 音樂播放器 ================= */
         .cute-music-player {
-            margin-top: 15px; padding: 15px 10px; background: linear-gradient(135deg, rgba(255,240,245,0.9) 0%, rgba(255,228,225,0.9) 100%);
-            border: 2px dashed #ffb6c1; border-radius: 16px; text-align: center;
-            box-shadow: 0 6px 12px rgba(255, 182, 193, 0.3), inset 0 2px 4px rgba(255,255,255,0.8); transition: transform 0.3s ease;
+            margin-top: 15px; padding: 15px 10px; background: linear-gradient(135deg, rgba(253, 235, 208, 0.9) 0%, rgba(250, 215, 161, 0.9) 100%);
+            border: 2px dashed #e67e22; border-radius: 16px; text-align: center;
+            box-shadow: 0 6px 12px rgba(230, 126, 34, 0.3), inset 0 2px 4px rgba(255,255,255,0.8); transition: transform 0.3s ease;
         }
-        .cute-music-player:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 16px rgba(255, 182, 193, 0.5), inset 0 2px 4px rgba(255,255,255,0.9); }
-        .music-title { font-size: 16px; color: #d87093; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; text-shadow: 1px 1px 0px rgba(255,255,255,1); }
+        .cute-music-player:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 16px rgba(230, 126, 34, 0.5), inset 0 2px 4px rgba(255,255,255,0.9); }
+        .music-title { font-size: 16px; color: #d35400; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; text-shadow: 1px 1px 0px rgba(255,255,255,1); }
         @keyframes bounceNote { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-4px) rotate(10deg); } }
         .music-note { display: inline-block; animation: bounceNote 1.5s infinite ease-in-out; }
         .music-note.delay { animation-delay: 0.75s; }
@@ -155,7 +155,7 @@
             display: flex; align-items: center; justify-content: space-between;
             background: rgba(255, 255, 255, 0.6); border-radius: 20px; padding: 5px 12px; margin-bottom: 8px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
-        .song-ctrl-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: #d87093; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; padding: 0; outline: none; flex-shrink: 0; }
+        .song-ctrl-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: #d35400; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; padding: 0; outline: none; flex-shrink: 0; }
         .song-ctrl-btn:hover { transform: scale(1.2); color: #c0392b; }
         
         .current-song-marquee {
@@ -192,9 +192,9 @@
         .cute-form {
             background: rgba(255, 255, 255, 0.95); padding: 25px 30px; border-radius: 16px;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); text-align: left;
-            border: 2px dashed #3498db; margin-top: 15px;
+            border: 2px dashed #e67e22; margin-top: 15px;
         }
-        .form-title { color: #2980b9; font-size: 26px; text-align: center; margin: 0 0 5px; }
+        .form-title { color: #d35400; font-size: 26px; text-align: center; margin: 0 0 5px; }
         .form-subtitle { color: #7f8c8d; text-align: center; font-size: 16px; margin-bottom: 25px; }
         .form-section-title { font-size: 18px; font-weight: bold; color: #d35400; margin: 15px 0 10px; border-bottom: 2px solid rgba(211, 84, 0, 0.2); padding-bottom: 5px; }
         
@@ -214,34 +214,90 @@
         .cute-form select { cursor: pointer; appearance: auto; }
         
         .cute-form input:focus, .cute-form select:focus, .cute-form textarea:focus { 
-            border-color: #3498db; outline: none; box-shadow: 0 0 8px rgba(52, 152, 219, 0.3); 
+            border-color: #e67e22; outline: none; box-shadow: 0 0 8px rgba(230, 126, 34, 0.3); 
         }
         .cute-form textarea { resize: vertical; }
 
         .form-submit-btn {
             display: block; width: 100%; padding: 15px; margin-top: 25px;
-            background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none; border-radius: 12px;
+            background: linear-gradient(135deg, #e67e22, #d35400); color: white; border: none; border-radius: 12px;
             font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: inherit;
         }
-        .form-submit-btn:hover { background: linear-gradient(135deg, #2980b9, #1f6391); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
+        .form-submit-btn:hover { background: linear-gradient(135deg, #d35400, #a04000); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
         .form-submit-btn:disabled { background: #95a5a6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* ================= 8. 雪花飄落特效 (優化硬體加速) ================= */
+        /* ================= 8. 萬聖節專屬特效區 ================= */
+        
+        /* 🦇 鬼屋大門 */
+        #spooky-intro {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
+            display: flex; align-items: center; justify-content: center;
+            background: #0a0a0a; overflow: hidden; transition: background 0.5s;
+        }
+        .spooky-door {
+            position: absolute; top: 0; height: 100%; width: 50%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            border: 2px solid #333; box-shadow: inset 0 0 80px rgba(0,0,0,1);
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex; align-items: center;
+        }
+        #spooky-door-left { left: 0; border-right: 5px solid #222; transform-origin: left; justify-content: flex-end; }
+        #spooky-door-right { right: 0; border-left: 5px solid #222; transform-origin: right; justify-content: flex-start; }
+        .door-handle { width: 25px; height: 100px; background: #555; border-radius: 10px; margin: 20px; box-shadow: 0 0 15px rgba(255, 152, 0, 0.3); }
+        .intro-text-btn {
+            z-index: 100001; padding: 20px 40px; font-size: 28px; color: #ff9800; font-family: inherit; font-weight: bold;
+            background: rgba(0,0,0,0.8); border: 3px dashed #ff9800; border-radius: 20px;
+            cursor: pointer; text-shadow: 0 0 15px #ff9800; animation: spookyPulse 1.5s infinite;
+            box-shadow: 0 0 30px rgba(255, 152, 0, 0.4); outline: none;
+        }
+        @keyframes spookyPulse { 
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 152, 0, 0.4); } 
+            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 152, 0, 0.8); } 
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 152, 0, 0.4); } 
+        }
+        .open-doors #spooky-door-left { transform: translateX(-100%); }
+        .open-doors #spooky-door-right { transform: translateX(100%); }
+        .open-doors .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.5s; transform: scale(1.5); }
+        .intro-hidden { pointer-events: none; background: transparent !important; }
+
+        /* 👻 幽靈糖果雨 */
         #snow-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9999; overflow: hidden;
+            pointer-events: none; z-index: 9997; overflow: hidden;
         }
-        .snowflake {
-            position: absolute; top: -10vh; color: #fff; opacity: 0.8;
-            text-shadow: 0 0 6px rgba(255,255,255,0.9);
-            animation: fall linear infinite;
-            will-change: transform; 
+        .halloween-rain {
+            position: absolute; top: -10vh; opacity: 0.9;
+            filter: drop-shadow(0 0 8px rgba(255, 152, 0, 0.8)); /* 橘色夜光 */
+            animation: fall linear infinite; will-change: transform; 
         }
         @keyframes fall {
             0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(110vh) translateX(30px) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0; }
+        }
+
+        /* 🦇 飛天蝙蝠 */
+        .flying-bat {
+            position: fixed; pointer-events: none; z-index: 9998;
+            animation: batFly linear infinite; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+        }
+        @keyframes batFly {
+            0% { transform: translate(-10vw, var(--startY)) scale(0.5) rotate(-15deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(110vw, var(--endY)) scale(1.5) rotate(15deg); opacity: 0; }
+        }
+
+        /* 💥 點擊南瓜爆破 */
+        .pumpkin-particle {
+            position: fixed; pointer-events: none; z-index: 99999;
+            animation: popOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            filter: drop-shadow(0 0 5px rgba(255, 152, 0, 0.8));
+        }
+        @keyframes popOut {
+            0% { transform: translate(0, 0) scale(0.2); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.8) rotate(var(--rot)); opacity: 0; }
         }
 
         /* ================= 9. 手機版 RWD ================= */
@@ -258,7 +314,7 @@
                 flex-direction: row; width: 100%; overflow-x: auto; padding: 10px 5px; gap: 8px; 
             }
             .sidebar::-webkit-scrollbar { height: 4px; }
-            .sidebar::-webkit-scrollbar-thumb { background: rgba(52, 152, 219, 0.5); border-radius: 4px; }
+            .sidebar::-webkit-scrollbar-thumb { background: rgba(230, 126, 34, 0.5); border-radius: 4px; }
             
             .sidebar button, .sub-tabs button { padding: 8px 12px; font-size: 15px; border-radius: 6px; }
             .cute-music-player { margin-top: 0; margin-left: 5px; min-width: 230px; padding: 10px; } 
@@ -277,10 +333,19 @@
             #lightbox-prev { left: 10px; } #lightbox-next { right: 10px; }
             .intro-custom-wave .wave-title { font-size: 22px; }
             .cute-form { padding: 15px; }
+
+            .intro-text-btn { font-size: 20px; padding: 15px 20px; } /* 手機版開門按鈕縮小 */
         }
     </style>
 </head>
 <body>
+
+    <!-- 🎃 萬聖節：鬼屋開場大門 -->
+    <div id="spooky-intro">
+        <div id="spooky-door-left" class="spooky-door"><div class="door-handle"></div></div>
+        <div id="spooky-door-right" class="spooky-door"><div class="door-handle"></div></div>
+        <button class="intro-text-btn" id="enterMansionBtn">敲門進入 Cloudy 鬼屋 🎃</button>
+    </div>
 
     <!-- 全螢幕燈箱 -->
     <div id="lightbox" class="flex-center">
@@ -434,7 +499,7 @@
                 </div>
             </div>
 
-            <!-- 頁籤：突襲王團報名 (新增合成備註選項) -->
+            <!-- 頁籤：突襲王團報名 (萬聖橘黑風格) -->
             <div id="signupTab" class="tab-content">
                 <div class="glass-panel" style="padding: 10px; text-align: center;">
                     <div id="countdownDisplay">⏳ 距離本週報名截止還剩： <span id="timerText">計算中...</span></div>
@@ -444,14 +509,15 @@
                             <h3 class="form-title">⚔️ 突襲王團 固定團/換團申請表</h3>
                             <p class="form-subtitle">資料將由系統加密直達公會後台，填寫不卡頓！</p>
 
-                            <!-- 🔥 新增：填表目的 (自動合成備註魔法) -->
+                            <!-- 🔥 填表目的 -->
                             <div class="form-section-title">📌 填表目的 (必選)</div>
                             <div class="form-grid-3">
                                 <label style="grid-column: 1 / -1;">您這次填寫表單的原因是？ 
                                     <select id="formPurpose" required style="border: 2px solid #e74c3c; box-shadow: 0 0 5px rgba(231,76,60,0.3);">
                                         <option value="" disabled selected>請選擇填表目的...</option>
-                                        <option value="新進求組">👋 [新進求組] 我是新來的 / 目前無固定團，請求分配</option>
+                                        <option value="新進求組">👋 [新進求組] 我是新來的夥伴 / 目前無固定團，請求分配</option>
                                         <option value="申請換團">🔄 [申請換團] 我已有固定團，下週起想轉換突襲王目標</option>
+                                        <option value="彈性候補">🏕️ [彈性候補] 下週時間不固定或原團請假，當個快樂的補位打工仔</option>
                                     </select>
                                 </label>
                             </div>
@@ -583,7 +649,7 @@
                 </div>
             </div>
 
-            <!-- 頁籤：每週突襲王團隊伍 (固定團全天候開放) -->
+            <!-- 頁籤：每週突襲王團隊伍 -->
             <div id="rosterTab" class="tab-content">
                 <div id="rosterContainerWrapper">
                     <div class="sub-tabs">
@@ -595,6 +661,11 @@
                     <div class="glass-panel roster-card">
                         <iframe id="rosterIframe" src="https://docs.google.com/spreadsheets/d/18ScfVsNY4OSDRs3fy71uTyHmD27eYFbvffn0XQ8YrYE/htmlembed?widget=false&chrome=false&gid=245864129" class="embed-container" title="每週突襲王團隊伍" loading="lazy"></iframe>
                     </div>
+                </div>
+                <!-- 新增：排班維護期間的遮罩畫面 -->
+                <div id="rosterClosedMessage" class="glass-panel" style="display: none; padding: 120px 20px; text-align: center; margin-top: 15px;">
+                    <h3 style="color: #e67e22; font-size: 32px; font-weight: bold; margin-bottom: 20px;">幹部們努力安排隊伍中，敬請期待>&lt;</h3>
+                    <p style="font-size: 22px; color: #7f8c8d;">每週二 18:00 將自動公佈最新排定名單！</p>
                 </div>
             </div>
 
@@ -669,13 +740,15 @@
             });
         }
 
-        // ================= 2. 時間與倒數管理器 (含首發日自動回歸版) =================
+        // ================= 2. 時間與倒數管理器 (含王團名單開關邏輯) =================
         function initTimers() {
             const els = {
                 formContainer: document.getElementById("formContainer"),
                 formMsg: document.getElementById("closedMessage"),
                 countDisp: document.getElementById("countdownDisplay"),
-                timerText: document.getElementById("timerText")
+                timerText: document.getElementById("timerText"),
+                rosterWrap: document.getElementById("rosterContainerWrapper"), // 抓取名單區塊
+                rosterMsg: document.getElementById("rosterClosedMessage")      // 抓取名單維護中訊息
             };
 
             function getTaiwanTime() {
@@ -687,23 +760,21 @@
             function update() {
                 const twDate = getTaiwanTime();
                 const today = twDate.getDay(); 
+                const hour = twDate.getHours();
                 
                 // 💡 加入「期間限定」密碼：設定 2026 年 10 月 30 日（週五）為特別開放日
                 const dateNum = twDate.getFullYear() * 10000 + (twDate.getMonth() + 1) * 100 + twDate.getDate();
                 const isSpecialLaunchDay = (dateNum === 20261030);
-                
-                // 0 是星期日，6 是星期六。或是「特別開放日」皆可開啟
+
+                // --- 1. 報名表單邏輯 ---
                 if (today === 0 || today === 6 || isSpecialLaunchDay) {
                     els.formContainer.style.display = "block";
                     els.formMsg.style.display = "none";
                     els.countDisp.style.display = "block";
                     
                     const target = new Date(twDate);
-                    
-                    // 自動計算距離「本週日深夜 23:59」還有幾天
                     if (today === 6) target.setDate(twDate.getDate() + 1); // 週六
                     if (today === 5) target.setDate(twDate.getDate() + 2); // 週五 (首發特例)
-                    
                     target.setHours(23, 59, 59, 999);
                     
                     const diff = target - twDate;
@@ -719,7 +790,13 @@
                     els.countDisp.style.display = "none";
                     els.formMsg.style.display = "block";
                 }
+
+                // --- 2. 王團名單開放邏輯 (週二 18:00 開啟) ---
+                const isRosterClosed = (today === 1) || (today === 2 && hour < 18);
+                els.rosterWrap.style.display = isRosterClosed ? "none" : "block";
+                els.rosterMsg.style.display = isRosterClosed ? "block" : "none";
             }
+            
             update(); setInterval(update, 1000);
         }
 
@@ -741,7 +818,7 @@
                     <td>${item.name}</td><td>${item.wc.toFixed(1)}</td><td>${thMeso.toFixed(1)}</td>
                     <td><input type="number" value="${item.ah}" style="width:75px;" onchange="updateAH(${i}, this.value)"></td>
                     <td>${item.ah < thMeso ? '<span class="buy-ah">✅ 用楓幣拉拍賣</span>' : '<span class="buy-wc">💎 直接扣 WC 買</span>'}</td>
-                    <td>${profit > 0 ? `<span class="profit-good">賺 ${profit.toFixed(1)} 萬</span>` : `<span class="profit-bad">虧 ${Math.abs(profit).toFixed(1)} 萬</span>`}</td>
+                    <td>${profit > 0 ? `<span class="profit-good">賺 ${profit.toFixed(1)} 萬</span>` : `<span class="profit-bad">亏 ${Math.abs(profit).toFixed(1)} 萬</span>`}</td>
                 </tr>`;
             });
             document.getElementById('tableBody').innerHTML = html;
@@ -785,7 +862,7 @@
             });
         }
 
-        // ================= 5. 洗牌音樂播放器 (修復記憶體外洩版) =================
+        // ================= 5. 洗牌音樂播放器 =================
         function initAudio() {
             const audio = document.getElementById("bgMusic");
             const songNameDisplay = document.getElementById("currentSongName");
@@ -802,7 +879,8 @@
                 }
             }
 
-            function playSong(index, shouldPlay = true) {
+            // 修改：拔除自動播放，改為可從外部呼叫播放
+            window.playMusicEngine = function(index, shouldPlay = true) {
                 if (CONFIG.playlist.length === 0) return;
                 
                 currentIndex = (index + CONFIG.playlist.length) % CONFIG.playlist.length;
@@ -811,39 +889,51 @@
                 audio.src = songFile + "?v=" + new Date().getTime();
                 
                 if (shouldPlay) {
-                    audio.play().catch(error => {
-                        console.log("自動播放被阻擋，等待使用者互動。");
-                        const forcePlay = () => audio.play();
-                        document.addEventListener("click", forcePlay, { once: true });
-                        document.addEventListener("touchstart", forcePlay, { once: true });
-                    });
+                    audio.play().catch(error => console.log("等待互動..."));
                 }
-            }
+            };
 
             shufflePlaylist(); 
-            playSong(0, false); 
+            window.playMusicEngine(0, false); 
 
-            document.getElementById("nextSongBtn").addEventListener("click", () => playSong(currentIndex + 1, true));
-            document.getElementById("prevSongBtn").addEventListener("click", () => playSong(currentIndex - 1, true));
-            audio.addEventListener("ended", () => playSong(currentIndex + 1, true));
+            document.getElementById("nextSongBtn").addEventListener("click", () => window.playMusicEngine(currentIndex + 1, true));
+            document.getElementById("prevSongBtn").addEventListener("click", () => window.playMusicEngine(currentIndex - 1, true));
+            audio.addEventListener("ended", () => window.playMusicEngine(currentIndex + 1, true));
         }
 
-        // ================= 6. 效能優化版飄雪特效 =================
-        function initSnow() {
+        // ================= 8. 萬聖節限定特效大禮包 =================
+        
+        // 👻 1. 開啟鬼屋大門
+        document.getElementById('enterMansionBtn').addEventListener('click', function() {
+            // 讓門往兩邊拉開
+            document.getElementById('spooky-intro').classList.add('open-doors');
+            // 延遲隱藏門的實體
+            setTimeout(() => { document.getElementById('spooky-intro').classList.add('intro-hidden'); }, 1500);
+            
+            // 🎶 利用這個使用者點擊，順便強制播放音樂！突破瀏覽器限制！
+            window.playMusicEngine(0, true);
+
+            // 啟動萬聖節特效
+            initHalloweenRain();
+            initBats();
+        });
+
+        // 👻 2. 橘光幽靈糖果雨
+        function initHalloweenRain() {
             const snowContainer = document.createElement('div');
             snowContainer.id = 'snow-container';
             const fragment = document.createDocumentFragment(); 
             
-            const flakeCount = 40;
-            const symbols = ['❄', '❅', '❆'];
+            const flakeCount = 35;
+            const symbols = ['👻', '🍬', '🍭', '🎃', '🦇'];
 
             for (let i = 0; i < flakeCount; i++) {
                 const flake = document.createElement('div');
-                flake.classList.add('snowflake');
+                flake.classList.add('halloween-rain');
                 flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
                 flake.style.left = `${Math.random() * 100}vw`;
-                flake.style.fontSize = `${Math.random() * 12 + 10}px`;
-                flake.style.animationDuration = `${Math.random() * 6 + 6}s`;
+                flake.style.fontSize = `${Math.random() * 15 + 15}px`;
+                flake.style.animationDuration = `${Math.random() * 5 + 7}s`;
                 flake.style.animationDelay = `${Math.random() * 5}s`;
                 fragment.appendChild(flake);
             }
@@ -851,12 +941,58 @@
             document.body.appendChild(snowContainer);
         }
 
-        // ================= 10. 原生表單提交 (Cloudflare 中繼) + 備註自動合成魔術 =================
+        // 🦇 3. 飛天大蝙蝠
+        function initBats() {
+            const batCount = 4;
+            for(let i=0; i<batCount; i++) {
+                const bat = document.createElement('div');
+                bat.classList.add('flying-bat');
+                bat.innerText = '🦇';
+                bat.style.animationDelay = `${Math.random() * 10}s`;
+                bat.style.animationDuration = `${Math.random() * 5 + 10}s`;
+                bat.style.setProperty('--startY', `${Math.random() * 80}vh`);
+                bat.style.setProperty('--endY', `${Math.random() * 80}vh`);
+                bat.style.fontSize = `${Math.random() * 20 + 30}px`;
+                document.body.appendChild(bat);
+            }
+        }
+
+        // 💥 4. 滑鼠點擊：南瓜爆破特效
+        document.addEventListener('click', function(e) {
+            // 避免點擊開門按鈕時觸發爆破擋住視線
+            if(e.target.id === 'enterMansionBtn') return;
+
+            const popCount = 6;
+            for(let i=0; i<popCount; i++) {
+                const pumpkin = document.createElement('div');
+                pumpkin.classList.add('pumpkin-particle');
+                pumpkin.innerText = ['🎃','👻','🍬','✨'][Math.floor(Math.random()*4)];
+                pumpkin.style.left = `${e.clientX - 15}px`;
+                pumpkin.style.top = `${e.clientY - 15}px`;
+                
+                // 讓它們往隨機方向炸開
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 50 + 30; // 爆炸距離
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                const rot = Math.random() * 360 - 180;
+                
+                pumpkin.style.setProperty('--tx', `${tx}px`);
+                pumpkin.style.setProperty('--ty', `${ty}px`);
+                pumpkin.style.setProperty('--rot', `${rot}deg`);
+                
+                document.body.appendChild(pumpkin);
+                
+                // 動畫結束後自動清除
+                setTimeout(() => { pumpkin.remove(); }, 600);
+            }
+        });
+
+        // ================= 10. 原生表單提交 =================
         function initCustomForm() {
             const form = document.getElementById('customRaidForm');
             if(!form) return;
 
-            // 🎯 絕招：針對文字輸入框，防止 Safari 亂切英文鍵盤
             const textInputs = form.querySelectorAll('input[type="text"], textarea');
             textInputs.forEach(input => {
                 input.dataset.name = input.getAttribute('name');
@@ -871,15 +1007,12 @@
                 btn.innerText = "資料傳送中... 🚀";
                 btn.disabled = true;
 
-                // 🎯 魔法啟動：取得「填表目的」與使用者的「原始備註」
                 const purposeSelect = document.getElementById('formPurpose');
-                const detailsTextarea = form.querySelector('[data-name="entry.2040299953"]'); // 這裡抓原本隱形掉的 textarea
+                const detailsTextarea = form.querySelector('[data-name="entry.2040299953"]'); 
                 const originalDetailsContent = detailsTextarea.value; 
 
-                // 🎯 組合文字：將目的標籤強迫黏在文字最前面
                 detailsTextarea.value = `[${purposeSelect.value}] ${originalDetailsContent}`;
 
-                // 送出前一刻，把 name 屬性裝回去
                 textInputs.forEach(input => {
                     input.setAttribute('name', input.dataset.name);
                 });
@@ -903,11 +1036,7 @@
                 } finally {
                     btn.innerText = originalText;
                     btn.disabled = false;
-                    
-                    // 🎯 送出完畢後，把 textarea 恢復成玩家原本打的字 (避免看到被加工過的標籤)
                     detailsTextarea.value = originalDetailsContent;
-
-                    // 再次把 name 拔掉，準備下一次填寫
                     textInputs.forEach(input => {
                         input.removeAttribute('name');
                     });
@@ -915,10 +1044,10 @@
             });
         }
 
-        // 🟢 總電源開關：等網頁載入完畢後，啟動所有功能
+        // 🟢 總電源開關：等網頁載入完畢後，啟動所有功能 (把雪花換成了萬聖節大禮包)
         document.addEventListener('DOMContentLoaded', () => {
             window.updateAH = updateAH; 
-            initTabs(); calculate(); initTimers(); initLightbox(); initAudio(); initSnow(); initCustomForm();
+            initTabs(); calculate(); initTimers(); initLightbox(); initAudio(); initCustomForm();
         });
     </script>
 </body>
