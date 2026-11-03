@@ -228,44 +228,45 @@
 
         /* ================= 8. 萬聖節專屬特效區 ================= */
         
-        /* 🦇 鐵柵欄鬼屋大門 */
+        /* 🦇 萬聖節：沉浸式鬧鬼宅邸開場 */
         #spooky-intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
             display: flex; align-items: center; justify-content: center;
-            background: #050505; overflow: hidden; transition: opacity 1s ease-in-out;
+            background: #000; overflow: hidden; transition: opacity 0.8s ease-in-out;
         }
 
-        /* 🎃 藏在鐵柵欄後的巨大發光南瓜 */
-        .giant-pumpkin {
-            position: absolute; top: 50%; left: 50%; z-index: 1;
-            font-size: clamp(150px, 40vw, 350px); /* 手機跟電腦自動適應大小 */
-            animation: pumpkinGlow 3s infinite alternate ease-in-out; 
-            user-select: none; pointer-events: none; margin: 0; line-height: 1;
+        /* 🖼️ 鬧鬼宅邸背景圖與呼吸閃爍效果 */
+        #mansion-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('萬聖節鬧鬼宅邸門口.jpg') center/cover no-repeat;
+            z-index: 1; transform-origin: center center;
+            animation: creepyPulse 4s infinite alternate ease-in-out;
+            transition: transform 2.2s cubic-bezier(0.4, 0, 0.2, 1), filter 2s ease-in;
         }
-        @keyframes pumpkinGlow {
-            0% { filter: drop-shadow(0 0 20px #d35400) drop-shadow(0 0 10px #e67e22); transform: translate(-50%, -50%) scale(1); }
-            100% { filter: drop-shadow(0 0 80px #d35400) drop-shadow(0 0 40px #e67e22); transform: translate(-50%, -50%) scale(1.1); }
+        
+        @keyframes creepyPulse {
+            0% { filter: brightness(0.7) contrast(1.1) drop-shadow(0 0 10px #000); transform: scale(1.02); }
+            100% { filter: brightness(1.1) contrast(1.2) drop-shadow(0 0 20px #000); transform: scale(1.05); }
         }
 
-        /* 🚪 半透明鐵柵欄門 */
+        /* 🚪 鐵柵欄設計 */
         .spooky-door {
             position: absolute; top: 0; height: 100%; width: 50%;
-            /* 直條紋與橫條紋交錯的鐵柵欄設計 */
+            /* 直條紋與橫條紋交錯的半透明鐵柵欄，讓背景透出來 */
             background: 
-                linear-gradient(to bottom, transparent 20%, #111 20%, #111 23%, transparent 23%, transparent 77%, #111 77%, #111 80%, transparent 80%),
-                repeating-linear-gradient(to right, transparent 0%, transparent 8%, #111 8%, #111 11%);
-            background-color: rgba(10, 10, 10, 0.85); /* 半透明黑底，讓南瓜的光透出來 */
-            box-shadow: inset 0 0 60px rgba(0,0,0,1);
-            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+                linear-gradient(to bottom, transparent 20%, #050505 20%, #050505 23%, transparent 23%, transparent 77%, #050505 77%, #050505 80%, transparent 80%),
+                repeating-linear-gradient(to right, transparent 0%, transparent 8%, #050505 8%, #050505 11%);
+            background-color: rgba(0, 0, 0, 0.4); 
+            box-shadow: inset 0 0 80px rgba(0,0,0,1);
             display: flex; align-items: center; z-index: 2;
         }
-        #spooky-door-left { left: 0; border-right: 6px solid #1a1a1a; transform-origin: left; justify-content: flex-end; }
-        #spooky-door-right { right: 0; border-left: 6px solid #1a1a1a; transform-origin: right; justify-content: flex-start; }
+        #spooky-door-left { left: 0; border-right: 8px solid #111; justify-content: flex-end; }
+        #spooky-door-right { right: 0; border-left: 8px solid #111; justify-content: flex-start; }
         
         .door-handle { 
             width: 25px; height: 100px; border-radius: 8px; margin: 25px; 
-            background: linear-gradient(to bottom, #555, #222); border: 2px solid #000; 
-            box-shadow: 0 0 15px rgba(255, 152, 0, 0.4); 
+            background: linear-gradient(to bottom, #444, #111); border: 2px solid #000; 
+            box-shadow: 0 0 15px rgba(255, 152, 0, 0.5); 
         }
         
         .intro-text-btn {
@@ -281,10 +282,33 @@
             50% { box-shadow: 0 0 50px rgba(255, 152, 0, 0.8); } 
             100% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.4); } 
         }
+
+        /* 🎬 開門連動動畫：哐的震動 ＋ 猛然拉開 ＋ 衝入宅邸 */
+        @keyframes clankOpenLeft {
+            0% { transform: translateX(0); }
+            15% { transform: translateX(15px); }  /* 哐！卡住 */
+            25% { transform: translateX(-10px); } /* 扯回來 */
+            100% { transform: translateX(-100%); }
+        }
+        @keyframes clankOpenRight {
+            0% { transform: translateX(0); }
+            15% { transform: translateX(-15px); } 
+            25% { transform: translateX(10px); } 
+            100% { transform: translateX(100%); }
+        }
+
+        .entering-mansion #spooky-door-left { animation: clankOpenLeft 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
+        .entering-mansion #spooky-door-right { animation: clankOpenRight 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
         
-        .open-doors #spooky-door-left { transform: translateX(-100%); }
-        .open-doors #spooky-door-right { transform: translateX(100%); }
-        .open-doors .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.5s; transform: scale(1.5); }
+        /* 宅邸圖瞬間拉近並漸漸融入黑暗 */
+        .entering-mansion #mansion-bg {
+            transform: scale(2.5); 
+            filter: brightness(0); 
+            animation: none; 
+        }
+        .entering-mansion .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.5s; transform: scale(1.5); }
+        
+        /* 動畫跑完後隱藏整個遮罩 */
         .intro-hidden { opacity: 0; pointer-events: none; }
 
         /* 👻 幽靈糖果雨 */
@@ -367,10 +391,10 @@
 </head>
 <body>
 
-    <!-- 🎃 萬聖節：鐵柵欄鬼屋大門 -->
+    <!-- 🎃 萬聖節：沉浸式鬧鬼宅邸開場大門 -->
     <div id="spooky-intro">
-        <!-- 發光的巨大南瓜，藏在鐵柵欄後面 -->
-        <div class="giant-pumpkin">🎃</div>
+        <!-- 宅邸背景圖，會呼吸閃爍 -->
+        <div id="mansion-bg"></div>
         
         <div id="spooky-door-left" class="spooky-door"><div class="door-handle"></div></div>
         <div id="spooky-door-right" class="spooky-door"><div class="door-handle"></div></div>
@@ -437,7 +461,7 @@
                     
                     <p><span class="highlight-item">✨ 活動點滴紀錄</span>：回顧我們過去一起舉辦過的各種瘋狂活動與專屬大合照！</p>
                     <p><span class="highlight-item">🔥 每週突襲王報名＆分組公告</span>：打王絕對不迷路！每週的報名表單和專屬分組公告都在這，隨時掌握出團動態。</p>
-                    <p><span class="highlight-item">💰 獨家理財神器</span>：自己人開發的「儲值WC買點商」與「楓幣比值計算」小工具，幫你精打細算，輕鬆把裝備衝到最頂！</p>
+                    <p><span class="highlight-item">💰 獨家理財神器</span>：自己人開發的「儲值WC買點商」與「楓幣比值計算」小工具，幫遇到瓶頸精打細算，輕鬆把裝備衝到最頂！</p>
                     
                     <p style="margin-top: 20px;">這一切的努力，都是因為幹部們超在乎大家，希望能給大家最棒的公會體驗、最順暢的遊戲日常！</p>
                     <p>有空就多來小窩聽聽點唱機的音樂、多加入DC一同閒聊！</p>
@@ -577,7 +601,7 @@
                                         <option value="" disabled selected>請選擇</option>
                                         <option value="困難殘暴炎魔">困難殘暴炎魔</option><option value="阿卡伊農">阿卡伊農</option>
                                         <option value="克雷塞爾(樹王)">克雷塞爾(樹王)</option><option value="闇黑龍王">闇黑龍王</option>
-                                        <option value="艾畢奈亞(毒)">艾畢奈亞(毒)</option><option value="艾畢奈亞(冰)">艾畢奈亞(冰)</option>
+                                        <option value="艾畢奈弱(毒)">艾畢奈亞(毒)</option><option value="艾畢奈亞(冰)">艾畢奈亞(冰)</option>
                                         <option value="困難拉圖斯">困難拉圖斯</option><option value="殘暴炎魔">殘暴炎魔</option>
                                     </select>
                                 </label>
@@ -937,8 +961,11 @@
         
         // 👻 1. 開啟鬼屋大門
         document.getElementById('enterMansionBtn').addEventListener('click', function() {
-            document.getElementById('spooky-intro').classList.add('open-doors');
-            setTimeout(() => { document.getElementById('spooky-intro').classList.add('intro-hidden'); }, 1500);
+            // 觸發「哐」開門與背景拉近特效
+            document.getElementById('spooky-intro').classList.add('entering-mansion');
+            
+            // 延遲隱藏整個大門遮罩，給拉近特效一點時間展現
+            setTimeout(() => { document.getElementById('spooky-intro').classList.add('intro-hidden'); }, 2000);
             
             // 🤫 取消自動播放，僅載入第一首歌但不播放
             window.playMusicEngine(0, false);
@@ -974,14 +1001,19 @@
         function initBats() {
             const batCount = 4;
             for(let i=0; i<batCount; i++) {
-                const bat = document.createElement('div');
+                const bat = document.createElement('img'); // 改成建立圖片
+                bat.src = 'bat.png'; // 這裡填入你的蝙蝠圖檔名稱
                 bat.classList.add('flying-bat');
-                bat.innerText = '🦇';
+                
+                // 為了讓圖片比例正確，這裡改用寬度來控制大小，而不是字體大小
+                const size = Math.random() * 30 + 40; 
+                bat.style.width = `${size}px`;
+                bat.style.height = 'auto';
+
                 bat.style.animationDelay = `${Math.random() * 10}s`;
                 bat.style.animationDuration = `${Math.random() * 5 + 10}s`;
                 bat.style.setProperty('--startY', `${Math.random() * 80}vh`);
                 bat.style.setProperty('--endY', `${Math.random() * 80}vh`);
-                bat.style.fontSize = `${Math.random() * 20 + 30}px`;
                 document.body.appendChild(bat);
             }
         }
@@ -1055,7 +1087,7 @@
                     });
 
                     if (res.ok) {
-                        alert("🎉 報名成功！資料已安全送達公會後台。");
+                        alert("🎉 報名成功！資料安全送達公會後台。");
                         this.reset();
                     } else {
                         alert("⚠️ 傳送失敗，請稍後再試或聯繫幹部。");
