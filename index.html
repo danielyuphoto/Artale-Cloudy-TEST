@@ -241,7 +241,7 @@
             background: url('萬聖節鬧鬼宅邸門口.jpg') center/cover no-repeat;
             z-index: 1; transform-origin: center center;
             animation: creepyPulse 4s infinite alternate ease-in-out;
-            transition: transform 2.2s cubic-bezier(0.4, 0, 0.2, 1), filter 2s ease-in;
+            /* 移除了原本會打架的 transition，完全交給下面的 keyframes 接管 */
         }
         
         @keyframes creepyPulse {
@@ -283,7 +283,7 @@
             100% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.4); } 
         }
 
-        /* 🎬 開門連動動畫：哐的震動 ＋ 猛然拉開 ＋ 衝入宅邸 */
+        /* 🎬 開門連動動畫：哐的震動 ＋ 猛然拉開 */
         @keyframes clankOpenLeft {
             0% { transform: translateX(0); }
             15% { transform: translateX(15px); }  /* 哐！卡住 */
@@ -300,13 +300,27 @@
         .entering-mansion #spooky-door-left { animation: clankOpenLeft 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
         .entering-mansion #spooky-door-right { animation: clankOpenRight 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
         
-        /* 宅邸圖瞬間拉近並漸漸融入黑暗 */
-        .entering-mansion #mansion-bg {
-            transform: scale(2.5); 
-            filter: brightness(0); 
-            animation: none; 
+        /* 🔥 新增：背景圖拉近衝鋒動畫 */
+        @keyframes rushIntoDarkness {
+            0% { transform: scale(1.05); filter: brightness(1.1); }
+            100% { transform: scale(3.5); filter: brightness(0); }
         }
-        .entering-mansion .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.5s; transform: scale(1.5); }
+
+        /* 🔥 新增：巨型南瓜衝鋒動畫 */
+        @keyframes pumpkinRush {
+            0% { transform: translate(-50%, -50%) scale(1); filter: brightness(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(3.5); filter: brightness(0); opacity: 0; }
+        }
+
+        /* 啟動！門一開，背景跟南瓜同時發車往畫面衝 */
+        .entering-mansion #mansion-bg {
+            animation: rushIntoDarkness 1.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+        }
+        .entering-mansion .giant-pumpkin {
+            animation: pumpkinRush 1.6s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+        }
+        
+        .entering-mansion .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.3s; transform: scale(1.5); }
         
         /* 動畫跑完後隱藏整個遮罩 */
         .intro-hidden { opacity: 0; pointer-events: none; }
