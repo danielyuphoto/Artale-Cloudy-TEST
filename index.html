@@ -241,7 +241,7 @@
             background: url('萬聖節鬧鬼宅邸門口.jpg') center/cover no-repeat;
             z-index: 1; transform-origin: center center;
             animation: creepyPulse 4s infinite alternate ease-in-out;
-            /* 移除了原本會打架的 transition，完全交給下面的 keyframes 接管 */
+            /* ⚠️ 這裡的 transition 已經刪除，保證縮放不會卡住 */
         }
         
         @keyframes creepyPulse {
@@ -249,10 +249,21 @@
             100% { filter: brightness(1.1) contrast(1.2) drop-shadow(0 0 20px #000); transform: scale(1.05); }
         }
 
+        /* 🎃 藏在鐵柵欄後的巨大發光南瓜 (使用外部圖檔) */
+        .giant-pumpkin {
+            position: absolute; top: 50%; left: 50%; z-index: 1;
+            width: clamp(150px, 40vw, 350px); height: auto;
+            animation: pumpkinGlow 3s infinite alternate ease-in-out; 
+            pointer-events: none; transform: translate(-50%, -50%);
+        }
+        @keyframes pumpkinGlow {
+            0% { filter: drop-shadow(0 0 20px #d35400) drop-shadow(0 0 10px #e67e22); }
+            100% { filter: drop-shadow(0 0 80px #d35400) drop-shadow(0 0 40px #e67e22); }
+        }
+
         /* 🚪 鐵柵欄設計 */
         .spooky-door {
             position: absolute; top: 0; height: 100%; width: 50%;
-            /* 直條紋與橫條紋交錯的半透明鐵柵欄，讓背景透出來 */
             background: 
                 linear-gradient(to bottom, transparent 20%, #050505 20%, #050505 23%, transparent 23%, transparent 77%, #050505 77%, #050505 80%, transparent 80%),
                 repeating-linear-gradient(to right, transparent 0%, transparent 8%, #050505 8%, #050505 11%);
@@ -300,13 +311,13 @@
         .entering-mansion #spooky-door-left { animation: clankOpenLeft 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
         .entering-mansion #spooky-door-right { animation: clankOpenRight 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
         
-        /* 🔥 新增：背景圖拉近衝鋒動畫 */
+        /* 🔥 背景圖拉近衝鋒動畫 */
         @keyframes rushIntoDarkness {
             0% { transform: scale(1.05); filter: brightness(1.1); }
             100% { transform: scale(3.5); filter: brightness(0); }
         }
 
-        /* 🔥 新增：巨型南瓜衝鋒動畫 */
+        /* 🔥 巨型南瓜衝鋒動畫 */
         @keyframes pumpkinRush {
             0% { transform: translate(-50%, -50%) scale(1); filter: brightness(1); opacity: 1; }
             100% { transform: translate(-50%, -50%) scale(3.5); filter: brightness(0); opacity: 0; }
@@ -409,6 +420,9 @@
     <div id="spooky-intro">
         <!-- 宅邸背景圖，會呼吸閃爍 -->
         <div id="mansion-bg"></div>
+        
+        <!-- 🦇 使用你的 pumpkin.png 圖檔 -->
+        <img src="pumpkin.png" alt="巨型南瓜" class="giant-pumpkin">
         
         <div id="spooky-door-left" class="spooky-door"><div class="door-handle"></div></div>
         <div id="spooky-door-right" class="spooky-door"><div class="door-handle"></div></div>
@@ -975,10 +989,7 @@
         
         // 👻 1. 開啟鬼屋大門
         document.getElementById('enterMansionBtn').addEventListener('click', function() {
-            // 觸發「哐」開門與背景拉近特效
             document.getElementById('spooky-intro').classList.add('entering-mansion');
-            
-            // 延遲隱藏整個大門遮罩，給拉近特效一點時間展現
             setTimeout(() => { document.getElementById('spooky-intro').classList.add('intro-hidden'); }, 2000);
             
             // 🤫 取消自動播放，僅載入第一首歌但不播放
@@ -1128,3 +1139,5 @@
     </script>
 </body>
 </html>
+幫我修改這個版本，並且巨型南瓜這段程式碼先幫我拿掉，因為我這張圖檔本身就已經是一張完美的門口的萬聖節圖檔，那剛剛講的衝刺感要保留喔!
+也就是現在進去會先有一個黑色的柵欄門鎖住圖檔(那張萬聖節門口圖檔)，點擊以後黑色柵欄開啟同時那張圖檔衝刺感放大進入網頁這樣
