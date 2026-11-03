@@ -313,8 +313,8 @@
         
         .entering-mansion .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.2s; transform: scale(1.5); }
         
-        /* 動畫跑完後隱藏整個遮罩 */
-        .intro-hidden { opacity: 0; pointer-events: none; display: none; }
+        /* 動畫跑完後隱藏整個遮罩 (讓它自然淡出) */
+        .intro-hidden { opacity: 0; pointer-events: none; }
 
         /* 👻 幽靈糖果雨 */
         #snow-container {
@@ -981,7 +981,7 @@
             e.target.disabled = true;
 
             document.getElementById('spooky-intro').classList.add('entering-mansion');
-            setTimeout(() => { document.getElementById('spooky-intro').classList.add('intro-hidden'); }, 2000);
+            setTimeout(() => { document.getElementById('spooky-intro').classList.add('intro-hidden'); }, 800);
             
             window.playMusicEngine(0, false);
 
