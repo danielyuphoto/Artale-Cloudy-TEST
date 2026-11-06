@@ -234,7 +234,7 @@
         #xmas-intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
             display: flex; align-items: center; justify-content: center;
-            background: #fff; overflow: hidden; transition: opacity 0.8s ease-in-out;
+            background: #000; overflow: hidden; transition: opacity 0.8s ease-in-out;
         }
 
         /* 🖼️ 聖誕村背景圖與溫馨呼吸效果 */
@@ -243,7 +243,7 @@
             background: url('聖誕村.jpg') center/cover no-repeat;
             z-index: 1; 
             
-            /* 🚀 核心亮點：你指定的神準運鏡座標 */
+            /* 🚀 核心亮點：精準對齊圖中門的座標 */
             transform-origin: 55.31% 89.69%; 
             
             animation: warmPulse 4s infinite alternate ease-in-out;
@@ -254,24 +254,16 @@
             100% { filter: brightness(1.1) contrast(1.1); transform: scale(1.03); }
         }
 
-        /* 🚪 實木雙開大門設計 */
-        .xmas-door {
-            position: absolute; top: 0; height: 100%; width: 50%;
-            /* 胡桃木紋理漸層 */
-            background: linear-gradient(to right, #5C4033 0%, #4A3225 10%, #5C4033 20%, #4A3225 30%, #5C4033 40%, #4A3225 50%, #5C4033 60%, #4A3225 70%, #5C4033 80%, #4A3225 90%, #5C4033 100%);
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-            display: flex; align-items: center; z-index: 2;
+        /* 🎅 開場進門的聖誕老人與雪橇 */
+        #intro-santa {
+            position: absolute;
+            font-size: 80px; 
+            margin-top: -40px; margin-left: -40px; /* 對齊中心點 */
+            top: 0; left: 0;
+            opacity: 0; pointer-events: none; z-index: 5;
+            filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.6));
         }
-        #xmas-door-left { left: 0; border-right: 4px solid #3E2723; justify-content: flex-end; }
-        #xmas-door-right { right: 0; border-left: 4px solid #3E2723; justify-content: flex-start; }
-        
-        /* 復古金色圓形門把 */
-        .door-handle { 
-            width: 45px; height: 45px; border-radius: 50%; margin: 30px; 
-            background: radial-gradient(circle, #f1c40f, #b7950b); border: 3px solid #7d6608; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.6); 
-        }
-        
+
         /* 敲門按鈕 (聖誕風) */
         .intro-text-btn {
             z-index: 100001; padding: 20px 40px; font-size: 28px; color: #fff; font-family: inherit; font-weight: bold;
@@ -280,7 +272,7 @@
             box-shadow: 0 0 30px rgba(241, 196, 15, 0.4); outline: none; transition: 0.3s;
         }
         .intro-text-btn:hover { background: rgba(231, 76, 60, 1); transform: scale(1.05); }
-        .intro-text-btn:disabled { pointer-events: none; opacity: 0.5; }
+        .intro-text-btn:disabled { pointer-events: none; opacity: 0; transition: 0.3s; transform: scale(1.5); }
         
         @keyframes xmasPulse { 
             0% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
@@ -288,33 +280,31 @@
             100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
         }
 
-        /* 🎬 開門連動動畫：厚重木門推開 */
-        @keyframes woodOpenLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-        @keyframes woodOpenRight {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(100%); }
-        }
-
-        .entering-xmas #xmas-door-left { animation: woodOpenLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        .entering-xmas #xmas-door-right { animation: woodOpenRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        
-        /* 🔥 背景圖拉近，並融入溫馨的黃白強光中！ */
+        /* 🎬 動畫一：背景圖 4 秒拉近，融入強光 */
         @keyframes rushIntoLight {
             0% { transform: scale(1.03); filter: brightness(1); opacity: 1; }
-            100% { transform: scale(3.5); filter: brightness(4) contrast(0.8); opacity: 0; }
+            80% { opacity: 1; filter: brightness(1.2); }
+            100% { transform: scale(6); filter: brightness(3) blur(2px); opacity: 0; }
         }
 
-        /* 啟動！門一開，背景瞬間往門口衝，變成明亮強光 */
+        /* 🎬 動畫二：聖誕老人與你同步衝鋒進門 */
+        @keyframes santaDive {
+            0% { transform: translate(-20vw, -10vh) scale(3) rotate(15deg); opacity: 0; }
+            15% { opacity: 1; }
+            40% { transform: translate(15vw, 30vh) scale(2) rotate(0deg); }
+            70% { transform: translate(35vw, 65vh) scale(1) rotate(-10deg); opacity: 1; }
+            100% { transform: translate(55.31vw, 89.69vh) scale(0) rotate(-25deg); opacity: 0; }
+        }
+
+        /* 啟動！門一開，背景跟聖誕老人同步發車往畫面衝 */
         .entering-xmas #xmas-bg {
-            animation: rushIntoLight 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+            animation: rushIntoLight 3.8s ease-in forwards;
+        }
+        .entering-xmas #intro-santa {
+            animation: santaDive 3.8s ease-in forwards;
         }
         
-        .entering-xmas .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.2s; transform: scale(1.5); }
-        
-        /* 動畫跑完後隱藏整個遮罩 (讓它自然淡出) */
+        /* 動畫跑完後隱藏整個遮罩 */
         .intro-hidden { opacity: 0; pointer-events: none; }
 
         /* ❄️ 浪漫初雪與禮物 */
@@ -328,30 +318,15 @@
             animation: snowFall linear infinite, snowSway 3s ease-in-out infinite alternate; 
             will-change: transform; 
         }
-        /* 浪漫緩降 */
         @keyframes snowFall {
             0% { top: -10vh; opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
             100% { top: 110vh; opacity: 0; }
         }
-        /* 左右飄移 */
         @keyframes snowSway {
             0% { transform: translateX(-15px) rotate(0deg); }
             100% { transform: translateX(15px) rotate(45deg); }
-        }
-
-        /* 🛷 聖誕老人雪橇 (Ｕ型飛行軌跡) */
-        .flying-sleigh {
-            position: fixed; pointer-events: none; z-index: 9998;
-            animation: sleighFly linear infinite; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
-        }
-        @keyframes sleighFly {
-            0% { transform: translate(-15vw, 20vh) scale(0.8) rotate(10deg); opacity: 0; }
-            20% { opacity: 1; }
-            50% { transform: translate(50vw, 8vh) scale(1.2) rotate(0deg); }
-            80% { opacity: 1; }
-            100% { transform: translate(115vw, -5vh) scale(0.8) rotate(-15deg); opacity: 0; }
         }
 
         /* 💥 點擊冰晶魔法爆破 */
@@ -405,13 +380,14 @@
 </head>
 <body>
 
-    <!-- 🎄 聖誕節：沉浸式溫馨木屋開場大門 -->
+    <!-- 🎄 聖誕節：沉浸式溫馨開場 -->
     <div id="xmas-intro">
         <!-- 聖誕村背景圖 -->
         <div id="xmas-bg"></div>
         
-        <div id="xmas-door-left" class="xmas-door"><div class="door-handle"></div></div>
-        <div id="xmas-door-right" class="xmas-door"><div class="door-handle"></div></div>
+        <!-- 🎅 開場陪你衝刺進門的聖誕老人 -->
+        <div id="intro-santa">🎅🦌🛷</div>
+        
         <button class="intro-text-btn" id="enterXmasBtn">🎄 敲敲門進入 Cloudy 聖誕派對 🎄</button>
     </div>
 
@@ -991,7 +967,7 @@
 
             document.getElementById('xmas-intro').classList.add('entering-xmas');
             
-            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 1200);
+            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 3800);
             
             window.playMusicEngine(0, false);
 
