@@ -230,11 +230,13 @@
 
         /* ================= 8. 🎄 聖誕節專屬特效區 ================= */
         
-        /* 🏰 聖誕節：沉浸式溫馨木屋開場大門 */
+        /* 🏰 聖誕節：沉浸式溫馨開場 */
         #xmas-intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
             display: flex; align-items: center; justify-content: center;
-            background: #000; overflow: hidden; transition: opacity 0.8s ease-in-out;
+            background: #000; overflow: hidden;
+            /* 讓黑幕消失時能平滑過渡 */
+            transition: opacity 1s ease-in-out;
         }
 
         /* 🖼️ 聖誕村背景圖與溫馨呼吸效果 */
@@ -246,6 +248,7 @@
             /* 🚀 核心亮點：精準對齊圖中門的座標 */
             transform-origin: 55.31% 95%; 
             
+            /* 移除會導致閃爍的暴衝動畫，只保留柔和呼吸 */
             animation: warmPulse 4s infinite alternate ease-in-out;
         }
         
@@ -254,14 +257,14 @@
             100% { filter: brightness(1.1) contrast(1.1); transform: scale(1.03); }
         }
 
-        /* 🎅 開場進門的聖誕老人與雪橇 (圖片版) */
+        /* 🎅 開場滑行進門的聖誕老人 (優化尺寸與飛行路徑) */
         #intro-santa {
             position: absolute;
-            width: 280px; height: auto; /* 預設圖片寬度 */
-            margin-top: -140px; margin-left: -140px; /* 將圖片完美置中，讓旋轉更自然 */
+            width: 200px; height: auto; /* 控制圖片初始大小 */
+            margin-top: -100px; margin-left: -100px; /* 將圖片完美置中，確保旋轉和縮放圓滑 */
             top: 0; left: 0;
             opacity: 0; pointer-events: none; z-index: 5;
-            filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.6));
+            filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.5));
         }
 
         /* 敲門按鈕 (聖誕風) */
@@ -280,32 +283,47 @@
             100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
         }
 
-        /* 🎬 動畫一：背景圖 3.8 秒極速拉近，融入強光 */
-        @keyframes rushIntoLight {
-            0% { transform: scale(1.03); filter: brightness(1); opacity: 1; }
-            80% { opacity: 1; filter: brightness(1.2); }
-            100% { transform: scale(6); filter: brightness(3) blur(2px); opacity: 0; }
+        /* 🎬 動畫一：開門連動動畫：厚重木門推開 */
+        .xmas-door {
+            position: absolute; top: 0; height: 100%; width: 50%;
+            background: linear-gradient(to right, #5C4033 0%, #4A3225 10%, #5C4033 20%, #4A3225 30%, #5C4033 40%, #4A3225 50%, #5C4033 60%, #4A3225 70%, #5C4033 80%, #4A3225 90%, #5C4033 100%);
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+            display: flex; align-items: center; z-index: 2;
+        }
+        #xmas-door-left { left: 0; border-right: 4px solid #3E2723; justify-content: flex-end; }
+        #xmas-door-right { right: 0; border-left: 4px solid #3E2723; justify-content: flex-start; }
+        
+        .door-handle { 
+            width: 45px; height: 45px; border-radius: 50%; margin: 30px; 
+            background: radial-gradient(circle, #f1c40f, #b7950b); border: 3px solid #7d6608; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6); 
         }
 
-        /* 🎬 動畫二：聖誕老人與你同步衝鋒進門，精準停在門口座標 */
+        @keyframes woodOpenLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        @keyframes woodOpenRight { 0% { transform: translateX(0); } 100% { transform: translateX(100%); } }
+        
+        .entering-xmas #xmas-door-left { animation: woodOpenLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .entering-xmas #xmas-door-right { animation: woodOpenRight 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+        /* 🎬 動畫二：聖誕老人優雅飄逸進門，精準停在門口座標 55.31% 95% */
         @keyframes santaDive {
-            0% { transform: translate(-20vw, -10vh) scale(3) rotate(15deg); opacity: 0; }
-            15% { opacity: 1; }
-            40% { transform: translate(15vw, 30vh) scale(2) rotate(0deg); }
-            70% { transform: translate(35vw, 65vh) scale(1) rotate(-10deg); opacity: 1; }
-            100% { transform: translate(55.31vw, 95vh) scale(0) rotate(-25deg); opacity: 0; } /* 完美對齊 Y軸 95% */
+            /* 1. 從畫面左上方微小角度出發 */
+            0% { transform: translate(-10vw, 10vh) scale(0.9) rotate(15deg); opacity: 0; }
+            10% { opacity: 1; }
+            /* 2. 經過畫面上方弧線 */
+            50% { transform: translate(30vw, 40vh) scale(0.6) rotate(0deg); opacity: 1; }
+            85% { opacity: 1; }
+            /* 3. 優雅縮小，沒入門中 */
+            100% { transform: translate(55.31vw, 95vh) scale(0.05) rotate(-15deg); opacity: 0; }
         }
 
-        /* 啟動！門一開，背景跟聖誕老人同步發車往畫面衝 */
-        .entering-xmas #xmas-bg {
-            animation: rushIntoLight 3.8s ease-in forwards;
-        }
+        /* 啟動！點擊按鈕後，聖誕老人開始飛行 */
         .entering-xmas #intro-santa {
-            animation: santaDive 3.8s ease-in forwards;
+            animation: santaDive 3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
         }
         
-        /* 動畫跑完後隱藏整個遮罩 */
-        .intro-hidden { opacity: 0; pointer-events: none; }
+        /* 動畫跑完後，整個遮罩淡出 (搭配 transition 1s) */
+        .intro-hidden { opacity: 0 !important; pointer-events: none; }
 
         /* ❄️ 浪漫初雪與禮物 */
         #snow-container {
@@ -385,8 +403,12 @@
         <!-- 聖誕村背景圖 -->
         <div id="xmas-bg"></div>
         
-        <!-- 🎅 開場陪你衝刺進門的聖誕老人 (更換為專屬圖檔) -->
+        <!-- 🎅 開場陪你衝刺進門的聖誕老人 (優化比例版) -->
         <img id="intro-santa" src="聖誕老人.png" alt="聖誕老人">
+        
+        <!-- 大門木板 -->
+        <div id="xmas-door-left" class="xmas-door"><div class="door-handle"></div></div>
+        <div id="xmas-door-right" class="xmas-door"><div class="door-handle"></div></div>
         
         <button class="intro-text-btn" id="enterXmasBtn">🎄 敲敲門進入 Cloudy 聖誕派對 🎄</button>
     </div>
@@ -648,7 +670,7 @@
                                 <label>星期五 
                                     <select name="entry.1921200425">
                                         <option value="" disabled selected>請選擇時段</option>
-                                        <option value="當天皆可以安排">當天皆可以安排</option><option value="当當天不行">當天不行</option>
+                                        <option value="當天皆可以安排">當天皆可以安排</option><option value="當天不行">當天不行</option>
                                         <option value="白天(10:00-18:00)">白天(10:00-18:00)</option><option value="晚上(18:00-02:00)">晚上(18:00-02:00)</option>
                                     </select>
                                 </label>
@@ -967,12 +989,12 @@
 
             document.getElementById('xmas-intro').classList.add('entering-xmas');
             
-            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 3800);
+            // 等待聖誕老人飛進門 (約 3 秒)，然後淡出整個遮罩
+            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 3000);
             
             window.playMusicEngine(0, false);
 
             initXmasSnow();
-            // 不再使用原本的雪橇 emoji 陣列
         });
 
         // 👻 2. 橘光幽靈糖果雨 (更換成聖誕初雪)
