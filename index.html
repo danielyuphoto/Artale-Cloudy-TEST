@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <!-- 🚀 優化 3: 鎖定縮放比例，防止手機點擊表單時畫面亂跳 -->
+    <!-- 🚀 優化: 鎖定縮放比例，防止手機點擊表單時畫面亂跳 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Artale Cloudy 公會小窩</title>
     <!-- 預連線 Google Fonts 加速字體載入 -->
@@ -41,7 +41,8 @@
         
         @keyframes textShimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         .title-cursive, .title-zen {
-            background: linear-gradient(to right, #2c3e50 20%, #e67e22 40%, #e74c3c 50%, #e67e22 60%, #2c3e50 80%);
+            /* 🎄 聖誕紅綠金漸層 */
+            background: linear-gradient(to right, #c0392b 20%, #27ae60 40%, #f1c40f 50%, #27ae60 60%, #c0392b 80%);
             background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
             animation: textShimmer 4s linear infinite;
         }
@@ -58,8 +59,8 @@
             transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); font-family: inherit; white-space: nowrap; 
         }
         .sidebar button:hover, .sub-tabs button:hover { background: rgba(255, 255, 255, 0.95); transform: translateX(5px); }
-        .sidebar button.active, .sub-tabs button.active { background: #e67e22; color: white; border-color: #d35400; transform: translateX(5px); }
-        .sub-tabs button.active { background: #d35400; border-color: #a04000; transform: none; }
+        .sidebar button.active, .sub-tabs button.active { background: #c0392b; color: white; border-color: #a1281e; transform: translateX(5px); } /* 聖誕紅 */
+        .sub-tabs button.active { background: #27ae60; border-color: #1e8449; transform: none; } /* 聖誕綠 */
         .sub-tabs button:hover { transform: none; }
 
         .main-content { flex: 1; min-width: 0; }
@@ -75,15 +76,15 @@
             will-change: transform;
         }
         .hero-image-container img:hover { 
-            transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px 5px rgba(230, 126, 34, 0.4); border-color: #fff;
+            transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px 5px rgba(39, 174, 96, 0.4); border-color: #fff;
         }
 
         /* ====== 👑 招生區圖片神話級特效 ====== */
         .recruit-image-container { width: 100%; display: flex; justify-content: center; padding: 40px 10px; }
         @keyframes legendaryDropGlow {
-            0% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(255, 170, 0, 0.4), 0 0 35px 12px rgba(230, 126, 34, 0.3); transform: translateY(0px); }
-            50% { box-shadow: 0 15px 40px rgba(0,0,0,0.55), 0 0 45px 18px rgba(255, 170, 0, 0.85), 0 0 75px 28px rgba(230, 126, 34, 0.65); transform: translateY(-10px); }
-            100% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(255, 170, 0, 0.4), 0 0 35px 12px rgba(230, 126, 34, 0.3); transform: translateY(0px); }
+            0% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(241, 196, 15, 0.4), 0 0 35px 12px rgba(192, 57, 43, 0.3); transform: translateY(0px); }
+            50% { box-shadow: 0 15px 40px rgba(0,0,0,0.55), 0 0 45px 18px rgba(241, 196, 15, 0.85), 0 0 75px 28px rgba(192, 57, 43, 0.65); transform: translateY(-10px); }
+            100% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(241, 196, 15, 0.4), 0 0 35px 12px rgba(192, 57, 43, 0.3); transform: translateY(0px); }
         }
         .recruit-image-container img { 
             width: 100%; max-width: 1300px; height: auto; border-radius: 16px; 
@@ -96,7 +97,7 @@
         .recruit-image-container img:hover { 
             transform: translateY(-15px) scale(1.03); z-index: 999; position: relative; 
             animation: none; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 65px 22px rgba(255, 160, 0, 1), 0 0 85px 32px rgba(230, 126, 34, 0.85); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 65px 22px rgba(241, 196, 15, 1), 0 0 85px 32px rgba(192, 57, 43, 0.85); 
             border-color: #fff;
         }
         
@@ -104,27 +105,27 @@
         .intro-box { padding: 30px; line-height: 1.8; font-size: 20px; }
         .intro-custom-wave { font-family: '華康大波浪圓體', 'DFPWave-W12', 'Mochiy Pop P One', 'Zen Maru Gothic', sans-serif; color: #2c3e50; letter-spacing: 1px; }
         .intro-custom-wave p { margin-bottom: 12px; }
-        .intro-custom-wave .wave-title { text-align: center; font-size: 28px; color: #d35400; margin-bottom: 25px; border-bottom: 2px dashed rgba(211, 84, 0, 0.4); padding-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .intro-custom-wave .highlight-item { color: #d35400; font-size: 22px; font-weight: normal; }
+        .intro-custom-wave .wave-title { text-align: center; font-size: 28px; color: #c0392b; margin-bottom: 25px; border-bottom: 2px dashed rgba(192, 57, 43, 0.4); padding-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .intro-custom-wave .highlight-item { color: #27ae60; font-size: 22px; font-weight: normal; }
         .intro-custom-wave .footer-cheer { text-align: center; font-size: 26px; color: #c0392b; margin-top: 25px; padding-top: 15px; border-top: 2px dashed rgba(192, 57, 43, 0.3); }
 
         /* ================= 4. 歷史活動畫廊 ================= */
         .history-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; padding: 10px; }
         .history-card { padding: 15px; display: flex; flex-direction: column; gap: 10px; transition: 0.3s; background: rgba(255, 255, 255, 0.75); }
         .history-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.95); }
-        .history-date { align-self: flex-start; font-size: 15px; color: #d35400; font-weight: bold; background: rgba(243, 156, 18, 0.2); padding: 4px 12px; border-radius: 20px; font-family: Tahoma, sans-serif; letter-spacing: 1px; }
+        .history-date { align-self: flex-start; font-size: 15px; color: #c0392b; font-weight: bold; background: rgba(241, 196, 15, 0.2); padding: 4px 12px; border-radius: 20px; font-family: Tahoma, sans-serif; letter-spacing: 1px; }
         .history-title { font-size: 22px; color: #2c3e50; font-weight: bold; line-height: 1.4; margin: 0 0 5px; }
         .photo-count { font-size: 15px; color: #7f8c8d; font-family: sans-serif; font-weight: bold; }
         
         .gallery-container { display: flex; gap: 15px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 15px; }
         .gallery-container::-webkit-scrollbar { height: 8px; }
         .gallery-container::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); border-radius: 4px; }
-        .gallery-container::-webkit-scrollbar-thumb { background: rgba(230, 126, 34, 0.5); border-radius: 4px; }
+        .gallery-container::-webkit-scrollbar-thumb { background: rgba(192, 57, 43, 0.5); border-radius: 4px; }
         
         .photo-wrapper { flex: 0 0 100%; scroll-snap-align: center; display: flex; flex-direction: column; gap: 10px; }
         .photo-wrapper img { width: 100%; height: 240px; object-fit: cover; border-radius: 10px; border: 2px solid rgba(255, 255, 255, 0.9); cursor: zoom-in; transition: 0.2s; }
         .photo-wrapper img:hover { opacity: 0.85; }
-        .photo-caption { font-size: 17px; color: #d35400; text-align: center; font-weight: bold; background: rgba(255, 243, 205, 0.8); padding: 8px 10px; }
+        .photo-caption { font-size: 17px; color: #c0392b; text-align: center; font-weight: bold; background: rgba(241, 196, 15, 0.3); padding: 8px 10px; }
         
         .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 10px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.9); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
@@ -142,12 +143,12 @@
 
         /* ================= 6. Q版立體手帳風 音樂播放器 ================= */
         .cute-music-player {
-            margin-top: 15px; padding: 15px 10px; background: linear-gradient(135deg, rgba(253, 235, 208, 0.9) 0%, rgba(250, 215, 161, 0.9) 100%);
-            border: 2px dashed #e67e22; border-radius: 16px; text-align: center;
-            box-shadow: 0 6px 12px rgba(230, 126, 34, 0.3), inset 0 2px 4px rgba(255,255,255,0.8); transition: transform 0.3s ease;
+            margin-top: 15px; padding: 15px 10px; background: linear-gradient(135deg, rgba(255, 240, 240, 0.9) 0%, rgba(240, 255, 240, 0.9) 100%);
+            border: 2px dashed #27ae60; border-radius: 16px; text-align: center;
+            box-shadow: 0 6px 12px rgba(39, 174, 96, 0.2), inset 0 2px 4px rgba(255,255,255,0.8); transition: transform 0.3s ease;
         }
-        .cute-music-player:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 16px rgba(230, 126, 34, 0.5), inset 0 2px 4px rgba(255,255,255,0.9); }
-        .music-title { font-size: 16px; color: #d35400; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; text-shadow: 1px 1px 0px rgba(255,255,255,1); }
+        .cute-music-player:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 16px rgba(39, 174, 96, 0.3), inset 0 2px 4px rgba(255,255,255,0.9); }
+        .music-title { font-size: 16px; color: #c0392b; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; text-shadow: 1px 1px 0px rgba(255,255,255,1); }
         @keyframes bounceNote { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-4px) rotate(10deg); } }
         .music-note { display: inline-block; animation: bounceNote 1.5s infinite ease-in-out; }
         .music-note.delay { animation-delay: 0.75s; }
@@ -156,8 +157,8 @@
             display: flex; align-items: center; justify-content: space-between;
             background: rgba(255, 255, 255, 0.6); border-radius: 20px; padding: 5px 12px; margin-bottom: 8px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
-        .song-ctrl-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: #d35400; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; padding: 0; outline: none; flex-shrink: 0; }
-        .song-ctrl-btn:hover { transform: scale(1.2); color: #c0392b; }
+        .song-ctrl-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: #c0392b; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; padding: 0; outline: none; flex-shrink: 0; }
+        .song-ctrl-btn:hover { transform: scale(1.2); color: #27ae60; }
         
         .current-song-marquee {
             flex: 1; overflow: hidden; white-space: nowrap; margin: 0 8px; position: relative;
@@ -175,8 +176,8 @@
         .embed-container { width: 100%; height: 615px; border: none; border-radius: 12px; background: #fff; }
 
         .sub-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
-        #countdownDisplay { background: rgba(255, 243, 205, 0.8); border: 2px dashed #f39c12; color: #d35400; font-size: 20px; text-align: center; padding: 12px; margin-bottom: 15px; font-family: Tahoma, sans-serif; }
-        #timerText { color: #c0392b; font-size: 24px; display: inline-block; min-width: 220px; }
+        #countdownDisplay { background: rgba(241, 196, 15, 0.2); border: 2px dashed #c0392b; color: #c0392b; font-size: 20px; text-align: center; padding: 12px; margin-bottom: 15px; font-family: Tahoma, sans-serif; }
+        #timerText { color: #27ae60; font-size: 24px; display: inline-block; min-width: 220px; }
         
         .controls { padding: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 15px; }
         .controls-row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
@@ -193,11 +194,11 @@
         .cute-form {
             background: rgba(255, 255, 255, 0.95); padding: 25px 30px; border-radius: 16px;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); text-align: left;
-            border: 2px dashed #e67e22; margin-top: 15px;
+            border: 2px dashed #c0392b; margin-top: 15px;
         }
-        .form-title { color: #d35400; font-size: 26px; text-align: center; margin: 0 0 5px; }
+        .form-title { color: #c0392b; font-size: 26px; text-align: center; margin: 0 0 5px; }
         .form-subtitle { color: #7f8c8d; text-align: center; font-size: 16px; margin-bottom: 25px; }
-        .form-section-title { font-size: 18px; font-weight: bold; color: #d35400; margin: 15px 0 10px; border-bottom: 2px solid rgba(211, 84, 0, 0.2); padding-bottom: 5px; }
+        .form-section-title { font-size: 18px; font-weight: bold; color: #27ae60; margin: 15px 0 10px; border-bottom: 2px solid rgba(39, 174, 96, 0.2); padding-bottom: 5px; }
         
         .form-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .form-grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
@@ -215,145 +216,153 @@
         .cute-form select { cursor: pointer; appearance: auto; }
         
         .cute-form input:focus, .cute-form select:focus, .cute-form textarea:focus { 
-            border-color: #e67e22; outline: none; box-shadow: 0 0 8px rgba(230, 126, 34, 0.3); 
+            border-color: #27ae60; outline: none; box-shadow: 0 0 8px rgba(39, 174, 96, 0.3); 
         }
         .cute-form textarea { resize: vertical; }
 
         .form-submit-btn {
             display: block; width: 100%; padding: 15px; margin-top: 25px;
-            background: linear-gradient(135deg, #e67e22, #d35400); color: white; border: none; border-radius: 12px;
+            background: linear-gradient(135deg, #c0392b, #a1281e); color: white; border: none; border-radius: 12px;
             font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: inherit;
         }
-        .form-submit-btn:hover { background: linear-gradient(135deg, #d35400, #a04000); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
+        .form-submit-btn:hover { background: linear-gradient(135deg, #a1281e, #7a1d15); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
         .form-submit-btn:disabled { background: #95a5a6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* ================= 8. 萬聖節專屬特效區 ================= */
+        /* ================= 8. 🎄 聖誕節專屬特效區 ================= */
         
-        /* 🦇 萬聖節：沉浸式鬧鬼宅邸開場 */
-        #spooky-intro {
+        /* 🏰 聖誕節：沉浸式溫馨木屋開場大門 */
+        #xmas-intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
             display: flex; align-items: center; justify-content: center;
-            background: #000; overflow: hidden; transition: opacity 0.8s ease-in-out;
+            background: #fff; overflow: hidden; transition: opacity 0.8s ease-in-out;
         }
 
-        /* 🖼️ 鬧鬼宅邸背景圖與呼吸閃爍效果 */
-        #mansion-bg {
+        /* 🖼️ 聖誕村背景圖與溫馨呼吸效果 */
+        #xmas-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('萬聖節鬧鬼宅邸門口.jpg') center/cover no-repeat;
-            z-index: 1; transform-origin: center center;
-            animation: creepyPulse 4s infinite alternate ease-in-out;
+            background: url('聖誕村.jpg') center/cover no-repeat;
+            z-index: 1; 
+            
+            /* 🚀 核心亮點：你指定的神準運鏡座標 */
+            transform-origin: 55.31% 89.69%; 
+            
+            animation: warmPulse 4s infinite alternate ease-in-out;
         }
         
-        @keyframes creepyPulse {
-            0% { filter: brightness(0.7) contrast(1.1) drop-shadow(0 0 10px #000); transform: scale(1.02); }
-            100% { filter: brightness(1.1) contrast(1.2) drop-shadow(0 0 20px #000); transform: scale(1.05); }
+        @keyframes warmPulse {
+            0% { filter: brightness(0.9) contrast(1.05); transform: scale(1.01); }
+            100% { filter: brightness(1.1) contrast(1.1); transform: scale(1.03); }
         }
 
-        /* 🚪 鐵柵欄設計 */
-        .spooky-door {
+        /* 🚪 實木雙開大門設計 */
+        .xmas-door {
             position: absolute; top: 0; height: 100%; width: 50%;
-            background: 
-                linear-gradient(to bottom, transparent 20%, #050505 20%, #050505 23%, transparent 23%, transparent 77%, #050505 77%, #050505 80%, transparent 80%),
-                repeating-linear-gradient(to right, transparent 0%, transparent 8%, #050505 8%, #050505 11%);
-            background-color: rgba(0, 0, 0, 0.4); 
-            box-shadow: inset 0 0 80px rgba(0,0,0,1);
+            /* 胡桃木紋理漸層 */
+            background: linear-gradient(to right, #5C4033 0%, #4A3225 10%, #5C4033 20%, #4A3225 30%, #5C4033 40%, #4A3225 50%, #5C4033 60%, #4A3225 70%, #5C4033 80%, #4A3225 90%, #5C4033 100%);
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
             display: flex; align-items: center; z-index: 2;
         }
-        #spooky-door-left { left: 0; border-right: 8px solid #111; justify-content: flex-end; }
-        #spooky-door-right { right: 0; border-left: 8px solid #111; justify-content: flex-start; }
+        #xmas-door-left { left: 0; border-right: 4px solid #3E2723; justify-content: flex-end; }
+        #xmas-door-right { right: 0; border-left: 4px solid #3E2723; justify-content: flex-start; }
         
+        /* 復古金色圓形門把 */
         .door-handle { 
-            width: 25px; height: 100px; border-radius: 8px; margin: 25px; 
-            background: linear-gradient(to bottom, #444, #111); border: 2px solid #000; 
-            box-shadow: 0 0 15px rgba(255, 152, 0, 0.5); 
+            width: 45px; height: 45px; border-radius: 50%; margin: 30px; 
+            background: radial-gradient(circle, #f1c40f, #b7950b); border: 3px solid #7d6608; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6); 
         }
         
+        /* 敲門按鈕 (聖誕風) */
         .intro-text-btn {
-            z-index: 100001; padding: 20px 40px; font-size: 28px; color: #ff9800; font-family: inherit; font-weight: bold;
-            background: rgba(0,0,0,0.85); border: 3px dashed #ff9800; border-radius: 20px;
-            cursor: pointer; text-shadow: 0 0 15px #ff9800; animation: spookyPulse 1.5s infinite;
-            box-shadow: 0 0 30px rgba(255, 152, 0, 0.4); outline: none; transition: 0.3s;
+            z-index: 100001; padding: 20px 40px; font-size: 28px; color: #fff; font-family: inherit; font-weight: bold;
+            background: rgba(192, 57, 43, 0.9); border: 3px dashed #f1c40f; border-radius: 20px;
+            cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5); animation: xmasPulse 1.5s infinite;
+            box-shadow: 0 0 30px rgba(241, 196, 15, 0.4); outline: none; transition: 0.3s;
         }
-        .intro-text-btn:hover { background: rgba(255, 152, 0, 0.2); transform: scale(1.05); }
-        .intro-text-btn:disabled { pointer-events: none; opacity: 0.5; } /* 🚀 優化 2: 點擊後鎖死樣式 */
+        .intro-text-btn:hover { background: rgba(231, 76, 60, 1); transform: scale(1.05); }
+        .intro-text-btn:disabled { pointer-events: none; opacity: 0.5; }
         
-        @keyframes spookyPulse { 
-            0% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.4); } 
-            50% { box-shadow: 0 0 50px rgba(255, 152, 0, 0.8); } 
-            100% { box-shadow: 0 0 20px rgba(255, 152, 0, 0.4); } 
+        @keyframes xmasPulse { 
+            0% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
+            50% { box-shadow: 0 0 40px rgba(241, 196, 15, 0.8); } 
+            100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
         }
 
-        /* 🎬 開門連動動畫：哐的震動 ＋ 猛然拉開 */
-        @keyframes clankOpenLeft {
+        /* 🎬 開門連動動畫：厚重木門推開 */
+        @keyframes woodOpenLeft {
             0% { transform: translateX(0); }
-            15% { transform: translateX(15px); }  /* 哐！卡住 */
-            25% { transform: translateX(-10px); } /* 扯回來 */
             100% { transform: translateX(-100%); }
         }
-        @keyframes clankOpenRight {
+        @keyframes woodOpenRight {
             0% { transform: translateX(0); }
-            15% { transform: translateX(-15px); } 
-            25% { transform: translateX(10px); } 
             100% { transform: translateX(100%); }
         }
 
-        .entering-mansion #spooky-door-left { animation: clankOpenLeft 1s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
-        .entering-mansion #spooky-door-right { animation: clankOpenRight 1s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
+        .entering-xmas #xmas-door-left { animation: woodOpenLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .entering-xmas #xmas-door-right { animation: woodOpenRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         
-        /* 🔥 背景圖拉近衝鋒動畫 (節奏加快版) */
-        @keyframes rushIntoDarkness {
-            0% { transform: scale(1.05); filter: brightness(1.1); }
-            100% { transform: scale(3.5); filter: brightness(0); }
+        /* 🔥 背景圖拉近，並融入溫馨的黃白強光中！ */
+        @keyframes rushIntoLight {
+            0% { transform: scale(1.03); filter: brightness(1); opacity: 1; }
+            100% { transform: scale(3.5); filter: brightness(4) contrast(0.8); opacity: 0; }
         }
 
-        /* 啟動！門一開，背景瞬間往畫面衝，變黑時間縮短為 1 秒 */
-        .entering-mansion #mansion-bg {
-            animation: rushIntoDarkness 1s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+        /* 啟動！門一開，背景瞬間往門口衝，變成明亮強光 */
+        .entering-xmas #xmas-bg {
+            animation: rushIntoLight 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
         }
         
-        .entering-mansion .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.2s; transform: scale(1.5); }
+        .entering-xmas .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.2s; transform: scale(1.5); }
         
         /* 動畫跑完後隱藏整個遮罩 (讓它自然淡出) */
         .intro-hidden { opacity: 0; pointer-events: none; }
 
-        /* 👻 幽靈糖果雨 */
+        /* ❄️ 浪漫初雪與禮物 */
         #snow-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9997; overflow: hidden;
         }
-        .halloween-rain {
+        .xmas-snow {
             position: absolute; top: -10vh; opacity: 0.9;
-            filter: drop-shadow(0 0 8px rgba(255, 152, 0, 0.8)); /* 橘色夜光 */
-            animation: fall linear infinite; will-change: transform; 
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+            animation: snowFall linear infinite, snowSway 3s ease-in-out infinite alternate; 
+            will-change: transform; 
         }
-        @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+        /* 浪漫緩降 */
+        @keyframes snowFall {
+            0% { top: -10vh; opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0; }
+            100% { top: 110vh; opacity: 0; }
+        }
+        /* 左右飄移 */
+        @keyframes snowSway {
+            0% { transform: translateX(-15px) rotate(0deg); }
+            100% { transform: translateX(15px) rotate(45deg); }
         }
 
-        /* 🦇 飛天蝙蝠 */
-        .flying-bat {
+        /* 🛷 聖誕老人雪橇 (Ｕ型飛行軌跡) */
+        .flying-sleigh {
             position: fixed; pointer-events: none; z-index: 9998;
-            animation: batFly linear infinite; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+            animation: sleighFly linear infinite; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.3));
         }
-        @keyframes batFly {
-            0% { transform: translate(-10vw, var(--startY)) scale(0.5) rotate(-15deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translate(110vw, var(--endY)) scale(1.5) rotate(15deg); opacity: 0; }
+        @keyframes sleighFly {
+            0% { transform: translate(-15vw, 20vh) scale(0.8) rotate(10deg); opacity: 0; }
+            20% { opacity: 1; }
+            50% { transform: translate(50vw, 8vh) scale(1.2) rotate(0deg); }
+            80% { opacity: 1; }
+            100% { transform: translate(115vw, -5vh) scale(0.8) rotate(-15deg); opacity: 0; }
         }
 
-        /* 💥 點擊南瓜爆破 */
-        .pumpkin-particle {
+        /* 💥 點擊冰晶魔法爆破 */
+        .xmas-particle {
             position: fixed; pointer-events: none; z-index: 99999;
-            animation: popOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            filter: drop-shadow(0 0 5px rgba(255, 152, 0, 0.8));
+            animation: popOut 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.6)); /* 冰藍色發光 */
         }
         @keyframes popOut {
             0% { transform: translate(0, 0) scale(0.2); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(1.8) rotate(var(--rot)); opacity: 0; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--rot)); opacity: 0; }
         }
 
         /* ================= 9. 手機版 RWD ================= */
@@ -370,7 +379,7 @@
                 flex-direction: row; width: 100%; overflow-x: auto; padding: 10px 5px; gap: 8px; 
             }
             .sidebar::-webkit-scrollbar { height: 4px; }
-            .sidebar::-webkit-scrollbar-thumb { background: rgba(230, 126, 34, 0.5); border-radius: 4px; }
+            .sidebar::-webkit-scrollbar-thumb { background: rgba(192, 57, 43, 0.5); border-radius: 4px; }
             
             .sidebar button, .sub-tabs button { padding: 8px 12px; font-size: 15px; border-radius: 6px; }
             .cute-music-player { margin-top: 0; margin-left: 5px; min-width: 230px; padding: 10px; } 
@@ -390,20 +399,20 @@
             .intro-custom-wave .wave-title { font-size: 22px; }
             .cute-form { padding: 15px; }
 
-            .intro-text-btn { font-size: 20px; padding: 15px 20px; } /* 手機版開門按鈕縮小 */
+            .intro-text-btn { font-size: 20px; padding: 15px 20px; } 
         }
     </style>
 </head>
 <body>
 
-    <!-- 🎃 萬聖節：沉浸式鬧鬼宅邸開場大門 -->
-    <div id="spooky-intro">
-        <!-- 宅邸背景圖，會呼吸閃爍 -->
-        <div id="mansion-bg"></div>
+    <!-- 🎄 聖誕節：沉浸式溫馨木屋開場大門 -->
+    <div id="xmas-intro">
+        <!-- 聖誕村背景圖 -->
+        <div id="xmas-bg"></div>
         
-        <div id="spooky-door-left" class="spooky-door"><div class="door-handle"></div></div>
-        <div id="spooky-door-right" class="spooky-door"><div class="door-handle"></div></div>
-        <button class="intro-text-btn" id="enterMansionBtn">敲敲門進入 Cloudy 萬聖節小窩 🎃</button>
+        <div id="xmas-door-left" class="xmas-door"><div class="door-handle"></div></div>
+        <div id="xmas-door-right" class="xmas-door"><div class="door-handle"></div></div>
+        <button class="intro-text-btn" id="enterXmasBtn">🎄 敲敲門進入 Cloudy 聖誕派對 🎄</button>
     </div>
 
     <!-- 全螢幕燈箱 -->
@@ -558,7 +567,7 @@
                 </div>
             </div>
 
-            <!-- 頁籤：突襲王團報名 (萬聖橘黑風格) -->
+            <!-- 頁籤：突襲王團報名 (聖誕節風格) -->
             <div id="signupTab" class="tab-content">
                 <div class="glass-panel" style="padding: 10px; text-align: center;">
                     <div id="countdownDisplay">⏳ 距離本週報名截止還剩： <span id="timerText">計算中...</span></div>
@@ -606,7 +615,7 @@
                                         <option value="" disabled selected>請選擇</option>
                                         <option value="困難殘暴炎魔">困難殘暴炎魔</option><option value="阿卡伊農">阿卡伊農</option>
                                         <option value="克雷塞爾(樹王)">克雷塞爾(樹王)</option><option value="闇黑龍王">闇黑龍王</option>
-                                        <option value="艾畢奈弱(毒)">艾畢奈亞(毒)</option><option value="艾畢奈亞(冰)">艾畢奈亞(冰)</option>
+                                        <option value="艾畢奈亞(毒)">艾畢奈亞(毒)</option><option value="艾畢奈亞(冰)">艾畢奈亞(冰)</option>
                                         <option value="困難拉圖斯">困難拉圖斯</option><option value="殘暴炎魔">殘暴炎魔</option>
                                     </select>
                                 </label>
@@ -736,7 +745,7 @@
                         <label>📈 1 億楓幣 = <input type="number" id="twdRate" value="650" oninput="calculate()"> 台幣</label>
                     </div>
                     <div class="controls-row">
-                        <label><input type="checkbox" id="vipCheck" style="width:18px; height:18px; cursor: pointer;" onchange="calculate()"> 👑 擁有拍 প্রতিরক্ষা(手續費 3%)</label>
+                        <label><input type="checkbox" id="vipCheck" style="width:18px; height:18px; cursor: pointer;" onchange="calculate()"> 👑 擁有拍賣場VIP (手續費 3%)</label>
                         <span id="vipText" class="vip-note"></span>
                     </div>
                 </div>
@@ -973,38 +982,39 @@
             audio.addEventListener("ended", () => window.playMusicEngine(currentIndex + 1, true));
         }
 
-        // ================= 8. 萬聖節限定特效大禮包 =================
+        // ================= 8. 🎄 聖誕節專屬特效區 =================
         
         // 👻 1. 開啟鬼屋大門
-        document.getElementById('enterMansionBtn').addEventListener('click', function(e) {
+        document.getElementById('enterXmasBtn').addEventListener('click', function(e) {
             // 🚀 優化 2: 防止連點狂魔
             e.target.disabled = true;
 
-            document.getElementById('spooky-intro').classList.add('entering-mansion');
-            setTimeout(() => { document.getElementById('spooky-intro').classList.add('intro-hidden'); }, 800);
+            document.getElementById('xmas-intro').classList.add('entering-xmas');
+            
+            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 1200);
             
             window.playMusicEngine(0, false);
 
-            initHalloweenRain();
-            initBats();
+            initXmasSnow();
+            initSleigh();
         });
 
         // 👻 2. 橘光幽靈糖果雨
-        function initHalloweenRain() {
+        function initXmasSnow() {
             const snowContainer = document.createElement('div');
             snowContainer.id = 'snow-container';
             const fragment = document.createDocumentFragment(); 
             
             const flakeCount = 35;
-            const symbols = ['👻', '🍬', '🍭', '🎃', '🦇'];
+            const symbols = ['❄️', '❅', '❆', '🎄', '🎁', '🔔'];
 
             for (let i = 0; i < flakeCount; i++) {
                 const flake = document.createElement('div');
-                flake.classList.add('halloween-rain');
+                flake.classList.add('xmas-snow');
                 flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
                 flake.style.left = `${Math.random() * 100}vw`;
                 flake.style.fontSize = `${Math.random() * 15 + 15}px`;
-                flake.style.animationDuration = `${Math.random() * 5 + 7}s`;
+                flake.style.animationDuration = `${Math.random() * 8 + 10}s`;
                 flake.style.animationDelay = `${Math.random() * 5}s`;
                 fragment.appendChild(flake);
             }
@@ -1013,12 +1023,13 @@
         }
 
         // 🦇 3. 飛天大蝙蝠
-        function initBats() {
+        function initSleigh() {
             const batCount = 4;
             for(let i=0; i<batCount; i++) {
                 const bat = document.createElement('div');
-                bat.classList.add('flying-bat');
-                bat.innerText = '🦇';
+                bat.classList.add('flying-sleigh');
+                bat.innerText = '🎅🦌🛷';
+                
                 bat.style.animationDelay = `${Math.random() * 10}s`;
                 bat.style.animationDuration = `${Math.random() * 5 + 10}s`;
                 bat.style.setProperty('--startY', `${Math.random() * 80}vh`);
@@ -1031,15 +1042,15 @@
         // 💥 4. 滑鼠點擊：南瓜爆破特效
         let popTimer = null;
         document.addEventListener('click', function(e) {
-            if(e.target.id === 'enterMansionBtn') return;
+            if(e.target.id === 'enterXmasBtn') return;
             if(popTimer) return; 
             popTimer = setTimeout(() => { popTimer = null; }, 100);
 
             const popCount = 6;
             for(let i=0; i<popCount; i++) {
                 const pumpkin = document.createElement('div');
-                pumpkin.classList.add('pumpkin-particle');
-                pumpkin.innerText = ['🎃','👻','🍬','✨'][Math.floor(Math.random()*4)];
+                pumpkin.classList.add('xmas-particle');
+                pumpkin.innerText = ['✨', '❄️', '🍭', '🎁'][Math.floor(Math.random()*4)];
                 pumpkin.style.left = `${e.clientX - 15}px`;
                 pumpkin.style.top = `${e.clientY - 15}px`;
                 
