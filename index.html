@@ -234,9 +234,7 @@
         #xmas-intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
             display: flex; align-items: center; justify-content: center;
-            background: #000; overflow: hidden;
-            /* 讓黑幕消失時能平滑過渡 */
-            transition: opacity 1s ease-in-out;
+            background: #000; overflow: hidden; transition: opacity 1s ease-in-out;
         }
 
         /* 🖼️ 聖誕村背景圖與溫馨呼吸效果 */
@@ -248,7 +246,6 @@
             /* 🚀 核心亮點：精準對齊圖中門的座標 */
             transform-origin: 55.31% 95%; 
             
-            /* 移除會導致閃爍的暴衝動畫，只保留柔和呼吸 */
             animation: warmPulse 4s infinite alternate ease-in-out;
         }
         
@@ -257,14 +254,13 @@
             100% { filter: brightness(1.1) contrast(1.1); transform: scale(1.03); }
         }
 
-        /* 🎅 開場滑行進門的聖誕老人 (優化尺寸與飛行路徑) */
+        /* 🎅 開場進門的聖誕老人 (優化 3D 滑行景深版) */
         #intro-santa {
             position: absolute;
-            width: 200px; height: auto; /* 控制圖片初始大小 */
-            margin-top: -100px; margin-left: -100px; /* 將圖片完美置中，確保旋轉和縮放圓滑 */
+            width: 250px; height: auto; /* 控制圖片初始大小 */
+            margin-top: -125px; margin-left: -125px; /* 將圖片完美置中，確保旋轉和縮放圓滑 */
             top: 0; left: 0;
             opacity: 0; pointer-events: none; z-index: 5;
-            filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.5));
         }
 
         /* 敲門按鈕 (聖誕風) */
@@ -283,7 +279,7 @@
             100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
         }
 
-        /* 🎬 聖誕老人從超大視角，優雅飄逸進門，精準停在門口座標 55.31% 95% */
+        /* 🎬 動畫一：聖誕老人從超大視角，優雅飄逸進門，精準停在門口座標 55.31% 95% */
         @keyframes santaDive {
             /* 1. 從畫面左上方「巨大化」出發，彷彿就在鏡頭前 */
             0% { transform: translate(-10vw, -10vh) scale(4) rotate(15deg); opacity: 0; }
@@ -295,7 +291,7 @@
             100% { transform: translate(55.31vw, 95vh) scale(0) rotate(-15deg); opacity: 0; }
         }
 
-        /* 啟動！點擊按鈕後，聖誕老人開始飛行 */
+        /* 啟動！點擊按鈕後，聖誕老人開始 3D 滑行 */
         .entering-xmas #intro-santa {
             animation: santaDive 3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
         }
@@ -381,7 +377,7 @@
         <!-- 聖誕村背景圖 -->
         <div id="xmas-bg"></div>
         
-        <!-- 🎅 開場陪你衝刺進門的聖誕老人 (更換為專屬圖檔) -->
+        <!-- 🎅 開場陪你衝刺進門的聖誕老人 (優化 3D 景深比例版) -->
         <img id="intro-santa" src="聖誕老人.png" alt="聖誕老人">
         
         <button class="intro-text-btn" id="enterXmasBtn">🎄 敲敲門進入 Cloudy 聖誕派對 🎄</button>
@@ -861,7 +857,7 @@
                     <td>${item.name}</td><td>${item.wc.toFixed(1)}</td><td>${thMeso.toFixed(1)}</td>
                     <td><input type="number" value="${item.ah}" style="width:75px;" onchange="updateAH(${i}, this.value)"></td>
                     <td>${item.ah < thMeso ? '<span class="buy-ah">✅ 用楓幣拉拍賣</span>' : '<span class="buy-wc">💎 直接扣 WC 買</span>'}</td>
-                    <td>${profit > 0 ? `<span class="profit-good">赚 ${profit.toFixed(1)} 萬</span>` : `<span class="profit-bad">亏 ${Math.abs(profit).toFixed(1)} 萬</span>`}</td>
+                    <td>${profit > 0 ? `<span class="profit-good">賺 ${profit.toFixed(1)} 萬</span>` : `<span class="profit-bad">虧 ${Math.abs(profit).toFixed(1)} 萬</span>`}</td>
                 </tr>`;
             });
             document.getElementById('tableBody').innerHTML = html;
@@ -956,14 +952,15 @@
 
         // ================= 8. 🎄 聖誕節專屬特效區 =================
         
-        // 👻 1. 開啟鬼屋大門
+        // 👻 1. 開啟木屋大門
         document.getElementById('enterXmasBtn').addEventListener('click', function(e) {
             // 🚀 優化 2: 防止連點狂魔
             e.target.disabled = true;
 
             document.getElementById('xmas-intro').classList.add('entering-xmas');
             
-            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 3800);
+            // 3 秒後聖誕老人進門完畢，遮罩淡出
+            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 3000);
             
             window.playMusicEngine(0, false);
 
