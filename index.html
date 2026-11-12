@@ -234,9 +234,7 @@
         #xmas-intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
             display: flex; align-items: center; justify-content: center;
-            background: #000; overflow: hidden;
-            /* 讓黑幕消失時能平滑過渡 */
-            transition: opacity 1s ease-in-out;
+            background: #000; overflow: hidden; transition: opacity 1s ease-in-out;
         }
 
         /* 🖼️ 聖誕村背景圖與溫馨呼吸效果 */
@@ -248,7 +246,6 @@
             /* 🚀 核心亮點：精準對齊圖中門的座標 */
             transform-origin: 55.31% 95%; 
             
-            /* 移除會導致閃爍的暴衝動畫，只保留柔和呼吸 */
             animation: warmPulse 4s infinite alternate ease-in-out;
         }
         
@@ -257,14 +254,13 @@
             100% { filter: brightness(1.1) contrast(1.1); transform: scale(1.03); }
         }
 
-        /* 🎅 開場滑行進門的聖誕老人 (優化尺寸與飛行路徑) */
+        /* 🎅 開場進門的聖誕老人 (優化 3D 滑行景深版) */
         #intro-santa {
             position: absolute;
-            width: 200px; height: auto; /* 控制圖片初始大小 */
-            margin-top: -100px; margin-left: -100px; /* 將圖片完美置中，確保旋轉和縮放圓滑 */
+            width: 250px; height: auto; /* 控制圖片初始大小 */
+            margin-top: -125px; margin-left: -125px; /* 將圖片完美置中，確保旋轉和縮放圓滑 */
             top: 0; left: 0;
             opacity: 0; pointer-events: none; z-index: 5;
-            filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.5));
         }
 
         /* 敲門按鈕 (聖誕風) */
@@ -283,18 +279,16 @@
             100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
         }
 
-        /* 🎬 動畫一：開門連動動畫：厚重木門推開 (已移除) */
-
-        /* 🎬 動畫二：聖誕老人從超大視角，優雅飄逸進門，精準停在門口座標 55.31% 95% */
+        /* 🎬 動畫一：聖誕老人從超大視角，優雅飄逸進門，精準停在門口座標 55.31% 95% */
         @keyframes santaDive {
             /* 1. 從畫面左上方「巨大化」出發，彷彿就在鏡頭前 */
-            0% { transform: translate(-10vw, 10vh) scale(0.9) rotate(15deg); opacity: 0; }
-            10% { opacity: 1; }
-            /* 2. 經過畫面上方弧線 */
-            50% { transform: translate(30vw, 40vh) scale(0.6) rotate(0deg); opacity: 1; }
-            85% { opacity: 1; }
-            /* 3. 優雅縮小，沒入門中 */
-            100% { transform: translate(55.31vw, 95vh) scale(0.05) rotate(-15deg); opacity: 0; }
+            0% { transform: translate(-10vw, -10vh) scale(4) rotate(15deg); opacity: 0; }
+            15% { opacity: 1; filter: drop-shadow(0 10px 20px rgba(255,255,255,0.8)); }
+            /* 2. 順著弧線往右下方滑行，並隨著距離拉遠而縮小 */
+            50% { transform: translate(30vw, 40vh) scale(1.5) rotate(0deg); opacity: 1; }
+            80% { opacity: 1; }
+            /* 3. 完美縮小沒入木門 */
+            100% { transform: translate(55.31vw, 95vh) scale(0) rotate(-15deg); opacity: 0; }
         }
 
         /* 啟動！點擊按鈕後，聖誕老人開始 3D 滑行 */
@@ -338,6 +332,45 @@
             100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--rot)); opacity: 0; }
         }
 
+        /* ================= 11. 🎅 首頁上空持續巡航的聖誕老人 ================= */
+        #patrol-santa-wrapper {
+            position: fixed;
+            top: 2vh;
+            left: 0;
+            z-index: 9995; /* 低於進場動畫，但高於網頁其他內容 */
+            pointer-events: none; /* 滑鼠可以直接穿透，不會阻擋點擊 */
+            animation: patrolX 24s linear infinite; /* 左右來回一次總共 24 秒 */
+        }
+
+        #patrol-santa-wrapper img {
+            width: 180px; 
+            height: auto;
+            filter: drop-shadow(0 8px 12px rgba(255, 255, 255, 0.4));
+            /* 加上輕微的高低起伏，以及精準的 50% 翻轉 */
+            animation: patrolY 4s ease-in-out infinite alternate, patrolFlip 24s step-end infinite;
+        }
+
+        /* 橫向移動：左到右(12秒)，右到左(12秒) */
+        @keyframes patrolX {
+            0% { transform: translateX(-30vw); }
+            49.99% { transform: translateX(120vw); }
+            50% { transform: translateX(120vw); }
+            100% { transform: translateX(-30vw); }
+        }
+
+        /* 垂直漂浮：模擬雪橇飛行的高低起伏 */
+        @keyframes patrolY {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(30px); }
+        }
+
+        /* 智能水平翻轉：前半段不翻轉(向右)，後半段水平翻轉(向左) */
+        @keyframes patrolFlip {
+            0% { transform: scaleX(1); }
+            50% { transform: scaleX(-1); }
+            100% { transform: scaleX(1); }
+        }
+
         /* ================= 9. 手機版 RWD ================= */
         @media (max-width: 768px) {
             body { padding: 10px 5px 30px; }
@@ -378,12 +411,17 @@
 </head>
 <body>
 
+    <!-- 🌟 首頁上空巡航的聖誕老人 (新增這區塊) 🌟 -->
+    <div id="patrol-santa-wrapper">
+        <img src="聖誕老人.png" alt="發禮物的聖誕老人">
+    </div>
+
     <!-- 🎄 聖誕節：沉浸式溫馨開場 -->
     <div id="xmas-intro">
         <!-- 聖誕村背景圖 -->
         <div id="xmas-bg"></div>
         
-        <!-- 🎅 開場陪你衝刺進門的聖誕老人 (優化比例版) -->
+        <!-- 🎅 開場陪你衝刺進門的聖誕老人 (優化 3D 景深比例版) -->
         <img id="intro-santa" src="聖誕老人.png" alt="聖誕老人">
         
         <button class="intro-text-btn" id="enterXmasBtn">🎄 敲敲門進入 Cloudy 聖誕派對 🎄</button>
@@ -475,7 +513,7 @@
                         <h4 class="history-title">【Cloudy 肝帝爭霸戰：沒有最卷，只有更卷！】</h4>
                         <div class="photo-count">📸 共 2 張照片 (滑動/放大)</div>
                         <div class="gallery-container">
-                            <div class="photo-wrapper"><img src="2026.09.07_肝帝爭霸戰_1.jpg" loading="lazy" data-index="0" data-group="g5" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">肝帝爭霸戰即打開肝！</div></div>
+                            <div class="photo-wrapper"><img src="2026.09.07_肝帝爭霸戰_1.jpg" loading="lazy" data-index="0" data-group="g5" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">肝帝爭霸戰即將開肝！</div></div>
                             <div class="photo-wrapper"><img src="2026.09.07_肝帝爭霸戰_2.jpg" loading="lazy" data-index="1" data-group="g5" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">恭喜各位肝帝～活動圓滿結束！</div></div>
                         </div>
                     </div>
@@ -719,7 +757,7 @@
                         <label>📈 1 億楓幣 = <input type="number" id="twdRate" value="650" oninput="calculate()"> 台幣</label>
                     </div>
                     <div class="controls-row">
-                        <label><input type="checkbox" id="vipCheck" style="width:18px; height:18px; cursor: pointer;" onchange="calculate()"> 👑 擁有拍賣場VIP (手續費 3%)</label>
+                        <label><input type="checkbox" id="vipCheck" style="width:18px; height:18px; cursor: pointer;" onchange="calculate()"> 👑 擁有拍賣場VIP(手續費 3%)</label>
                         <span id="vipText" class="vip-note"></span>
                     </div>
                 </div>
@@ -958,15 +996,15 @@
 
         // ================= 8. 🎄 聖誕節專屬特效區 =================
         
-        // 👻 1. 開啟鬼屋大門
+        // 👻 1. 開啟木屋大門
         document.getElementById('enterXmasBtn').addEventListener('click', function(e) {
             // 🚀 優化 2: 防止連點狂魔
             e.target.disabled = true;
 
             document.getElementById('xmas-intro').classList.add('entering-xmas');
             
-            // 等待聖誕老人飛進門 (約 3 秒)，然後淡出整個遮罩
-            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 3000);
+            // 5.5 秒後聖誕老人巡航完畢，遮罩淡出
+            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 5500);
             
             window.playMusicEngine(0, false);
 
