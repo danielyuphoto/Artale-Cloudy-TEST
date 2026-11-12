@@ -228,24 +228,73 @@
         .form-submit-btn:hover { background: linear-gradient(135deg, #a1281e, #7a1d15); transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
         .form-submit-btn:disabled { background: #95a5a6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* ================= 8. 🎄 聖誕節專屬特效區 ================= */
-        
-        /* 🏰 聖誕節：沉浸式溫馨開場 */
+        /* ================= 11. 🎅 首頁上空持續巡航發禮物的聖誕老人 ================= */
+        /* 外層控制：左右移動 (24秒一圈) */
+        #patrol-santa-wrapper {
+            position: fixed;
+            top: 5vh;
+            left: 0;
+            z-index: 9995; /* 確保在主畫面之上，但在開場遮罩之下 */
+            pointer-events: none; /* 不干擾滑鼠點擊網頁 */
+            animation: flightX 24s linear infinite;
+        }
+        /* 中層控制：智能水平翻轉 (左右來回切換) */
+        #patrol-santa-flipper {
+            /* 假設原圖面向左。往右飛時翻轉成面右，往左飛時翻回來 */
+            animation: flightFlip 24s step-end infinite;
+        }
+        /* 內層圖片：高低起伏 (Bobbing) */
+        #patrol-santa-img {
+            width: 220px; 
+            height: auto;
+            filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.6));
+            animation: flightBob 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes flightX {
+            0% { transform: translateX(-30vw); }
+            49.99% { transform: translateX(110vw); }
+            50% { transform: translateX(110vw); }
+            100% { transform: translateX(-30vw); }
+        }
+        @keyframes flightFlip {
+            0% { transform: scaleX(-1); } /* 前 12 秒往右飛：水平翻轉 */
+            50% { transform: scaleX(1); } /* 後 12 秒往左飛：恢復原狀 */
+            100% { transform: scaleX(-1); }
+        }
+        @keyframes flightBob {
+            0% { transform: translateY(-20px); }
+            100% { transform: translateY(20px); }
+        }
+
+        /* 🎁 動態掉落的禮物與雪花 */
+        .trail-item {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
+            animation: trailFall linear forwards;
+            z-index: 9994;
+        }
+        @keyframes trailFall {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--endX), 100vh) rotate(var(--endRot)); opacity: 0; }
+        }
+
+        /* ================= 8. 🎄 聖誕節開場遮罩區 ================= */
         #xmas-intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
             display: flex; align-items: center; justify-content: center;
-            background: #000; overflow: hidden; transition: opacity 1s ease-in-out;
+            background: #000; overflow: hidden; 
+            transition: opacity 1s ease-in-out;
         }
 
-        /* 🖼️ 聖誕村背景圖與溫馨呼吸效果 */
+        /* 🖼️ 聖誕村背景圖 (只會呼吸，不放大) */
         #xmas-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: url('聖誕村.jpg') center/cover no-repeat;
             z-index: 1; 
-            
-            /* 🚀 核心亮點：精準對齊圖中門的座標 */
-            transform-origin: 55.31% 95%; 
-            
+            transition: opacity 1.5s ease-in-out; /* 點擊後變黑的過渡 */
             animation: warmPulse 4s infinite alternate ease-in-out;
         }
         
@@ -254,16 +303,7 @@
             100% { filter: brightness(1.1) contrast(1.1); transform: scale(1.03); }
         }
 
-        /* 🎅 開場進門的聖誕老人 (優化 3D 滑行景深版) */
-        #intro-santa {
-            position: absolute;
-            width: 250px; height: auto; /* 控制圖片初始大小 */
-            margin-top: -125px; margin-left: -125px; /* 將圖片完美置中，確保旋轉和縮放圓滑 */
-            top: 0; left: 0;
-            opacity: 0; pointer-events: none; z-index: 5;
-        }
-
-        /* 敲門按鈕 (聖誕風) */
+        /* 敲門按鈕 */
         .intro-text-btn {
             z-index: 100001; padding: 20px 40px; font-size: 28px; color: #fff; font-family: inherit; font-weight: bold;
             background: rgba(192, 57, 43, 0.9); border: 3px dashed #f1c40f; border-radius: 20px;
@@ -271,7 +311,6 @@
             box-shadow: 0 0 30px rgba(241, 196, 15, 0.4); outline: none; transition: 0.3s;
         }
         .intro-text-btn:hover { background: rgba(231, 76, 60, 1); transform: scale(1.05); }
-        .intro-text-btn:disabled { pointer-events: none; opacity: 0; transition: 0.3s; transform: scale(1.5); }
         
         @keyframes xmasPulse { 
             0% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
@@ -279,97 +318,10 @@
             100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
         }
 
-        /* 🎬 動畫一：聖誕老人從超大視角，優雅飄逸進門，精準停在門口座標 55.31% 95% */
-        @keyframes santaDive {
-            /* 1. 從畫面左上方「巨大化」出發，彷彿就在鏡頭前 */
-            0% { transform: translate(-10vw, -10vh) scale(4) rotate(15deg); opacity: 0; }
-            15% { opacity: 1; filter: drop-shadow(0 10px 20px rgba(255,255,255,0.8)); }
-            /* 2. 順著弧線往右下方滑行，並隨著距離拉遠而縮小 */
-            50% { transform: translate(30vw, 40vh) scale(1.5) rotate(0deg); opacity: 1; }
-            80% { opacity: 1; }
-            /* 3. 完美縮小沒入木門 */
-            100% { transform: translate(55.31vw, 95vh) scale(0) rotate(-15deg); opacity: 0; }
-        }
-
-        /* 啟動！點擊按鈕後，聖誕老人開始 3D 滑行 */
-        .entering-xmas #intro-santa {
-            animation: santaDive 3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-        }
-        
-        /* 動畫跑完後，整個遮罩淡出 (搭配 transition 1s) */
+        /* 🎬 點擊開門後的狀態變化 */
+        .entering-xmas .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.5s; transform: scale(1.2); }
+        .entering-xmas #xmas-bg { opacity: 0; } /* 背景漸黑 */
         .intro-hidden { opacity: 0 !important; pointer-events: none; }
-
-        /* ❄️ 浪漫初雪與禮物 */
-        #snow-container {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9997; overflow: hidden;
-        }
-        .xmas-snow {
-            position: absolute; top: -10vh; opacity: 0.9;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
-            animation: snowFall linear infinite, snowSway 3s ease-in-out infinite alternate; 
-            will-change: transform; 
-        }
-        @keyframes snowFall {
-            0% { top: -10vh; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { top: 110vh; opacity: 0; }
-        }
-        @keyframes snowSway {
-            0% { transform: translateX(-15px) rotate(0deg); }
-            100% { transform: translateX(15px) rotate(45deg); }
-        }
-
-        /* 💥 點擊冰晶魔法爆破 */
-        .xmas-particle {
-            position: fixed; pointer-events: none; z-index: 99999;
-            animation: popOut 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.6)); /* 冰藍色發光 */
-        }
-        @keyframes popOut {
-            0% { transform: translate(0, 0) scale(0.2); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--rot)); opacity: 0; }
-        }
-
-        /* ================= 11. 🎅 首頁上空持續巡航的聖誕老人 ================= */
-        #patrol-santa-wrapper {
-            position: fixed;
-            top: 2vh;
-            left: 0;
-            z-index: 9995; /* 低於進場動畫，但高於網頁其他內容 */
-            pointer-events: none; /* 滑鼠可以直接穿透，不會阻擋點擊 */
-            animation: patrolX 24s linear infinite; /* 左右來回一次總共 24 秒 */
-        }
-
-        #patrol-santa-wrapper img {
-            width: 180px; 
-            height: auto;
-            filter: drop-shadow(0 8px 12px rgba(255, 255, 255, 0.4));
-            /* 加上輕微的高低起伏，以及精準的 50% 翻轉 */
-            animation: patrolY 4s ease-in-out infinite alternate, patrolFlip 24s step-end infinite;
-        }
-
-        /* 橫向移動：左到右(12秒)，右到左(12秒) */
-        @keyframes patrolX {
-            0% { transform: translateX(-30vw); }
-            49.99% { transform: translateX(120vw); }
-            50% { transform: translateX(120vw); }
-            100% { transform: translateX(-30vw); }
-        }
-
-        /* 垂直漂浮：模擬雪橇飛行的高低起伏 */
-        @keyframes patrolY {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(30px); }
-        }
-
-        /* 智能水平翻轉：前半段不翻轉(向右)，後半段水平翻轉(向左) */
-        @keyframes patrolFlip {
-            0% { transform: scaleX(1); }
-            50% { transform: scaleX(-1); }
-            100% { transform: scaleX(1); }
-        }
 
         /* ================= 9. 手機版 RWD ================= */
         @media (max-width: 768px) {
@@ -406,24 +358,22 @@
             .cute-form { padding: 15px; }
 
             .intro-text-btn { font-size: 20px; padding: 15px 20px; } 
+            #patrol-santa-img { width: 120px; } /* 手機版聖誕老人縮小 */
         }
     </style>
 </head>
 <body>
 
-    <!-- 🌟 首頁上空巡航的聖誕老人 (新增這區塊) 🌟 -->
+    <!-- 🌟 首頁上空持續巡航發禮物的聖誕老人 -->
     <div id="patrol-santa-wrapper">
-        <img src="聖誕老人.png" alt="發禮物的聖誕老人">
+        <div id="patrol-santa-flipper">
+            <img id="patrol-santa-img" src="聖誕老人.png" alt="發禮物的聖誕老人">
+        </div>
     </div>
 
-    <!-- 🎄 聖誕節：沉浸式溫馨開場 -->
+    <!-- 🎄 聖誕節：沉浸式溫馨開場遮罩 -->
     <div id="xmas-intro">
-        <!-- 聖誕村背景圖 -->
         <div id="xmas-bg"></div>
-        
-        <!-- 🎅 開場陪你衝刺進門的聖誕老人 (優化 3D 景深比例版) -->
-        <img id="intro-santa" src="聖誕老人.png" alt="聖誕老人">
-        
         <button class="intro-text-btn" id="enterXmasBtn">🎄 敲敲門進入 Cloudy 聖誕派對 🎄</button>
     </div>
 
@@ -994,45 +944,67 @@
             audio.addEventListener("ended", () => window.playMusicEngine(currentIndex + 1, true));
         }
 
+        // ================= 11. 🎅 啟動聖誕老人軌跡掉落系統 =================
+        function initSantaTrail() {
+            const container = document.createElement('div');
+            // 將軌跡層設為 fixed，並放在所有內容最上層 (但在點擊特效之下)
+            container.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9994; overflow:hidden;';
+            document.body.appendChild(container);
+
+            const santaImg = document.getElementById('patrol-santa-img'); // 追蹤那張會高低起伏的圖片
+            const symbols = ['❄️', '❅', '❆', '🎄', '🎁', '🔔', '✨', '🎁']; // 增加禮物的機率
+
+            setInterval(() => {
+                if (!santaImg) return;
+                
+                // 動態取得聖誕老人當下的精準位置 (包含 X平移 和 Y高低起伏)
+                const rect = santaImg.getBoundingClientRect();
+                
+                // 只有當聖誕老人在畫面上可見時，才讓他掉落禮物
+                if (rect.right > 0 && rect.left < window.innerWidth) {
+                    const flake = document.createElement('div');
+                    flake.className = 'trail-item';
+                    flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                    
+                    // 設定掉落物的起始位置：聖誕老人圖片的正中央偏下
+                    flake.style.left = `${rect.left + (rect.width / 2)}px`;
+                    flake.style.top = `${rect.top + (rect.height * 0.7)}px`;
+                    
+                    flake.style.fontSize = `${Math.random() * 10 + 16}px`;
+                    
+                    // 動態設定飄落的時間 (4~7秒) 與 落地點的橫向偏移 (左右搖擺)
+                    const duration = Math.random() * 3 + 4;
+                    const endX = (Math.random() - 0.5) * 150; 
+                    
+                    flake.style.animationDuration = `${duration}s`;
+                    flake.style.setProperty('--endX', `${endX}px`);
+                    flake.style.setProperty('--endRot', `${Math.random() * 360}deg`);
+                    
+                    container.appendChild(flake);
+                    
+                    // 掉出畫面後清除元件，保持網頁順暢
+                    setTimeout(() => flake.remove(), duration * 1000);
+                }
+            }, 250); // 每 0.25 秒掉落一個，營造豐富的軌跡感
+        }
+
         // ================= 8. 🎄 聖誕節專屬特效區 =================
         
-        // 👻 1. 開啟木屋大門
+        // 👻 1. 開啟開場大門
         document.getElementById('enterXmasBtn').addEventListener('click', function(e) {
             // 🚀 優化 2: 防止連點狂魔
             e.target.disabled = true;
 
             document.getElementById('xmas-intro').classList.add('entering-xmas');
             
-            // 5.5 秒後聖誕老人巡航完畢，遮罩淡出
-            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 5500);
+            // 1.5 秒後背景黑透，接著遮罩隱藏
+            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 1500);
             
             window.playMusicEngine(0, false);
-
-            initXmasSnow();
-        });
-
-        // 👻 2. 橘光幽靈糖果雨 (更換成聖誕初雪)
-        function initXmasSnow() {
-            const snowContainer = document.createElement('div');
-            snowContainer.id = 'snow-container';
-            const fragment = document.createDocumentFragment(); 
             
-            const flakeCount = 35;
-            const symbols = ['❄️', '❅', '❆', '🎄', '🎁', '🔔'];
-
-            for (let i = 0; i < flakeCount; i++) {
-                const flake = document.createElement('div');
-                flake.classList.add('xmas-snow');
-                flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-                flake.style.left = `${Math.random() * 100}vw`;
-                flake.style.fontSize = `${Math.random() * 15 + 15}px`;
-                flake.style.animationDuration = `${Math.random() * 8 + 10}s`;
-                flake.style.animationDelay = `${Math.random() * 5}s`;
-                fragment.appendChild(flake);
-            }
-            snowContainer.appendChild(fragment);
-            document.body.appendChild(snowContainer);
-        }
+            // 啟動首頁天空的聖誕老人發禮物系統
+            initSantaTrail();
+        });
 
         // 💥 4. 滑鼠點擊：冰晶碎片爆破
         let popTimer = null;
