@@ -234,7 +234,9 @@
         #xmas-intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000;
             display: flex; align-items: center; justify-content: center;
-            background: #000; overflow: hidden; transition: opacity 1s ease-in-out;
+            background: #000; overflow: hidden;
+            /* 讓黑幕消失時能平滑過渡 */
+            transition: opacity 1s ease-in-out;
         }
 
         /* 🖼️ 聖誕村背景圖與溫馨呼吸效果 */
@@ -243,9 +245,7 @@
             background: url('聖誕村.jpg') center/cover no-repeat;
             z-index: 1; 
             
-            /* 🚀 核心亮點：精準對齊圖中門的座標 */
-            transform-origin: 55.31% 95%; 
-            
+            /* 移除會導致閃爍的暴衝動畫，只保留柔和呼吸 */
             animation: warmPulse 4s infinite alternate ease-in-out;
         }
         
@@ -254,13 +254,13 @@
             100% { filter: brightness(1.1) contrast(1.1); transform: scale(1.03); }
         }
 
-        /* 🎅 開場進門的聖誕老人 (優化 3D 滑行景深版) */
+        /* 🎅 開場在天空巡航的聖誕老人 */
         #intro-santa {
             position: absolute;
-            width: 250px; height: auto; /* 控制圖片初始大小 */
-            margin-top: -125px; margin-left: -125px; /* 將圖片完美置中，確保旋轉和縮放圓滑 */
-            top: 0; left: 0;
+            width: 250px; height: auto; /* 控制圖片大小 */
+            top: 5vh; left: -300px; /* 從畫面左上方外面出發 */
             opacity: 0; pointer-events: none; z-index: 5;
+            filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.6));
         }
 
         /* 敲門按鈕 (聖誕風) */
@@ -279,24 +279,31 @@
             100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
         }
 
-        /* 🎬 動畫一：聖誕老人從超大視角，優雅飄逸進門，精準停在門口座標 55.31% 95% */
-        @keyframes santaDive {
-            /* 1. 從畫面左上方「巨大化」出發，彷彿就在鏡頭前 */
-            0% { transform: translate(-10vw, -10vh) scale(4) rotate(15deg); opacity: 0; }
-            15% { opacity: 1; filter: drop-shadow(0 10px 20px rgba(255,255,255,0.8)); }
-            /* 2. 順著弧線往右下方滑行，並隨著距離拉遠而縮小 */
-            50% { transform: translate(30vw, 40vh) scale(1.5) rotate(0deg); opacity: 1; }
-            80% { opacity: 1; }
-            /* 3. 完美縮小沒入木門 */
-            100% { transform: translate(55.31vw, 95vh) scale(0) rotate(-15deg); opacity: 0; }
+        /* 🎬 動畫一：單純變黑淡出，不放大 */
+        @keyframes fadeToBlack {
+            0% { filter: brightness(1); opacity: 1; }
+            50% { filter: brightness(0); opacity: 1; }
+            100% { filter: brightness(0); opacity: 0; }
         }
 
-        /* 啟動！點擊按鈕後，聖誕老人開始 3D 滑行 */
+        /* 🎬 動畫二：聖誕老人悠哉從左上方天空飛越至右上方 */
+        @keyframes santaCruise {
+            0% { transform: translateX(0) rotate(5deg); opacity: 0; }
+            20% { opacity: 1; }
+            50% { transform: translateX(60vw) translateY(5vh) rotate(0deg); opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateX(120vw) translateY(-10vh) rotate(-10deg); opacity: 0; }
+        }
+
+        /* 啟動！點擊按鈕後，背景慢慢變黑，聖誕老人開始 5.5 秒的巡航飛行 */
+        .entering-xmas #xmas-bg {
+            animation: fadeToBlack 5.5s ease-in-out forwards;
+        }
         .entering-xmas #intro-santa {
-            animation: santaDive 3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+            animation: santaCruise 5.5s linear forwards;
         }
         
-        /* 動畫跑完後，整個遮罩淡出 (搭配 transition 1s) */
+        /* 動畫跑完後，整個遮罩隱藏 */
         .intro-hidden { opacity: 0 !important; pointer-events: none; }
 
         /* ❄️ 浪漫初雪與禮物 */
@@ -377,7 +384,7 @@
         <!-- 聖誕村背景圖 -->
         <div id="xmas-bg"></div>
         
-        <!-- 🎅 開場陪你衝刺進門的聖誕老人 (優化 3D 景深比例版) -->
+        <!-- 🎅 開場在天空巡航的聖誕老人 -->
         <img id="intro-santa" src="聖誕老人.png" alt="聖誕老人">
         
         <button class="intro-text-btn" id="enterXmasBtn">🎄 敲敲門進入 Cloudy 聖誕派對 🎄</button>
@@ -713,7 +720,7 @@
                         <label>📈 1 億楓幣 = <input type="number" id="twdRate" value="650" oninput="calculate()"> 台幣</label>
                     </div>
                     <div class="controls-row">
-                        <label><input type="checkbox" id="vipCheck" style="width:18px; height:18px; cursor: pointer;" onchange="calculate()"> 👑 擁有拍賣場VIP (手續費 3%)</label>
+                        <label><input type="checkbox" id="vipCheck" style="width:18px; height:18px; cursor: pointer;" onchange="calculate()"> 👑 擁有拍賣場VIP(手續費 3%)</label>
                         <span id="vipText" class="vip-note"></span>
                     </div>
                 </div>
@@ -959,8 +966,8 @@
 
             document.getElementById('xmas-intro').classList.add('entering-xmas');
             
-            // 3 秒後聖誕老人進門完畢，遮罩淡出
-            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 3000);
+            // 5.5 秒後聖誕老人巡航完畢，遮罩淡出
+            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 5500);
             
             window.playMusicEngine(0, false);
 
