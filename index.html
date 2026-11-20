@@ -2,8 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <!-- 🚀 優化 3: 鎖定縮放比例，防止手機點擊表單時畫面亂跳 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artale Cloudy 公會小窩</title>
     <!-- 預連線 Google Fonts 加速字體載入 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +36,7 @@
         }
         .cloud-title-wrapper::before { width: 110px; height: 110px; top: -45px; left: 15%; }
         .cloud-title-wrapper::after { width: 140px; height: 140px; top: -60px; right: 15%; }
-        .cloud-title-wrapper h2 { margin: 0; text-align: center; z-index: 2; display: flex; align-items: baseline; justify-content: center; gap: 15px;}
+        .cloud-title-wrapper h2 { margin: 0; text-align: center; z-index: 2; display: flex; align-items: baseline; justify-content: center; gap: 15px; }
         
         @keyframes textShimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         .title-cursive, .title-zen {
@@ -69,7 +68,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ====== 首頁合照 ====== */
-        .hero-image-container { width: 100%; display: flex; justify-content: center; margin-bottom: 25px; padding: 10px; }
+        .hero-image-container { width: 100%; display: flex; justify-content: center; margin-bottom: 25px; padding: 10px; box-sizing: border-box; }
         .hero-image-container img { 
             width: 100%; max-width: 1300px; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
             border: 3px solid rgba(255, 255, 255, 0.9); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
@@ -80,7 +79,7 @@
         }
 
         /* ====== 👑 招生區圖片神話級特效 ====== */
-        .recruit-image-container { width: 100%; display: flex; justify-content: center; padding: 40px 10px; }
+        .recruit-image-container { width: 100%; display: flex; justify-content: center; padding: 40px 10px; box-sizing: border-box; }
         @keyframes legendaryDropGlow {
             0% { box-shadow: 0 10px 25px rgba(0,0,0,0.45), 0 0 20px 5px rgba(241, 196, 15, 0.4), 0 0 35px 12px rgba(192, 57, 43, 0.3); transform: translateY(0px); }
             50% { box-shadow: 0 15px 40px rgba(0,0,0,0.55), 0 0 45px 18px rgba(241, 196, 15, 0.85), 0 0 75px 28px rgba(192, 57, 43, 0.65); transform: translateY(-10px); }
@@ -190,6 +189,16 @@
         th { background: rgba(44, 62, 80, 0.95); color: #fff; }
         tr:hover { background: rgba(255, 255, 255, 0.6); }
 
+        /* 點商計算表狀態配色 */
+        .buy-ah { color: #27ae60; font-weight: bold; }
+        .buy-wc { color: #2980b9; font-weight: bold; }
+        .profit-good { color: #27ae60; font-weight: bold; }
+        .profit-bad { color: #e74c3c; font-weight: bold; }
+
+        /* 頁尾公會名牌 */
+        .footer-container { margin-top: 30px; }
+        .nameplate { height: 110px; max-width: 95%; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
+
         /* ================= 10. 原生報名表單專屬樣式 ================= */
         .cute-form {
             background: rgba(255, 255, 255, 0.95); padding: 25px 30px; border-radius: 16px;
@@ -229,26 +238,24 @@
         .form-submit-btn:disabled { background: #95a5a6; cursor: not-allowed; transform: none; box-shadow: none; }
 
         /* ================= 11. 🎅 首頁上空持續巡航發禮物的聖誕老人 ================= */
-        /* 外層控制：左右移動 (24秒一圈) */
         #patrol-santa-wrapper {
             position: fixed;
             top: 5vh;
             left: 0;
-            z-index: 9995; /* 確保在主畫面之上，但在開場遮罩之下 */
-            pointer-events: none; /* 不干擾滑鼠點擊網頁 */
+            z-index: 9995;
+            pointer-events: none;
             animation: flightX 24s linear infinite;
+            will-change: transform;
         }
-        /* 中層控制：智能水平翻轉 (左右來回切換) */
         #patrol-santa-flipper {
-            /* 修正：預設面右，往左飛時才翻轉 (-1) */
             animation: flightFlip 24s step-end infinite;
         }
-        /* 內層圖片：高低起伏 (Bobbing) */
         #patrol-santa-img {
             width: 220px; 
             height: auto;
             filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.6));
             animation: flightBob 2.5s ease-in-out infinite alternate;
+            will-change: transform;
         }
 
         @keyframes flightX {
@@ -258,9 +265,9 @@
             100% { transform: translateX(-30vw); }
         }
         @keyframes flightFlip {
-            0% { transform: scaleX(1); } /* 前 12 秒往右飛：不翻轉 */
+            0% { transform: scaleX(1); }
             49.99% { transform: scaleX(1); } 
-            50% { transform: scaleX(-1); } /* 後 12 秒往左飛：水平翻轉 */
+            50% { transform: scaleX(-1); }
             99.99% { transform: scaleX(-1); }
             100% { transform: scaleX(1); }
         }
@@ -277,10 +284,26 @@
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
             animation: trailFall linear forwards;
             z-index: 9994;
+            will-change: transform, opacity;
         }
         @keyframes trailFall {
             0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
             100% { transform: translate(var(--endX), 100vh) rotate(var(--endRot)); opacity: 0; }
+        }
+
+        /* 💥 點擊冰晶魔法爆破 */
+        .xmas-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            font-size: 20px;
+            animation: popOut 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.6));
+            will-change: transform, opacity;
+        }
+        @keyframes popOut {
+            0% { transform: translate(0, 0) scale(0.2); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--rot)); opacity: 0; }
         }
 
         /* ================= 8. 🎄 聖誕節開場遮罩區 ================= */
@@ -291,12 +314,11 @@
             transition: opacity 1s ease-in-out;
         }
 
-        /* 🖼️ 聖誕村背景圖 (只會呼吸，不放大) */
         #xmas-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: url('聖誕村.jpg') center/cover no-repeat;
             z-index: 1; 
-            transition: opacity 3s ease-in-out; /* 點擊後變黑的過渡 */
+            transform-origin: 55.31% 95%;
             animation: warmPulse 4s infinite alternate ease-in-out;
         }
         
@@ -305,11 +327,11 @@
             100% { filter: brightness(1.1) contrast(1.1); transform: scale(1.03); }
         }
 
-        /* 🎅 開場陪你衝刺進門的聖誕老人 (加回來了！) */
+        /* 🎅 開場衝刺進門的聖誕老人 */
         #intro-santa {
             position: absolute;
             width: 250px; height: auto;
-            margin-top: -125px; margin-left: -125px; /* 置中用 */
+            margin-top: -125px; margin-left: -125px;
             top: 0; left: 0;
             opacity: 0; pointer-events: none; z-index: 5;
         }
@@ -329,14 +351,14 @@
             100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.4); } 
         }
 
-        /* 🎬 動畫一：單純變黑淡出，不放大 */
+        /* 🎬 動畫一：背景單純變黑淡出，不放大 */
         @keyframes fadeToBlack {
             0% { filter: brightness(1); opacity: 1; }
             70% { filter: brightness(0.2); opacity: 1; }
             100% { filter: brightness(0); opacity: 0; }
         }
 
-        /* 🎬 動畫二：聖誕老人從超大視角，優雅飄逸進門，精準停在門口座標 55.31% 95% */
+        /* 🎬 動畫二：聖誕老人從左上方滑進門口 55.31% 95% */
         @keyframes santaDive {
             0% { transform: translate(-10vw, -10vh) scale(4) rotate(15deg); opacity: 0; }
             15% { opacity: 1; filter: drop-shadow(0 10px 20px rgba(255,255,255,0.8)); }
@@ -347,13 +369,13 @@
 
         /* 🎬 點擊開門後的狀態變化 */
         .entering-xmas .intro-text-btn { opacity: 0; pointer-events: none; transition: 0.5s; transform: scale(1.2); }
-        .entering-xmas #xmas-bg { animation: fadeToBlack 3s ease-in-out forwards; } /* 背景漸黑 */
-        .entering-xmas #intro-santa { animation: santaDive 3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards; } /* 衝進門 */
-        .intro-hidden { opacity: 0 !important; pointer-events: none; display: none; }
+        .entering-xmas #xmas-bg { animation: fadeToBlack 3s ease-in-out forwards; }
+        .entering-xmas #intro-santa { animation: santaDive 3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards; }
+        .intro-hidden { opacity: 0 !important; pointer-events: none; }
 
         /* ================= 9. 手機版 RWD ================= */
         @media (max-width: 768px) {
-            body { padding: 10px 5px 30px; }
+            body { padding: 10px 5px 30px; background-attachment: scroll; }
             .header-container { flex-wrap: wrap; }
             .badge { height: 65px; } 
             .cloud-title-wrapper { padding: 15px 30px; border-radius: 40px; }
@@ -362,7 +384,7 @@
             
             .sidebar { 
                 position: relative; top: 0; 
-                flex-direction: row; width: 100%; overflow-x: auto; padding: 10px 5px; gap: 8px; 
+                flex-direction: row; width: 100%; box-sizing: border-box; overflow-x: auto; padding: 10px 5px; gap: 8px; 
             }
             .sidebar::-webkit-scrollbar { height: 4px; }
             .sidebar::-webkit-scrollbar-thumb { background: rgba(192, 57, 43, 0.5); border-radius: 4px; }
@@ -374,11 +396,11 @@
             .photo-wrapper img { height: 200px; }
             .controls-row { flex-direction: column; align-items: flex-start; gap: 10px; }
             
-            .roster-card { width: 100%; margin-left: 0; }
+            .roster-card { width: 100%; box-sizing: border-box; margin-left: 0; }
             .embed-container { height: 550px; }
 
             .nameplate { height: 75px; }
-            #countdownDisplay { font-size: 16px; padding: 10px; margin-bottom: 10px;} 
+            #countdownDisplay { font-size: 16px; padding: 10px; margin-bottom: 10px; } 
             #timerText { font-size: 18px; }
             .lightbox-nav { width: 40px; height: 40px; font-size: 24px; }
             #lightbox-prev { left: 10px; } #lightbox-next { right: 10px; }
@@ -386,7 +408,7 @@
             .cute-form { padding: 15px; }
 
             .intro-text-btn { font-size: 20px; padding: 15px 20px; } 
-            #patrol-santa-img { width: 120px; } /* 手機版聖誕老人縮小 */
+            #patrol-santa-img { width: 120px; }
         }
     </style>
 </head>
@@ -402,7 +424,6 @@
     <!-- 🎄 聖誕節：沉浸式溫馨開場遮罩 -->
     <div id="xmas-intro">
         <div id="xmas-bg"></div>
-        <!-- 🎅 開場陪你衝刺進門的聖誕老人 -->
         <img id="intro-santa" src="聖誕老人.png" alt="聖誕老人">
         <button class="intro-text-btn" id="enterXmasBtn">🎄 敲敲門進入 Cloudy 聖誕派對 🎄</button>
     </div>
@@ -467,7 +488,7 @@
                     
                     <p><span class="highlight-item">✨ 活動點滴紀錄</span>：回顧我們過去一起舉辦過的各種瘋狂活動與專屬大合照！</p>
                     <p><span class="highlight-item">🔥 每週突襲王報名＆分組公告</span>：打王絕對不迷路！每週的報名表單和專屬分組公告都在這，隨時掌握出團動態。</p>
-                    <p><span class="highlight-item">💰 獨家理財神器</span>：自己人開發的「儲值WC買點商」與「楓幣比值計算」小工具，幫遇到瓶頸精打細算，輕鬆把裝備衝到最頂！</p>
+                    <p><span class="highlight-item">💰 獨家理財神器</span>：自己人開發的「儲值WC買點商」與「楓幣比值計算」小工具，幫你精打細算，輕鬆把裝備衝到最頂！</p>
                     
                     <p style="margin-top: 20px;">這一切的努力，都是因為幹部們超在乎大家，希望能給大家最棒的公會體驗、最順暢的遊戲日常！</p>
                     <p>有空就多來小窩聽聽點唱機的音樂、多加入DC一同閒聊！</p>
@@ -493,8 +514,8 @@
                         <h4 class="history-title">【Cloudy 肝帝爭霸戰：沒有最卷，只有更卷！】</h4>
                         <div class="photo-count">📸 共 2 張照片 (滑動/放大)</div>
                         <div class="gallery-container">
-                            <div class="photo-wrapper"><img src="2026.09.07_肝帝爭霸戰_1.jpg" loading="lazy" data-index="0" data-group="g5" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">肝帝爭霸戰即將開肝！</div></div>
-                            <div class="photo-wrapper"><img src="2026.09.07_肝帝爭霸戰_2.jpg" loading="lazy" data-index="1" data-group="g5" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">恭喜各位肝帝～活動圓滿結束！</div></div>
+                            <div class="photo-wrapper"><img src="2026.09.07_肝帝爭霸戰_1.jpg" loading="lazy" data-index="0" data-group="g5" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">肝帝爭霸戰即將開肝！</div></div>
+                            <div class="photo-wrapper"><img src="2026.09.07_肝帝爭霸戰_2.jpg" loading="lazy" data-index="1" data-group="g5" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">恭喜各位肝帝～活動圓滿結束！</div></div>
                         </div>
                     </div>
 
@@ -513,9 +534,9 @@
                         <h4 class="history-title">【台中線下副本】</h4>
                         <div class="photo-count">📸 共 3 張照片 (滑動/放大)</div>
                         <div class="gallery-container">
-                            <div class="photo-wrapper"><img src="2026.03.09_台中線下副本_1.jpg" loading="lazy" data-index="0" data-group="g4" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">台中美樂地ＫＴＶ活動圓滿成功～</div></div>
-                            <div class="photo-wrapper"><img src="2026.03.09_台中線下副本_2.jpg" loading="lazy" data-index="1" data-group="g4" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">台中烤狀猿燒肉圓滿結束～</div></div>
-                            <div class="photo-wrapper"><img src="2026.03.09_台中線下副本_3.jpg" loading="lazy" data-index="2" data-group="g4" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">感謝天心為每個夥伴準備的小卡片及手工堅果塔</div></div>
+                            <div class="photo-wrapper"><img src="2026.03.09_台中線下副本_1.jpg" loading="lazy" data-index="0" data-group="g4" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">台中美樂地ＫＴＶ活動圓滿成功～</div></div>
+                            <div class="photo-wrapper"><img src="2026.03.09_台中線下副本_2.jpg" loading="lazy" data-index="1" data-group="g4" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">台中烤狀猿燒肉圓滿結束～</div></div>
+                            <div class="photo-wrapper"><img src="2026.03.09_台中線下副本_3.jpg" loading="lazy" data-index="2" data-group="g4" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">感謝天心為每個夥伴準備的小卡片及手工堅果塔</div></div>
                         </div>
                     </div>
 
@@ -524,10 +545,10 @@
                         <h4 class="history-title">【Cloudy 新春財源廣進活動】</h4>
                         <div class="photo-count">📸 共 4 張照片 (滑動/放大)</div>
                         <div class="gallery-container">
-                            <div class="photo-wrapper"><img src="2026.02.16_新春財源廣進_1.jpg" loading="lazy" data-index="0" data-group="g3" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">新春財源廣進活動公告</div></div>
-                            <div class="photo-wrapper"><img src="2026.02.16_新春財源廣進_2.jpg" loading="lazy" data-index="1" data-group="g3" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">新春財源廣進活動成果</div></div>
-                            <div class="photo-wrapper"><img src="2026.02.16_新春財源廣進_3.jpg" loading="lazy" data-index="2" data-group="g3" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">新春財源廣進活動大合照～</div></div>
-                            <div class="photo-wrapper"><img src="2026.02.16_新春財源廣進_4.jpg" loading="lazy" data-index="3" data-group="g3" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">新春財源廣進活動大合照～</div></div>
+                            <div class="photo-wrapper"><img src="2026.02.16_新春財源廣進_1.jpg" loading="lazy" data-index="0" data-group="g3" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">新春財源廣進活動公告</div></div>
+                            <div class="photo-wrapper"><img src="2026.02.16_新春財源廣進_2.jpg" loading="lazy" data-index="1" data-group="g3" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">新春財源廣進活動成果</div></div>
+                            <div class="photo-wrapper"><img src="2026.02.16_新春財源廣進_3.jpg" loading="lazy" data-index="2" data-group="g3" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">新春財源廣進活動大合照～</div></div>
+                            <div class="photo-wrapper"><img src="2026.02.16_新春財源廣進_4.jpg" loading="lazy" data-index="3" data-group="g3" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">新春財源廣進活動大合照～</div></div>
                         </div>
                     </div>
 
@@ -536,11 +557,11 @@
                         <h4 class="history-title">【第一次線下聚會「銀櫃KTV大亂鬥」跟「消滅和牛燒肉」】</h4>
                         <div class="photo-count">📸 共 5 張照片 (滑動/放大)</div>
                         <div class="gallery-container">
-                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_1.jpg" loading="lazy" data-index="0" data-group="g2" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">「銀櫃KTV大亂鬥」活動海報</div></div>
-                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_2.jpg" loading="lazy" data-index="1" data-group="g2" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">「消滅和牛燒肉」活動海報</div></div>
-                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_3.jpg" loading="lazy" data-index="2" data-group="g2" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">這是給有出席活動的夥伴的一點心意</div></div>
-                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_4.jpg" loading="lazy" data-index="3" data-group="g2" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">「銀櫃KTV大亂鬥」活動成功！</div></div>
-                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_5.jpg" loading="lazy" data-index="4" data-group="g2" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'"><div class="photo-caption">「消滅和牛燒肉」活動成功！</div></div>
+                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_1.jpg" loading="lazy" data-index="0" data-group="g2" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">「銀櫃KTV大亂鬥」活動海報</div></div>
+                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_2.jpg" loading="lazy" data-index="1" data-group="g2" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">「消滅和牛燒肉」活動海報</div></div>
+                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_3.jpg" loading="lazy" data-index="2" data-group="g2" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">這是給有出席活動的夥伴的一點心意</div></div>
+                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_4.jpg" loading="lazy" data-index="3" data-group="g2" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">「銀櫃KTV大亂鬥」活動成功！</div></div>
+                            <div class="photo-wrapper"><img src="2025.12.27_第一次線下聚會_5.jpg" loading="lazy" data-index="4" data-group="g2" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'"><div class="photo-caption">「消滅和牛燒肉」活動成功！</div></div>
                         </div>
                     </div>
 
@@ -550,7 +571,7 @@
                         <div class="photo-count">📸 共 1 張照片 (點擊放大)</div>
                         <div class="gallery-container" style="overflow-x: hidden;">
                             <div class="photo-wrapper">
-                                <img src="2025.11.17_第一張合照_1.jpg" loading="lazy" data-index="0" data-group="g1" class="lightbox-trigger" onerror="this.src='https://via.placeholder.com/400x250/ecf0f1/bdc3c7?text=圖片載入中'">
+                                <img src="2025.11.17_第一張合照_1.jpg" loading="lazy" data-index="0" data-group="g1" class="lightbox-trigger" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ecf0f1/7f8c8d?text=圖片載入中'">
                                 <div class="photo-caption">這是Cloudy公會的第一張合照！</div>
                             </div>
                         </div>
@@ -569,7 +590,7 @@
                             <h3 class="form-title">⚔️ 突襲王團 固定團/換團申請表</h3>
                             <p class="form-subtitle">資料將由系統加密直達公會後台，填寫不卡頓！</p>
 
-                            <!-- 🔥 填表目的 -->
+                            <!-- 📌 填表目的 -->
                             <div class="form-section-title">📌 填表目的 (必選)</div>
                             <div class="form-grid-3">
                                 <label style="grid-column: 1 / -1;">您這次填寫表單的原因是？ 
@@ -722,7 +743,7 @@
                         <iframe id="rosterIframe" src="https://docs.google.com/spreadsheets/d/18ScfVsNY4OSDRs3fy71uTyHmD27eYFbvffn0XQ8YrYE/htmlembed?widget=false&chrome=false&gid=245864129" class="embed-container" title="每週突襲王團隊伍" loading="lazy"></iframe>
                     </div>
                 </div>
-                <!-- 新增：排班維護期間的遮罩畫面 -->
+                <!-- 排班維護期間的遮罩畫面 -->
                 <div id="rosterClosedMessage" class="glass-panel" style="display: none; padding: 120px 20px; text-align: center; margin-top: 15px;">
                     <h3 style="color: #e67e22; font-size: 32px; font-weight: bold; margin-bottom: 20px;">幹部們努力安排隊伍中，敬請期待>&lt;</h3>
                     <p style="font-size: 22px; color: #7f8c8d;">每週二 18:00 將自動公佈最新排定名單！</p>
@@ -737,7 +758,7 @@
                         <label>📈 1 億楓幣 = <input type="number" id="twdRate" value="650" oninput="calculate()"> 台幣</label>
                     </div>
                     <div class="controls-row">
-                        <label><input type="checkbox" id="vipCheck" style="width:18px; height:18px; cursor: pointer;" onchange="calculate()"> 👑 擁有拍賣場VIP(手續費 3%)</label>
+                        <label><input type="checkbox" id="vipCheck" style="width:18px; height:18px; cursor: pointer;" onchange="calculate()"> 👑 擁有拍賣場VIP (手續費 3%)</label>
                         <span id="vipText" class="vip-note"></span>
                     </div>
                 </div>
@@ -784,6 +805,7 @@
         function initTabs() {
             document.querySelectorAll(".sidebar button[data-tab]").forEach(btn => {
                 btn.addEventListener("click", function() {
+                    if (this.classList.contains("active")) return;
                     document.querySelectorAll(".sidebar button[data-tab], .tab-content").forEach(el => el.classList.remove("active"));
                     this.classList.add("active");
                     document.getElementById(this.dataset.tab).classList.add("active");
@@ -888,7 +910,7 @@
         }
         function updateAH(i, val) { CONFIG.calcItems[i].ah = parseFloat(val) || 0; calculate(); }
 
-        // ================= 4. 燈箱相簿 (🚀 優化 1: 預載圖片) =================
+        // ================= 4. 燈箱相簿 (預載 + 平滑淡入優化版) =================
         function initLightbox() {
             const box = document.getElementById("lightbox"), imgEl = document.getElementById("lightbox-img");
             const cap = document.getElementById("lightbox-caption"), prev = document.getElementById("lightbox-prev"), next = document.getElementById("lightbox-next");
@@ -903,35 +925,43 @@
             });
 
             function updateBox() {
-                imgEl.style.opacity = 0; // 淡出舊圖
-                setTimeout(() => {
-                    imgEl.src = group[idx].src; 
-                    cap.textContent = group[idx].nextElementSibling.textContent;
-                    imgEl.onload = () => imgEl.style.opacity = 1; // 載入完成才淡入
-                }, 150);
-                
+                const targetSrc = group[idx].src;
+                cap.textContent = group[idx].nextElementSibling.textContent;
                 const showNav = group.length > 1 ? "flex" : "none";
                 prev.style.display = showNav; next.style.display = showNav;
 
-                // 背景偷偷預載下一張跟上一張圖片，確保切換順暢
-                if(group.length > 1) {
+                if (imgEl.src === targetSrc && imgEl.complete) {
+                    imgEl.style.opacity = 1;
+                } else {
+                    imgEl.style.opacity = 0;
+                    setTimeout(() => {
+                        imgEl.onload = () => { imgEl.style.opacity = 1; };
+                        imgEl.src = targetSrc;
+                        if (imgEl.complete) imgEl.style.opacity = 1;
+                    }, 150);
+                }
+
+                // 背景預載前後一張圖片
+                if (group.length > 1) {
                     new Image().src = group[(idx + 1) % group.length].src;
                     new Image().src = group[(idx - 1 + group.length) % group.length].src;
                 }
             }
 
             function move(step, e) {
-                if(e) e.stopPropagation();
-                if(group.length > 1) { idx = (idx + step + group.length) % group.length; updateBox(); }
+                if (e) e.stopPropagation();
+                if (group.length > 1) { idx = (idx + step + group.length) % group.length; updateBox(); }
             }
 
             next.onclick = (e) => move(1, e);
             prev.onclick = (e) => move(-1, e);
             document.getElementById("lightbox-close").onclick = () => box.classList.remove("active");
-            box.onclick = (e) => { if(![imgEl, prev, next].includes(e.target)) box.classList.remove("active"); };
+            box.onclick = (e) => { if (![imgEl, prev, next].includes(e.target)) box.classList.remove("active"); };
             document.addEventListener("keydown", e => {
-                if(box.classList.contains("active")) {
-                    if(e.key==="ArrowRight") move(1); if(e.key==="ArrowLeft") move(-1); if(e.key==="Escape") box.classList.remove("active");
+                if (box.classList.contains("active")) {
+                    if (e.key === "ArrowRight") move(1);
+                    if (e.key === "ArrowLeft") move(-1);
+                    if (e.key === "Escape") box.classList.remove("active");
                 }
             });
         }
@@ -962,7 +992,7 @@
                 audio.src = songFile; 
                 
                 if (shouldPlay) {
-                    audio.play().catch(error => console.log("等待互動..."));
+                    audio.play().catch(() => console.log("等待互動..."));
                 }
             };
 
@@ -974,35 +1004,29 @@
             audio.addEventListener("ended", () => window.playMusicEngine(currentIndex + 1, true));
         }
 
-        // ================= 11. 🎅 啟動聖誕老人軌跡掉落系統 =================
+        // ================= 11. 🎅 聖誕老人軌跡掉落系統 =================
         function initSantaTrail() {
             const container = document.createElement('div');
-            // 將軌跡層設為 fixed，並放在所有內容最上層 (但在點擊特效之下)
             container.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9994; overflow:hidden;';
             document.body.appendChild(container);
 
-            const santaImg = document.getElementById('patrol-santa-img'); // 追蹤那張會高低起伏的圖片
-            const symbols = ['❄️', '❅', '❆', '🎄', '🎁', '🔔', '✨', '🎁']; // 增加禮物的機率
+            const santaImg = document.getElementById('patrol-santa-img');
+            const symbols = ['❄️', '❅', '❆', '🎄', '🎁', '🔔', '✨', '🎁'];
 
             setInterval(() => {
-                if (!santaImg) return;
+                // 切換到背景分頁時暫停產生，避免回來瞬間爆出一大坨
+                if (document.hidden || !santaImg) return;
                 
-                // 動態取得聖誕老人當下的精準位置 (包含 X平移 和 Y高低起伏)
                 const rect = santaImg.getBoundingClientRect();
-                
-                // 只有當聖誕老人在畫面上可見時，才讓他掉落禮物
                 if (rect.right > 0 && rect.left < window.innerWidth) {
                     const flake = document.createElement('div');
                     flake.className = 'trail-item';
                     flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
                     
-                    // 設定掉落物的起始位置：聖誕老人圖片的正中央偏下
                     flake.style.left = `${rect.left + (rect.width / 2)}px`;
                     flake.style.top = `${rect.top + (rect.height * 0.7)}px`;
-                    
                     flake.style.fontSize = `${Math.random() * 10 + 16}px`;
                     
-                    // 動態設定飄落的時間 (4~7秒) 與 落地點的橫向偏移 (左右搖擺)
                     const duration = Math.random() * 3 + 4;
                     const endX = (Math.random() - 0.5) * 150; 
                     
@@ -1011,45 +1035,46 @@
                     flake.style.setProperty('--endRot', `${Math.random() * 360}deg`);
                     
                     container.appendChild(flake);
-                    
-                    // 掉出畫面後清除元件，保持網頁順暢
                     setTimeout(() => flake.remove(), duration * 1000);
                 }
-            }, 250); // 每 0.25 秒掉落一個，營造豐富的軌跡感
+            }, 250);
         }
 
         // ================= 8. 🎄 聖誕節專屬特效區 =================
         
-        // 👻 1. 開啟開場大門
+        // 1. 開啟開場大門
         document.getElementById('enterXmasBtn').addEventListener('click', function(e) {
-            // 🚀 優化 2: 防止連點狂魔
             e.target.disabled = true;
 
-            document.getElementById('xmas-intro').classList.add('entering-xmas');
+            const introEl = document.getElementById('xmas-intro');
+            introEl.classList.add('entering-xmas');
             
-            // 3 秒後動畫完畢，遮罩隱藏
-            setTimeout(() => { document.getElementById('xmas-intro').classList.add('intro-hidden'); }, 3000);
+            // 3 秒後開始 1 秒平滑淡出，完全透明後再 display:none 釋放圖層
+            setTimeout(() => {
+                introEl.classList.add('intro-hidden');
+                setTimeout(() => { introEl.style.display = 'none'; }, 1000);
+            }, 3000);
             
-            window.playMusicEngine(0, false);
+            // 若希望點進場就自動播放音樂，把下面這行的註解打開即可：
+            // window.playMusicEngine(0, true);
             
-            // 啟動首頁天空的聖誕老人發禮物系統
             initSantaTrail();
         });
 
-        // 💥 4. 滑鼠點擊：冰晶碎片爆破
+        // 2. 滑鼠點擊：冰晶碎片爆破
         let popTimer = null;
         document.addEventListener('click', function(e) {
-            if(e.target.id === 'enterXmasBtn') return;
-            if(popTimer) return; 
+            if (e.target.id === 'enterXmasBtn') return;
+            if (popTimer) return; 
             popTimer = setTimeout(() => { popTimer = null; }, 100);
 
             const popCount = 6;
-            for(let i=0; i<popCount; i++) {
-                const pumpkin = document.createElement('div');
-                pumpkin.classList.add('xmas-particle');
-                pumpkin.innerText = ['✨', '❄️', '🍭', '🎁'][Math.floor(Math.random()*4)];
-                pumpkin.style.left = `${e.clientX - 15}px`;
-                pumpkin.style.top = `${e.clientY - 15}px`;
+            for (let i = 0; i < popCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('xmas-particle');
+                particle.innerText = ['✨', '❄️', '🍭', '🎁'][Math.floor(Math.random() * 4)];
+                particle.style.left = `${e.clientX - 15}px`;
+                particle.style.top = `${e.clientY - 15}px`;
                 
                 const angle = Math.random() * Math.PI * 2;
                 const distance = Math.random() * 50 + 30;
@@ -1057,19 +1082,19 @@
                 const ty = Math.sin(angle) * distance;
                 const rot = Math.random() * 360 - 180;
                 
-                pumpkin.style.setProperty('--tx', `${tx}px`);
-                pumpkin.style.setProperty('--ty', `${ty}px`);
-                pumpkin.style.setProperty('--rot', `${rot}deg`);
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                particle.style.setProperty('--rot', `${rot}deg`);
                 
-                document.body.appendChild(pumpkin);
-                setTimeout(() => { pumpkin.remove(); }, 600);
+                document.body.appendChild(particle);
+                setTimeout(() => { particle.remove(); }, 800);
             }
         });
 
         // ================= 10. 原生表單提交 =================
         function initCustomForm() {
             const form = document.getElementById('customRaidForm');
-            if(!form) return;
+            if (!form) return;
 
             const textInputs = form.querySelectorAll('input[type="text"], textarea');
             textInputs.forEach(input => {
@@ -1103,7 +1128,7 @@
                     });
 
                     if (res.ok) {
-                        alert("🎉 報名成功！資料安全送達公會後台。");
+                        alert("🎉 報名成功！資料已安全送達公會後台。");
                         this.reset();
                     } else {
                         alert("⚠️ 傳送失敗，請稍後再試或聯繫幹部。");
