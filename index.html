@@ -171,7 +171,7 @@
         audio::-webkit-media-controls-panel { background-color: rgba(255, 255, 255, 0.8); }
 
         /* ================= 7. 其他 UI 元件 ================= */
-        .roster-card { width: 105%; margin-left: 0; padding: 10px; }
+        .roster-card { width: 106%; margin-left: 0; padding: 10px; }
         .embed-container { width: 100%; height: 615px; border: none; border-radius: 12px; background: #fff; }
 
         .sub-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
@@ -256,6 +256,15 @@
             filter: drop-shadow(0 10px 15px rgba(255, 255, 255, 0.6));
             animation: flightBob 2.5s ease-in-out infinite alternate;
             will-change: transform;
+        }
+        /* 進場前先暫停巡航，進入首頁才開始飛 */
+        #patrol-santa-wrapper, #patrol-santa-flipper, #patrol-santa-img {
+            animation-play-state: paused;
+        }
+        #patrol-santa-wrapper.santa-active,
+        #patrol-santa-wrapper.santa-active #patrol-santa-flipper,
+        #patrol-santa-wrapper.santa-active #patrol-santa-img {
+            animation-play-state: running;
         }
 
         @keyframes flightX {
@@ -784,6 +793,7 @@
         // ================= 全局設定區 =================
         const CONFIG = {
             playlist: [
+                "聖誕節幸福村.mp3",
                 "北部森林 藤條巢穴.mp3", "墮落城市.mp3", "大木林 和風鄰近的地方.mp3", 
                 "天空之城.mp3", "天空之城塔門口.mp3", "奇幻村.mp3", "弓箭手村.mp3", 
                 "弓箭手村北邊山丘.mp3", "弓箭手村市集.mp3", "摩登101.mp3", "水世界.mp3", 
@@ -976,11 +986,13 @@
             let currentIndex = 0;
 
             function shufflePlaylist() {
-                shuffledIndices = CONFIG.playlist.map((_, i) => i);
-                for (let i = shuffledIndices.length - 1; i > 0; i--) {
+                // 固定把第 0 首 (聖誕節幸福村.mp3) 排第一，其餘歌曲隨機洗牌
+                const restIndices = CONFIG.playlist.slice(1).map((_, i) => i + 1);
+                for (let i = restIndices.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
-                    [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
+                    [restIndices[i], restIndices[j]] = [restIndices[j], restIndices[i]];
                 }
+                shuffledIndices = [0, ...restIndices];
             }
 
             window.playMusicEngine = function(index, shouldPlay = true) {
@@ -998,6 +1010,21 @@
 
             shufflePlaylist(); 
             window.playMusicEngine(0, false); 
+
+            // 開啟網頁後，點一下網頁任一處就立即播放（防手機雙重觸發，啟動後自動解除監聽）
+            const cleanupAudioUnlock = () => {
+                document.removeEventListener("click", unlockAudio);
+                document.removeEventListener("touchend", unlockAudio);
+            };
+            const unlockAudio = (e) => {
+                if (!audio.paused || e.target.closest('.cute-music-player')) {
+                    cleanupAudioUnlock();
+                    return;
+                }
+                audio.play().then(cleanupAudioUnlock).catch(() => {});
+            };
+            document.addEventListener("click", unlockAudio);
+            document.addEventListener("touchend", unlockAudio, { passive: true });
 
             document.getElementById("nextSongBtn").addEventListener("click", () => window.playMusicEngine(currentIndex + 1, true));
             document.getElementById("prevSongBtn").addEventListener("click", () => window.playMusicEngine(currentIndex - 1, true));
@@ -1041,30 +1068,30 @@
         }
 
         // ================= 8. 🎄 聖誕節專屬特效區 =================
-        
+        const introEl = document.getElementById('xmas-intro');
+        document.body.style.overflow = 'hidden'; // 開場大門顯示時鎖住底層捲軸
+
         // 1. 開啟開場大門
         document.getElementById('enterXmasBtn').addEventListener('click', function(e) {
             e.target.disabled = true;
-
-            const introEl = document.getElementById('xmas-intro');
+            window.scrollTo(0, 0); // 確保進場一定在首頁最上方
             introEl.classList.add('entering-xmas');
             
-            // 3 秒後開始 1 秒平滑淡出，完全透明後再 display:none 釋放圖層
+            // 3 秒衝門動畫結束後淡出黑幕，並正式啟動首頁巡航與灑禮物
             setTimeout(() => {
                 introEl.classList.add('intro-hidden');
+                document.body.style.overflow = '';
+                document.getElementById('patrol-santa-wrapper').classList.add('santa-active');
+                initSantaTrail();
                 setTimeout(() => { introEl.style.display = 'none'; }, 1000);
             }, 3000);
-            
-            // 若希望點進場就自動播放音樂，把下面這行的註解打開即可：
-            // window.playMusicEngine(0, true);
-            
-            initSantaTrail();
         });
 
         // 2. 滑鼠點擊：冰晶碎片爆破
         let popTimer = null;
         document.addEventListener('click', function(e) {
-            if (e.target.id === 'enterXmasBtn') return;
+            // 開場遮罩還沒完全退場前，不觸發點擊爆破
+            if (introEl && introEl.style.display !== 'none') return;
             if (popTimer) return; 
             popTimer = setTimeout(() => { popTimer = null; }, 100);
 
